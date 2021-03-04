@@ -24,5 +24,44 @@
     <!-- Don't forget to delete this style tag. -->
   </head>
 
-  <body></body>
+  <body>
+    <header class="header header__home container" data-index="header">
+      <nav class="nav" data-index="navigation">
+        <a href="./index.html" class="nav__logo logo-style">
+          <svg class="nav__logo-icon" width="24" height="24">
+            <use href="./images/sprite.svg#icon-film"></use>
+          </svg>
+          <span class="nav__logo-text">Filmoteka</span>
+        </a>
+        <div class="nav__btn-section">
+          <button class="nav__btn current" data-index="home">HOME</button>
+          <button class="nav__btn" data-index="mylibrary">MY LIBRARY</button>
+        </div>
+      </nav>
+      <div data-index="headerСhanging"></div>
+    </header>
+    <main class="main-section container">
+      <ul data-index="gallery" class="gallery container"></ul>
+      <!-- Modal -->
+      <div class="modal is-hidden" id="modal"></div>
+      <!-- Pagination -->
+      <div id="data-container"></div>
+      <div id="pagination-container"></div>
+    </main>
+    <footer class="footer container">
+      <div class="footer__text">
+        <span class="footer__text-section">
+          <span
+            >© 2021 | All Rights Reserved | Developed with<i
+              class="material-icons"
+              >favorite</i
+            >by
+            <a href class="footer__link" data-index="team"
+              >GoIT Students Team-A</a
+            >
+          </span>
+        </span>
+      </div>
+    </footer>
+  </body>
 </html>
