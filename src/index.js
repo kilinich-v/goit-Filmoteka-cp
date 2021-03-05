@@ -1,8 +1,7 @@
 import './styles.scss';
+import './js/myLibrary';
 const _ = require('lodash');
 import refs from './js/refs';
-import toLibrary from './js/myLibrary';
-import inputTemplate from './templates/header/home.hbs';
 import apiFetch from './js/apiService.js';
 import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
