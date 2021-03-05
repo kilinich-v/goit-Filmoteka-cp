@@ -10,6 +10,10 @@ const refs = {
   galleryRef: document.querySelector('.movie__list'),
   modalRef: document.querySelector('.modal'),
   galContainerRef: document.querySelector('.js-container'),
+  //****** vlad hapon  */
+  btn: document.querySelector('[data-index="btn"]'),
+  pageHeader: document.querySelector('.header__home'),
+  markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
 };
 
 export default refs;

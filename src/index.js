@@ -1,16 +1,12 @@
 import './styles.scss';
 const _ = require('lodash');
 import refs from './js/refs';
+import toLibrary from './js/myLibrary';
 import inputTemplate from './templates/header/home.hbs';
 import apiFetch from './js/apiService.js';
 import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
-
-const input = inputTemplate();
-
-//рендер инпута - добавьте стиили!
-refs.header.insertAdjacentHTML('beforeend', input);
 
 //============== вставка Dr.Frame======================
 //=====================================================
@@ -25,7 +21,7 @@ startPopularFilms();
 inputRef.addEventListener('input', _.debounce(handleSearchQuery, 700));
 galleryRef.addEventListener('click', modalMatchesFounder);
 
-// ============= фнкции отвечает за стартовую загрузку популярных фильмов =============================
+// ============= функции отвечает за стартовую загрузку популярных фильмов =============================
 
 //массив жанров от АПИ
 let genreDB = [
