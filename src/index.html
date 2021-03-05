@@ -40,14 +40,29 @@
       </nav>
       <div data-index="headerСhanging"></div>
     </header>
-    <main class="main-section container">
-      <ul data-index="gallery" class="gallery container"></ul>
+
+    <!-- <main class="main-section container">
+      <ul data-index="gallery" class="gallery container"></ul> -->
+    <main>
+      <section class="movie">
+        <div class="container js-container">
+          <h2 class="movie__tittle visually-hidden">List of movies</h2>
+          <ul class="movie__list list"></ul>
+        </div>
+      </section>
+
       <!-- Modal -->
-      <div class="modal is-hidden" id="modal"></div>
+      <div id="js-backdrop" class="backdrop is-hidden" data-modal>
+        <div class="container">
+          <div class="modal"></div>
+        </div>
+      </div>
+
       <!-- Pagination -->
       <div id="data-container"></div>
       <div id="pagination-container"></div>
     </main>
+
     <footer class="footer container">
       <div class="footer__text">
         <span class="footer__text-section">
