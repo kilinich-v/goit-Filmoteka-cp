@@ -1,6 +1,9 @@
 @import './scss/global/normalize';
 @import './scss/utils/variables';
+@import './scss/utils/mixins';
 @import './scss/global/common';
 @import './scss/components/header';
 @import './scss/components/navigation';
 @import './scss/components/footer';
+@import './scss/components/modal';
+@import './scss/components/movie';
