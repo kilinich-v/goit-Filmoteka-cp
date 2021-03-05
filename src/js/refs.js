@@ -5,6 +5,8 @@ const refs = {
   inputQuery: () => document.querySelector('.filmSearch'),
   gallery: document.querySelector('[data-index="gallery"]'),
   galleryItem: () => document.querySelectorAll('#gallery-item'),
+
+  //****** vlad hapon  */
   btn: document.querySelector('[data-index="btn"]'),
   pageHeader: document.querySelector('.header__home'),
   markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
