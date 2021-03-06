@@ -10,4 +10,4 @@
 - Спиннеры
   [https://getbootstrap.com/docs/4.4/components/spinners/](https://getbootstrap.com/docs/4.4/components/spinners/)
 - Пагинация
-  [https://github.com/superRaytin/paginationjs](https://github.com/superRaytin/paginationjs)
+  [https://nhn.github.io/tui.pagination/latest/#-install](https://nhn.github.io/tui.pagination/latest/#-install)
