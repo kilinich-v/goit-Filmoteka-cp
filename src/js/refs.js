@@ -4,7 +4,8 @@ const refs = {
   header: document.querySelector('[data-index="header"]'),
   inputQuery: document.querySelector('.filmSearch'),
   gallery: document.querySelector('[data-index="gallery"]'),
-  galleryItem: () => document.querySelector('#gallery-item'),
+  galleryItems: () => document.querySelectorAll('#gallery-item'),
+  spinner: document.querySelector('#spinner'),
   //adder by Dr.Frame
   inputRef: document.querySelector('.filmSearch__input'),
   galleryRef: document.querySelector('.movie__list'),

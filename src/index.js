@@ -1,6 +1,6 @@
 import './styles.scss';
 import './js/myLibrary';
-const _ = require('lodash');
+import _ from 'lodash';
 import refs from './js/refs';
 import apiFetch from './js/apiService.js';
 import './js/open-close-modal';
@@ -59,6 +59,7 @@ function startPopularFilms() {
   apiFetch
     .fetchPopularMovieGallery()
     .then(data => {
+      refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
       currentPage = data.page;
       totalPages = data.total_pages;
       totalResults = data.total_results;
@@ -66,7 +67,9 @@ function startPopularFilms() {
     })
     .then(({ results }) => {
       handlePopularFilmMarkup(genreTransform(results, genreDB));
-    });
+    })
+    .catch(error => failureMarkup(refs.galContainerRef))
+    .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
 }
 
 // меняет числа жанров на название и дату релиза
@@ -116,6 +119,7 @@ function handleSearchQuery(event) {
     apiFetch
       .fetchSearchRequestGallery()
       .then(data => {
+        refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
         currentPage = data.page;
         totalPages = data.total_pages;
         totalResults = data.total_results;
@@ -128,7 +132,8 @@ function handleSearchQuery(event) {
           handlePopularFilmMarkup(genreTransform(results, genreDB));
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
   } else {
     return;
   }
