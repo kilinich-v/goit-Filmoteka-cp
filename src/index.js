@@ -4,6 +4,7 @@ const _ = require('lodash');
 import refs from './js/refs';
 import apiFetch from './js/apiService.js';
 import './js/open-close-modal';
+import './js/watched';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 
