@@ -8,7 +8,10 @@ const refs = {
   //adder by Dr.Frame
   inputRef: document.querySelector('.filmSearch__input'),
   galleryRef: document.querySelector('.movie__list'),
-  modalRef: document.querySelector('.modal'),
+  modalRef: document.querySelector('.card'),
+  modalBoxRef: document.querySelector('.card-box'),
+  modalBackdropRef: document.querySelector('.backdrop'),
+  btnCloseModalRef: document.querySelector('.card__btn-close'),
   galContainerRef: document.querySelector('.js-container'),
   //****** vlad hapon  */
   headerButtons: document.querySelector('[data-index="headerButtons"]'),
