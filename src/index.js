@@ -17,7 +17,7 @@ const modalRef = refs.modalRef;
 const backdropRef = document.querySelector('#js-backdrop');
 
 startPopularFilms();
-inputRef.addEventListener('input', _.debounce(handleSearchQuery, 700));
+inputRef.addEventListener('input', _.debounce(handleSearchQuery, 1000));
 galleryRef.addEventListener('click', modalMatchesFounder);
 
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
@@ -46,9 +46,11 @@ let genreDB = [
 ];
 
 // берут значение после фетча
-let currentPage = 1;
-let totalPages;
-let totalResults;
+const resultData = {
+  currentPage: 1,
+  totalPages: null,
+  totalResults: null,
+};
 
 //заходит сюда отрендеренный масив
 let moviesArr;
@@ -59,12 +61,13 @@ function startPopularFilms() {
   apiFetch
     .fetchPopularMovieGallery()
     .then(data => {
-      currentPage = data.page;
-      totalPages = data.total_pages;
-      totalResults = data.total_results;
+      resultData.currentPage = data.page;
+      resultData.totalPages = data.total_pages;
+      resultData.totalResults = data.total_results;
       return data;
     })
     .then(({ results }) => {
+      console.log(apiFetch.page);
       handlePopularFilmMarkup(genreTransform(results, genreDB));
     });
 }
@@ -109,21 +112,24 @@ function handlePopularFilmMarkup(popularFilms) {
 
 //функции отвечающие за отрисовку запроса
 function handleSearchQuery(event) {
+  //event.preventDefault();
   apiFetch.searchQuerry = '';
-  apiFetch.searchQuerry = event.target.value;
+  apiFetch.searchQuerry = inputRef.value;
+  console.log(apiFetch.page);
   if (event.target.value) {
     galleryRef.innerHTML = '';
     apiFetch
       .fetchSearchRequestGallery()
       .then(data => {
-        currentPage = data.page;
-        totalPages = data.total_pages;
-        totalResults = data.total_results;
+        console.log(data);
+        resultData.currentPage = data.page;
+        resultData.totalPages = data.total_pages;
+        resultData.totalResults = data.total_results;
         return data;
       })
       .then(({ results }) => {
         if (results.length === 0) {
-          failureMarkup(refs.galContainerRef);
+          failureMarkup(refs.galleryRef);
         } else {
           handlePopularFilmMarkup(genreTransform(results, genreDB));
         }
@@ -132,7 +138,6 @@ function handleSearchQuery(event) {
   } else {
     return;
   }
-  inputRef.value = '';
 }
 
 // рисует разметку когда нету результатов запроса
@@ -184,7 +189,7 @@ function modalGenreEditor(movie, genreDB) {
 //рендерит разметку модального окна
 function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
-  modalRef.insertAdjacentHTML('afterbegin', modalMarkup);
+  refs.modalBoxRef.insertAdjacentHTML('afterbegin', modalMarkup);
 }
 
 // ======================== конец кода  Dr.Frame  =============================================
