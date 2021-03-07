@@ -7,6 +7,9 @@ import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 
+// for line 171, added by M.Permiakova
+import addToQueueList from './js/addToQueueList';
+
 //============== вставка Dr.Frame======================
 //=====================================================
 
@@ -163,6 +166,9 @@ function modalMatchesFounder(event) {
   });
   handleModalMarkup(modalGenreEditor(currentFilmObj, genreDB));
   backdropRef.classList.remove('is-hidden');
+
+  // added by M.Permiakova
+  addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
 }
 
 //изменяет жанр при рендере модалки
