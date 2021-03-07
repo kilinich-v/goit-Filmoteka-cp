@@ -6,7 +6,6 @@ import apiFetch from './js/apiService.js';
 import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
-import './js/realtime-database';
 
 //============== вставка Dr.Frame======================
 //=====================================================
