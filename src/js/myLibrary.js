@@ -2,16 +2,24 @@ import refs from '../js/refs';
 import inputTemplate from '../templates/header/home.hbs';
 import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
 
+const input = inputTemplate();
+
+refs.header.insertAdjacentHTML('beforeend', input);
+
 function toLibrary() {
+  //! Не удалять
+  const inputIndexRef = document.querySelector('[data-index="form"]');
+  //****************** */
+
   const inputMyLibrary = inputTemplateMyLibrary();
-  refs.btn.addEventListener('click', event => {
+  refs.headerButtons.addEventListener('click', event => {
     event.preventDefault();
 
     if (event.target.nodeName !== 'BUTTON') {
       return;
     }
 
-    const currentActiveBtn = refs.btn.querySelector('.current');
+    const currentActiveBtn = refs.headerButtons.querySelector('.current');
 
     if (currentActiveBtn) {
       currentActiveBtn.classList.remove('current');
@@ -24,13 +32,13 @@ function toLibrary() {
     if (buttonId === 'myLibrary') {
       refs.pageHeader.classList.remove('header__home');
       refs.pageHeader.classList.add('header__watched');
-      refs.inputQuery.classList.add('is__hidden');
+      inputIndexRef.classList.add('is__hidden');
       refs.markupMyLibraty.insertAdjacentHTML('beforeend', inputMyLibrary);
     }
     if (buttonId === 'home') {
       refs.pageHeader.classList.remove('header__watched');
       refs.pageHeader.classList.add('header__home');
-      refs.inputQuery.classList.remove('is__hidden');
+      inputIndexRef.classList.remove('is__hidden');
       refs.markupMyLibraty.innerHTML = '';
     }
   });

@@ -11,7 +11,7 @@ const refs = {
   modalRef: document.querySelector('.modal'),
   galContainerRef: document.querySelector('.js-container'),
   //****** vlad hapon  */
-  btn: document.querySelector('[data-index="btn"]'),
+  headerButtons: document.querySelector('[data-index="headerButtons"]'),
   pageHeader: document.querySelector('.header__home'),
   markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
 };
