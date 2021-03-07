@@ -33,54 +33,21 @@
           </svg>
           <span class="nav__logo-text">Filmoteka</span>
         </a>
-        <div class="nav__btn-section" data-index="headerButtons">
-          <button class="nav__btn current" id="home" data-index="home">
-            HOME
-          </button>
-          <button class="nav__btn" id="myLibrary" data-index="mylibrary">
-            MY LIBRARY
-          </button>
+        <div class="nav__btn-section">
+          <button class="nav__btn current" data-index="home">HOME</button>
+          <button class="nav__btn" data-index="mylibrary">MY LIBRARY</button>
         </div>
       </nav>
-      <div data-index="headerСhanging">
-        <!-- <form class="filmSearch" id="query" action="" data-index="form">
-          <input
-            class="filmSearch__input"
-            data-index="serch"
-            type="text"
-            placeholder="Search films"
-            autocomplete="off"
-          /><i class="material-icons white search-icon">search</i>
-          <p
-            class="filmSearch__input-error hidden"
-            data-index="fetchStatus"
-          ></p>
-        </form> -->
-      </div>
+      <div data-index="headerСhanging"></div>
     </header>
-
-    <!-- <main class="main-section container">
-      <ul data-index="gallery" class="gallery container"></ul> -->
-    <main>
-      <section class="movie">
-        <div class="container js-container">
-          <h2 class="movie__tittle visually-hidden">List of movies</h2>
-          <ul class="movie__list list"></ul>
-        </div>
-      </section>
-
+    <main class="main-section container">
+      <ul data-index="gallery" class="gallery container"></ul>
       <!-- Modal -->
-      <div id="js-backdrop" class="backdrop is-hidden" data-modal>
-        <div class="container">
-          <div class="modal"></div>
-        </div>
-      </div>
-
+      <div class="modal is-hidden" id="modal"></div>
       <!-- Pagination -->
       <div id="data-container"></div>
       <div id="pagination-container"></div>
     </main>
-
     <footer class="footer container">
       <div class="footer__text">
         <span class="footer__text-section">
