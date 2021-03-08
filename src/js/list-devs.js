@@ -26,7 +26,7 @@ const students = [
   },
   {
     src: 'https://github.com/Fil1989',
-    name: 'Filip   Koza',
+    name: 'Filip Koza',
     role: 'Developer',
   },
   {
