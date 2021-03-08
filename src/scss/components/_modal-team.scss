@@ -1,20 +1,92 @@
+.basicLightbox {
+  overflow: scroll;
+}
+
 .team-wrapper {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  margin: 80px;
-  background-color: grey;
+  justify-content: center;
+
+  @include for-size(tablet - 1) {
+    margin-top: 210px;
+    justify-content: center;
+  }
+
+  width: 240px;
+  background-color: gray;
+
+  @include for-size(tablet) {
+    width: 600px;
+  }
+
+  @include for-size(desktop) {
+    width: 800px;
+  }
 }
 
 .team-card {
   position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
   text-align: center;
-  width: calc((40% - 80px) / 2);
+  margin: 15px;
+  width: calc((100% - 80px) / 2);
+
+  @include for-size(tablet) {
+    width: calc((100% - 160px) / 5);
+  }
+
+  @include for-size(desktop) {
+    width: calc((100% - 240px) / 2);
+  }
 }
-.basicLightbox {
-  overflow: scroll;
+
+.team-name {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-family: $black-color;
+  font-weight: 700;
+}
+
+.team-role {
+  font-family: $black-color;
+  font-size: 12px;
+  @include for-size(tablet - 1) {
+    font-size: 10px;
+  }
+
+  color: $orange-second-color;
+}
+
+.team-git {
+  // position: absolute;
+
+  top: 80px;
+  right: -10px;
+
+  @include for-size(tablet) {
+    top: 100px;
+  }
+
+  @include for-size(desktop) {
+    top: 120px;
+  }
+
+  transform: scale(1);
+  @include transition(transform);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.5);
+  }
+}
+
+// footer
+
+.team-modal {
+  text-decoration: underline;
+
+  cursor: pointer;
 }
