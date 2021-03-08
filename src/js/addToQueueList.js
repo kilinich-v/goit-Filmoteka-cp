@@ -6,12 +6,12 @@ function addToQueueList(element) {
   addToQueueBtn.addEventListener('click', () => {
     const storage = localStorage.getItem('queue');
     if (storage.includes(element.poster_path)) {
-      // console.log('1');
+      alert('This film has already been added;)');
       return;
     }
-    // console.log('2');
-    localStorage.setItem('queue', JSON.stringify(data));
-    // }
+    const newStorage = JSON.parse(localStorage.getItem('queue'));
+    newStorage.push(data);
+    localStorage.setItem('queue', JSON.stringify(newStorage));
   });
 }
 
@@ -23,13 +23,3 @@ function createQueueLocalStorage() {
 }
 
 export default addToQueueList;
-
-// console.log(storage);
-// let arr = [];
-// arr.push(storage);
-// const keys = Object.keys(arr);
-// for (const key of keys) {
-//   console.log(arr[key]);
-//   if (arr[key].includes(element.poster_path)) {
-//     return;
-//   }

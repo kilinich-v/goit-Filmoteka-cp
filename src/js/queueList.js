@@ -16,11 +16,6 @@ function createQueueListFn() {
     );
     return;
   }
-  // console.log(queue);
-
-  refs.galleryRef.insertAdjacentHTML(
-    'beforeend',
-    filmGalleryTemplate({ queue }),
-  );
+  refs.galleryRef.insertAdjacentHTML('beforeend', filmGalleryTemplate(queue));
 }
 export default openQueueListFn;
