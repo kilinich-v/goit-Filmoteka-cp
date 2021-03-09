@@ -6,43 +6,10 @@ import apiFetch from './js/apiService.js';
 import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
+import paginationJs from './js/pagination';
 
 //============== вставка Dr.Frame======================
-import 'paginationjs';
-
-const API_KEY = '3550330ecc32a34c7342dbd44dd96d6e';
-const path = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
-// function simpleTemplating(data) {
-//   let html = '<div class="poster">';
-//   $.each(data, function (index, item) {
-//     html += `<img src="https://image.tmdb.org/t/p/w200${item.poster_path}">`;
-//   });
-//   html += '</div>';
-//   return html;
-// }
-const trendingsUrl = apiFetch.trendingUrl;
-const trendingUrlApiKey = `${trendingsUrl}${apiFetch.apiKey}`;
-console.log(trendingUrlApiKey);
-const pagCont = document.querySelector('#data-container');
-$('#pagination-container').pagination({
-  dataSource: trendingUrlApiKey,
-  locator: 'results',
-  totalNumber: 20000,
-  pageSize: 20,
-  alias: {
-    pageNumber: 'page',
-  },
-  prevText: '',
-  nextText: '',
-  callback: function (data, pagination) {
-    console.log(data);
-    galleryRef.innerHTML = '';
-    handlePopularFilmMarkup(genreTransform(data, genreDB));
-    // const popularMarkup = popularFilmsGalerryTpl(data);
-    // galleryRef.insertAdjacentHTML('beforeend', popularMarkup);
-  },
-});
-
+paginationJs();
 //=====================================================
 
 // мои ссылки для корректной работы впихнутого кода
@@ -58,7 +25,7 @@ galleryRef.addEventListener('click', modalMatchesFounder);
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
 
 //массив жанров от АПИ
-let genreDB = [
+export let genreDB = [
   { id: 28, name: 'Action' },
   { id: 12, name: 'Adventure' },
   { id: 16, name: 'Animation' },
@@ -90,7 +57,7 @@ let moviesArr;
 //заходит обьект для рендера модалки
 let currentFilmObj = {};
 
-function startPopularFilms() {
+export function startPopularFilms() {
   apiFetch
     .fetchPopularMovieGallery()
     .then(data => {
@@ -106,7 +73,7 @@ function startPopularFilms() {
 }
 
 // меняет числа жанров на название и дату релиза
-function genreTransform(moviesDB, genreDB) {
+export function genreTransform(moviesDB, genreDB) {
   const transferedGenreArr = moviesDB.map(film => {
     //ставим заглушку если нету фото
     if (film.poster_path === null) {
@@ -131,12 +98,12 @@ function genreTransform(moviesDB, genreDB) {
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
   moviesArr = transferedGenreArr;
-  console.log(moviesArr);
+  //console.log(moviesArr);
   return transferedGenreArr;
 }
 
 //ставит разметку популярных фильмов
-function handlePopularFilmMarkup(popularFilms) {
+export function handlePopularFilmMarkup(popularFilms) {
   const popularMarkup = popularFilmsGalerryTpl(popularFilms);
   galleryRef.insertAdjacentHTML('beforeend', popularMarkup);
 }
@@ -144,7 +111,7 @@ function handlePopularFilmMarkup(popularFilms) {
 // =================================================================================================
 
 //функции отвечающие за отрисовку запроса
-function handleSearchQuery(event) {
+export function handleSearchQuery(event) {
   apiFetch.searchQuerry = '';
   apiFetch.searchQuerry = event.target.value;
   if (event.target.value) {
@@ -172,7 +139,7 @@ function handleSearchQuery(event) {
 }
 
 // рисует разметку когда нету результатов запроса
-function failureMarkup(placeToInsert) {
+export function failureMarkup(placeToInsert) {
   const failureMarkup = `<div class="error">
   <div class="error-img"><img src="https://i.ibb.co/4WvT00q/caterror.jpg" alt="" width="300"></div>
 
@@ -183,7 +150,7 @@ function failureMarkup(placeToInsert) {
 
 // =================== модалка вывод фильма по клику =======================================
 
-function modalMatchesFounder(event) {
+export function modalMatchesFounder(event) {
   if (event.target.nodeName !== 'IMG') {
     return;
   }
@@ -202,7 +169,7 @@ function modalMatchesFounder(event) {
 }
 
 //изменяет жанр при рендере модалки
-function modalGenreEditor(movie, genreDB) {
+export function modalGenreEditor(movie, genreDB) {
   //изменяем жанр
   let genreArr = [];
   movie.genre_ids.forEach(genreId => {
@@ -218,7 +185,7 @@ function modalGenreEditor(movie, genreDB) {
 }
 
 //рендерит разметку модального окна
-function handleModalMarkup(currentMovie) {
+export function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
   modalRef.insertAdjacentHTML('afterbegin', modalMarkup);
 }
