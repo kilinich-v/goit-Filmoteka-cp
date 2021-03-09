@@ -1,0 +1,20 @@
+{{#each this}}
+<li class="poster">
+    <div class="poster__img-wrap">
+        <img src="{{poster_path}}" data-compare="{{poster_path}}" alt="movie-poster" class="poster__img" width="274">
+    </div>
+    <div class="poster__content-wrap">
+        <h3 class="poster__movie-name">{{original_title}}</h3>
+        <div class="poster__movie-info-wrap">
+            <ul class="poster__genre-list list">
+                {{#each genre_ids}}
+                <li class="poster__genre-item">
+                    {{this}}<span>,&nbsp;</span></li>
+                {{/each}}
+                <p class="card__info-content__item">&nbsp| {{release_date}}&nbsp&nbsp&nbsp<span>{{vote_average}}</span>
+                </p>
+            </ul>
+        </div>
+    </div>
+</li>
+{{/each}}
