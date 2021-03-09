@@ -23,6 +23,8 @@ const db = firebase.firestore();
 
 db.settings({ timestampsInSnapshots: true });
 
+// Sign Up
+
 refs.singupForm.addEventListener('submit', handleSignup);
 
 function handleSignup(event) {
@@ -38,7 +40,7 @@ function handleSignup(event) {
             console.log(credential.user);
             refs.singupForm.reset();
             refs.singupForm.classList.add('is-hidden');
-        })
+        }).catch(err => console.log("catch", err));
 }
 
 // Добавляет запись в database
