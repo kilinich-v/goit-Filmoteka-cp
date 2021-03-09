@@ -8,6 +8,39 @@ import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 
 //============== вставка Dr.Frame======================
+import 'paginationjs';
+
+const API_KEY = '3550330ecc32a34c7342dbd44dd96d6e';
+const path = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+// function simpleTemplating(data) {
+//   let html = '<div class="poster">';
+//   $.each(data, function (index, item) {
+//     html += `<img src="https://image.tmdb.org/t/p/w200${item.poster_path}">`;
+//   });
+//   html += '</div>';
+//   return html;
+// }
+const trendingsUrl = apiFetch.trendingUrl;
+const trendingUrlApiKey = `${trendingsUrl}${apiFetch.apiKey}`;
+console.log(trendingUrlApiKey);
+const pagCont = document.querySelector('#data-container');
+$('#pagination-container').pagination({
+  dataSource: trendingUrlApiKey,
+  locator: 'results',
+  totalNumber: 20000,
+  pageSize: 20,
+  alias: {
+    pageNumber: 'page',
+  },
+  callback: function (data, pagination) {
+    console.log(data);
+    galleryRef.innerHTML = '';
+    handlePopularFilmMarkup(genreTransform(data, genreDB));
+    // const popularMarkup = popularFilmsGalerryTpl(data);
+    // galleryRef.insertAdjacentHTML('beforeend', popularMarkup);
+  },
+});
+
 //=====================================================
 
 // мои ссылки для корректной работы впихнутого кода
@@ -62,6 +95,7 @@ function startPopularFilms() {
       currentPage = data.page;
       totalPages = data.total_pages;
       totalResults = data.total_results;
+
       return data;
     })
     .then(({ results }) => {
