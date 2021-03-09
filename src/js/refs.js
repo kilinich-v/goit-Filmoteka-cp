@@ -6,6 +6,7 @@ const refs = {
   gallery: document.querySelector('[data-index="gallery"]'),
   galleryItems: () => document.querySelectorAll('#gallery-item'),
   spinner: document.querySelector('#spinner'),
+  singupForm: document.querySelector('#signup-form'),
   //adder by Dr.Frame
   inputRef: document.querySelector('.filmSearch__input'),
   galleryRef: document.querySelector('.movie__list'),

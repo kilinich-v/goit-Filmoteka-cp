@@ -19,6 +19,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css"
+    />
     <title>Filmoteka</title>
 
     <!-- Don't forget to delete this style tag. -->
@@ -62,6 +67,33 @@
     <!-- <main class="main-section container">
       <ul data-index="gallery" class="gallery container"></ul> -->
     <main>
+      <!-- <h1>Login</h1>
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div> -->
+
+      <form class="signup__form" id="signup-form">
+        <h4>Sign up</h4>
+        <div class="signup__field">
+          <input
+            type="email"
+            class="signup__email"
+            id="signup-email"
+            required
+          />
+          <label for="signup-email">Email address</label>
+        </div>
+        <div class="signup__field">
+          <input
+            type="password"
+            class="signup__password"
+            id="signup-password"
+            required
+          />
+          <label for="signup-password">Choose password</label>
+        </div>
+        <button class="signup__button">Sign up</button>
+      </form>
+
       <section class="movie">
         <div class="spinner-border" role="status" id="spinner">
           <span class="sr-only">Loading...</span>
