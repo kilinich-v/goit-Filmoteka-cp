@@ -33,7 +33,8 @@
   color: $white-color !important;
 }
 .mylibrary {
-  display: block;
+  display: flex;
+  justify-content: center;
   text-align: center;
 
   &__button {
@@ -60,4 +61,8 @@
 .current-mylibrary__button {
   background-color: $orange-color;
   border: 1px solid transparent;
+}
+
+.is__hidden {
+  display: none;
 }

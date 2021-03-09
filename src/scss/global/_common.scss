@@ -72,6 +72,16 @@ h6 {
   color: $black-color;
 }
 
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+}
+
 .list {
   margin: 0;
   padding: 0;
@@ -79,9 +89,6 @@ h6 {
 }
 
 .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
 
   border: 1px solid $black-color;
