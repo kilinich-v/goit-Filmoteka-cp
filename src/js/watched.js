@@ -20,6 +20,7 @@ function addToLocaleStorage(event) {
           poster_path: event.target.dataset.poster,
           release_date: event.target.dataset.release_date,
           original_title: event.target.dataset.original_title,
+          vote_average: event.target.dataset.vote,
         });
         localStorage.setItem('watched', JSON.stringify(store));
       }
@@ -28,6 +29,7 @@ function addToLocaleStorage(event) {
         poster_path: event.target.dataset.poster,
         release_date: event.target.dataset.release_date,
         original_title: event.target.dataset.original_title,
+        vote_average: event.target.dataset.vote,
       });
       localStorage.setItem('watched', JSON.stringify(store));
     }
