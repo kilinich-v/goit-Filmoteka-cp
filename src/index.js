@@ -3,6 +3,7 @@ import './js/myLibrary';
 const _ = require('lodash');
 import refs from './js/refs';
 import apiFetch from './js/apiService.js';
+import addToQueueList from './js/addToQueueList';
 import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
@@ -168,6 +169,7 @@ function modalMatchesFounder(event) {
   });
   handleModalMarkup(modalGenreEditor(currentFilmObj, genreDB));
   backdropRef.classList.remove('is-hidden');
+  addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
 }
 
 //изменяет жанр при рендере модалки

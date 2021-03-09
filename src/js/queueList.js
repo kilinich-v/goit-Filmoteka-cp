@@ -1,10 +1,3 @@
-// В ФАЙЛ MYLIBRARY.JS
-// 1) зверху файла:
-// import openQueueListFn from './queueList';
-// 
-// 2) там де  "if (buttonId === 'myLibrary')" в кінець цього if, орієнтовно рядок 37 всnавити:
-// openQueueListFn();
-
 import refs from './refs';
 import filmGalleryTemplate from '../templates/filmgallery.hbs';
 

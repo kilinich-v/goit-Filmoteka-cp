@@ -1,10 +1,3 @@
-// В INDEX.JS 
-// 1) зверху:
-// import addToQueueList from './js/addToQueueList';
-
-// 2) в function modalMatchesFounder в самий кінець, орієнтовно рядок 171:
-//  addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
-
 function addToQueueList(element) {
   createQueueLocalStorage();
   const { poster_path, original_title, genre_ids, release_date } = element;
