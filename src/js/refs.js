@@ -7,6 +7,7 @@ const refs = {
   galleryItems: () => document.querySelectorAll('#gallery-item'),
   spinner: document.querySelector('#spinner'),
   singupForm: document.querySelector('#signup-form'),
+  // logoutBtn: document.querySelector('#logout'),
   //adder by Dr.Frame
   inputRef: document.querySelector('.filmSearch__input'),
   galleryRef: document.querySelector('.movie__list'),

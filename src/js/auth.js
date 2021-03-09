@@ -17,11 +17,22 @@ const config = {
 
 firebase.initializeApp(config);
 
-// const database = firebase.database();
+const database = firebase.database();
 const auth = firebase.auth();
-const db = firebase.firestore();
 
-db.settings({ timestampsInSnapshots: true });
+// Listen user status
+
+auth.onAuthStateChanged(user => {
+    console.log(user);
+
+    if (user) {
+        firebase.database().ref('/users/' + user.uid).get().then((snapshot) => {
+            console.log(snapshot.val());
+        });
+    } else {
+
+    }
+})
 
 // Sign Up
 
@@ -33,15 +44,43 @@ function handleSignup(event) {
     const email = refs.singupForm['signup-email'].value;
     const password = refs.singupForm['signup-password'].value;
 
-    console.log(email, password);
-
     auth.createUserWithEmailAndPassword(email, password)
+        .then(credential => {
+            refs.singupForm.reset();
+            refs.singupForm.classList.add('is-hidden');
+        }).catch(err => {
+            if (err.code === "auth/email-already-in-use") {
+                signin(email, password);
+            }
+        });
+}
+
+// Logout
+
+// refs.logoutBtn.addEventListener('click', handleLogout);
+
+// function handleLogout(event) {
+//     event.preventDefault();
+
+//     auth.signOut().then();
+// }
+
+// Sign In
+
+function signin(email, password) {
+    auth.signInWithEmailAndPassword(email, password)
         .then(credential => {
             console.log(credential.user);
             refs.singupForm.reset();
             refs.singupForm.classList.add('is-hidden');
-        }).catch(err => console.log("catch", err));
+        })
 }
+
+
+
+
+
+
 
 // Добавляет запись в database
 
