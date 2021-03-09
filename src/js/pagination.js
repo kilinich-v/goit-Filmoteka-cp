@@ -30,7 +30,10 @@ export default function paginationJs() {
     callback: function (data, pagination) {
       galleryRef.innerHTML = '';
       handlePopularFilmMarkup(genreTransform(data, genreDB));
-      window.scrollTo(pageXOffset, 0);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     },
   });
 }
