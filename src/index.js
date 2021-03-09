@@ -7,6 +7,8 @@ import addToQueueList from './js/addToQueueList';
 import './js/open-close-modal';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import './js/modal-team';
 
 //============== вставка Dr.Frame======================
 //=====================================================
