@@ -12,6 +12,7 @@ import modalTpl from './templates/modal.hbs';
 
 // мои ссылки для корректной работы впихнутого кода
 const inputRef = document.querySelector('.filmSearch__input');
+const formRef = document.querySelector('filmSearch');
 const galleryRef = refs.galleryRef;
 const modalRef = refs.modalRef;
 const backdropRef = document.querySelector('#js-backdrop');
@@ -166,7 +167,7 @@ function modalMatchesFounder(event) {
       return;
     }
   });
-  handleModalMarkup(modalGenreEditor(currentFilmObj, genreDB));
+  handleModalMarkup(currentFilmObj);
   backdropRef.classList.remove('is-hidden');
 }
 
