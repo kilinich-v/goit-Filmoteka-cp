@@ -32,7 +32,9 @@ $hover-color: rgb(238, 233, 222);
 
     &.disabled {
       >a {
-        opacity: 0.3;
+        color: black;
+        font-weight: 500;
+        //opacity: 0.3;
 
         &:hover {
           background: none;
@@ -42,6 +44,7 @@ $hover-color: rgb(238, 233, 222);
   }
 
   li.paginationjs-ellipsis {
+
     width: 11px;
 
     @media screen and (max-width: 450px) {

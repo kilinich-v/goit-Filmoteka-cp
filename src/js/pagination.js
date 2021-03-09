@@ -21,6 +21,7 @@ export default function paginationJs() {
     dataSource: trendingUrlApiKey,
     locator: 'results',
     totalNumber: 20000,
+    totalNumberLocatorэтот: totalRes(),
     pageSize: 20,
     alias: {
       pageNumber: 'page',
@@ -36,4 +37,12 @@ export default function paginationJs() {
       });
     },
   });
+
+  function totalRes() {
+    apiFetch.fetchPopularMovieGallery().then(data => {
+      data.total_results;
+      console.log(data.total_results);
+    });
+  }
+  totalRes();
 }
