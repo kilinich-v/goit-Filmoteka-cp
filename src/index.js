@@ -63,9 +63,9 @@ function startPopularFilms() {
     .fetchPopularMovieGallery()
     .then(data => {
       refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
-      currentPage = data.page;
-      totalPages = data.total_pages;
-      totalResults = data.total_results;
+      resultData.currentPage = data.page;
+      resultData.totalPages = data.total_pages;
+      resultData.totalResults = data.total_results;
       return data;
     })
     .then(({ results }) => {
@@ -126,9 +126,9 @@ function handleSearchQuery(event) {
       .fetchSearchRequestGallery()
       .then(data => {
         refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
-        currentPage = data.page;
-        totalPages = data.total_pages;
-        totalResults = data.total_results;
+        resultData.currentPage = data.page;
+        resultData.totalPages = data.total_pages;
+        resultData.totalResults = data.total_results;
         return data;
       })
       .then(({ results }) => {

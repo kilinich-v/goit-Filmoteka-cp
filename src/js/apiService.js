@@ -6,7 +6,7 @@ export default {
   apiKey: '3550330ecc32a34c7342dbd44dd96d6e',
   movieID: 0,
   searchQuerry: '',
-  page: 2,
+  page: 1,
 
   fetchSearchRequestGallery() {
     const url = `${this.searchUrl}${this.apiKey}&language=en-US&query=${this.searchQuerry}&page=${this.page}`;
