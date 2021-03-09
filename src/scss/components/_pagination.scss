@@ -123,6 +123,16 @@ li.paginationjs-next>a {
   }
 }
 
+.paginationjs-prev>a {
+  background: url('./images/arrow-left.svg') no-repeat;
+  background-position: 50% 50%;
+}
+
+.paginationjs-next>a {
+  background: url('./images/arrow-right.svg') no-repeat;
+  background-position: 50% 50%;
+}
+
 .paginationjs-prev .arrow,
 .paginationjs-next .arrow {
   margin: 0;

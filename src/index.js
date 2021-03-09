@@ -32,6 +32,8 @@ $('#pagination-container').pagination({
   alias: {
     pageNumber: 'page',
   },
+  prevText: '',
+  nextText: '',
   callback: function (data, pagination) {
     console.log(data);
     galleryRef.innerHTML = '';
