@@ -20,7 +20,4 @@ function openQueueListFn() {
   refs.galleryRef.insertAdjacentHTML('beforeend', filmGalleryTemplate(queue));
 }
 
-export default {
-  openQueueListFn,
-  createQueueListFn
-};
+export default openQueueListFn;
