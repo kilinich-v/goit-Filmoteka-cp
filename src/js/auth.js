@@ -6,6 +6,7 @@ import 'firebase/auth';
 import refs from './refs';
 import userNav from '../templates/header/userNav.hbs';
 import singupForm from '../templates/header/singupForm.hbs';
+import dbService from './databaseService';
 
 const config = {
     apiKey: "AIzaSyDBptg0_ENszfxYjlkxxxHgNrKil-uqJLs",
@@ -25,7 +26,7 @@ const auth = firebase.auth();
 // Listen user status
 
 auth.onAuthStateChanged(user => {
-    console.log(user);
+    console.log('user', user);
 
     if (user) {
         const userNavMarkup = userNav();
@@ -33,38 +34,44 @@ auth.onAuthStateChanged(user => {
         refs.headerButtons.children[1].innerHTML = '';
         refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
 
+
         afterRemoveForm();
         firebase.database().ref('/users/' + user.uid).get().then((snapshot) => {
             console.log(snapshot.val());
+
+            dbService.currentUserId = snapshot.key;
+            dbService.queue = snapshot.val().queue;
+            dbService.watched = snapshot.val().watched;
         });
     } else {
         const singupMarkup = singupForm();
 
         refs.gallery.insertAdjacentHTML('afterbegin', singupMarkup);
-        afterAddForm();
+
+        const singupRef = document.querySelector('#signup-form');
+        singupRef.addEventListener('submit', handleSignup);
+        console.log(singupRef);
     }
 })
 
 // Sign Up
 
-function afterAddForm() {
-    refs.singupForm().addEventListener('submit', handleSignup);
-}
-
 function handleSignup(event) {
     event.preventDefault();
 
-    const email = refs.singupForm()['signup-email'].value;
-    const password = refs.singupForm()['signup-password'].value;
+    const email = event.target['signup-email'].value;
+    const password = event.target['signup-password'].value;
 
     auth.createUserWithEmailAndPassword(email, password)
         .then(credential => {
-            refs.singupForm().reset();
-            refs.singupForm().classList.add('is-hidden');
+            event.target.reset();
+            event.target.classList.add('is-hidden');
         }).catch(err => {
             if (err.code === "auth/email-already-in-use") {
-                signin(email, password);
+                signin(email, password, event.target);
             }
+
+            console.log(err);
         });
 }
 
@@ -82,12 +89,12 @@ function handleLogout(event) {
 
 // Sign In
 
-function signin(email, password) {
+function signin(email, password, logoutRef) {
     auth.signInWithEmailAndPassword(email, password)
         .then(credential => {
             console.log(credential.user);
-            refs.singupForm().reset();
-            refs.singupForm().classList.add('is-hidden');
+            logoutRef.reset();
+            logoutRef.classList.add('is-hidden');
         })
 }
 
