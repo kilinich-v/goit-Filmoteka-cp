@@ -37,7 +37,7 @@ function addToLocaleStorage(event) {
       };
       store.push(currentFilm);
 
-      storage.deleteFilm(currentFilm, localStorage.queue);
+      storage.deleteFilm(currentFilm, storage.queue);
       renderQueueList.createQueueListFn();
 
       localStorage.setItem('watched', JSON.stringify(store));

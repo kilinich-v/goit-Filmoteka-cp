@@ -1,6 +1,14 @@
 const storage = {
-    // queue: JSON.parse(localStorage.queue),
-    // watched: JSON.parse(localStorage.watched),
+    queue: localStorage.queue,
+    watched: localStorage.watched,
+
+    checkStorage(filmsArray) {
+        if (filmsArray) {
+            return;
+        }
+
+        localStorage.removeItem(filmsArray);
+    },
 
     findFilm(film, filmsArray) {
         return filmsArray.filter(filmInArray => filmInArray.original_title === film.original_title).splice(film, 1);
