@@ -180,6 +180,7 @@ export function modalMatchesFounder(event) {
     }
   });
   handleModalMarkup(currentFilmObj);
+  changeBtnWatchedText(event);
   backdropRef.classList.remove('is-hidden');
   addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
 }
@@ -205,6 +206,17 @@ export function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
   refs.modalBoxRef.insertAdjacentHTML('afterbegin', modalMarkup);
   // document.querySelector('body').classList.add('hide-overflow');
+}
+function changeBtnWatchedText(event) {
+  if (
+    localStorage.getItem('watched') != null &&
+    localStorage.getItem('watched').includes(`${event.target.src}`)
+  ) {
+    document.querySelector('.js-watched').textContent = 'already watched';
+    document
+      .querySelector('.js-watched')
+      .setAttribute('style', 'background: #ff6b08; color:#ffffff; border:0;');
+  }
 }
 
 // ======================== конец кода  Dr.Frame  =============================================

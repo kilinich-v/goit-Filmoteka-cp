@@ -14,7 +14,8 @@
     </div>
     <div class="card__info-content">
       <ul class="card__info-content__list list">
-        <li class="card__info-content__item"><span>{{vote_average}}</span>&nbsp;/&nbsp;<span>{{vote_count}}</span></li>
+        <li class="card__info-content__item"><span
+            class="js-vote">{{vote_average}}</span>&nbsp;/&nbsp;<span>{{vote_count}}</span></li>
         <li class="card__info-content__item">{{popularity}}</li>
         <li class="card__info-content__item">{{original_title}}</li>
         <li class="card__info-content__item">
@@ -30,8 +31,7 @@
   <p class="card__description-title">About</p>
   <p class="card__description">{{overview}}</p>
   <div class="card__btn-box">
-    <button type="button" class="button card__btn watched" data-poster="{{poster_path}}"
-      data-release_date="{{release_date}}" data-original_title="{{original_title}}" data-vote="{{vote_average}}">add
+    <button type="button" class="button card__btn js-watched" data-release_date="{{release_date}}">add
       to Watched</button>
     <button type="button" class="button card__btn js-queue">add to queue</button>
   </div>
