@@ -3,10 +3,11 @@ import students from './list-devs';
 
 
 const markupStudent = students.reduce(
-  (string, {link, name, role }) =>
+  (string, {avatar,link, name, role }) =>
     string +
     `
 <div class="team-card">
+    <img class="team-image" src="${avatar}" alt="${name}-foto">
     <h2 class="team-name">${name}</h2>
      <a href="${link}" target="_blank" class="team-git"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 <title>github-link</title>
