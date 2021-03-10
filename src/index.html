@@ -38,62 +38,25 @@
           </svg>
           <span class="nav__logo-text">Filmoteka</span>
         </a>
-        <div class="nav__btn-section" data-index="headerButtons">
-          <button class="nav__btn current" id="home" data-index="home">
-            HOME
-          </button>
-          <button class="nav__btn" id="myLibrary" data-index="mylibrary">
-            MY LIBRARY
-          </button>
-        </div>
+        <ul class="nav__btn-section" data-index="headerButtons">
+          <li class="nav__item">
+            <button class="nav__btn current" id="home" data-index="home">
+              HOME
+            </button>
+          </li>
+          <li class="nav__item user">
+            <button class="nav__btn" id="myLibrary" data-index="mylibrary">
+              MY LIBRARY
+            </button>
+          </li>
+        </ul>
       </nav>
-      <div data-index="headerСhanging">
-        <!-- <form class="filmSearch" id="query" action="" data-index="form">
-          <input
-            class="filmSearch__input"
-            data-index="serch"
-            type="text"
-            placeholder="Search films"
-            autocomplete="off"
-          /><i class="material-icons white search-icon">search</i>
-          <p
-            class="filmSearch__input-error hidden"
-            data-index="fetchStatus"
-          ></p>
-        </form> -->
-      </div>
+      <div data-index="headerСhanging"></div>
     </header>
 
     <!-- <main class="main-section container">
       <ul data-index="gallery" class="gallery container"></ul> -->
     <main>
-      <!-- <h1>Login</h1>
-      <div id="firebaseui-auth-container"></div>
-      <div id="loader">Loading...</div> -->
-
-      <form class="signup__form" id="signup-form">
-        <h4>Sign up</h4>
-        <div class="signup__field">
-          <input
-            type="email"
-            class="signup__email"
-            id="signup-email"
-            required
-          />
-          <label for="signup-email">Email address</label>
-        </div>
-        <div class="signup__field">
-          <input
-            type="password"
-            class="signup__password"
-            id="signup-password"
-            required
-          />
-          <label for="signup-password">Choose password</label>
-        </div>
-        <button class="signup__button">Sign up</button>
-      </form>
-
       <section class="movie">
         <div class="spinner-border" role="status" id="spinner">
           <span class="sr-only">Loading...</span>
@@ -128,9 +91,7 @@
               class="material-icons"
               >favorite</i
             >by
-            <a href class="footer__link" data-index="team"
-              >GoIT Students Team-A</a
-            >
+            <a class="footer__link" data-index="team">GoIT Students Team-A</a>
           </span>
         </span>
       </div>

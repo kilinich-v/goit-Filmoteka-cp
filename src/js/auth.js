@@ -4,6 +4,8 @@ import 'firebase/database';
 import 'firebase/firestore';
 import 'firebase/auth';
 import refs from './refs';
+import userNav from '../templates/header/userNav.hbs';
+import singupForm from '../templates/header/singupForm.hbs';
 
 const config = {
     apiKey: "AIzaSyDBptg0_ENszfxYjlkxxxHgNrKil-uqJLs",
@@ -26,28 +28,39 @@ auth.onAuthStateChanged(user => {
     console.log(user);
 
     if (user) {
+        const userNavMarkup = userNav();
+
+        refs.headerButtons.children[1].innerHTML = '';
+        refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
+
+        afterRemoveForm();
         firebase.database().ref('/users/' + user.uid).get().then((snapshot) => {
             console.log(snapshot.val());
         });
     } else {
+        const singupMarkup = singupForm();
 
+        refs.gallery.insertAdjacentHTML('afterbegin', singupMarkup);
+        afterAddForm();
     }
 })
 
 // Sign Up
 
-refs.singupForm.addEventListener('submit', handleSignup);
+function afterAddForm() {
+    refs.singupForm().addEventListener('submit', handleSignup);
+}
 
 function handleSignup(event) {
     event.preventDefault();
 
-    const email = refs.singupForm['signup-email'].value;
-    const password = refs.singupForm['signup-password'].value;
+    const email = refs.singupForm()['signup-email'].value;
+    const password = refs.singupForm()['signup-password'].value;
 
     auth.createUserWithEmailAndPassword(email, password)
         .then(credential => {
-            refs.singupForm.reset();
-            refs.singupForm.classList.add('is-hidden');
+            refs.singupForm().reset();
+            refs.singupForm().classList.add('is-hidden');
         }).catch(err => {
             if (err.code === "auth/email-already-in-use") {
                 signin(email, password);
@@ -57,13 +70,15 @@ function handleSignup(event) {
 
 // Logout
 
-// refs.logoutBtn.addEventListener('click', handleLogout);
+function afterRemoveForm() {
+    refs.logoutBtn().addEventListener('click', handleLogout);
+}
 
-// function handleLogout(event) {
-//     event.preventDefault();
+function handleLogout(event) {
+    event.preventDefault();
 
-//     auth.signOut().then();
-// }
+    auth.signOut().then();
+}
 
 // Sign In
 
@@ -71,8 +86,8 @@ function signin(email, password) {
     auth.signInWithEmailAndPassword(email, password)
         .then(credential => {
             console.log(credential.user);
-            refs.singupForm.reset();
-            refs.singupForm.classList.add('is-hidden');
+            refs.singupForm().reset();
+            refs.singupForm().classList.add('is-hidden');
         })
 }
 
