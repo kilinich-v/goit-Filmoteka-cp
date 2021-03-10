@@ -31,7 +31,7 @@ function btnStatus(text, status) {
 
 function deleteFilm(storage, element) {
   btnStatus('In queue', true);
-  const watchedBtn = document.querySelector('.watched');
+  const watchedBtn = document.querySelector('.js-watched');
   watchedBtn.addEventListener('click', () => {
     btnStatus('add to queue', false);
     if (!storage) {
