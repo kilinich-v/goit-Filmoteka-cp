@@ -30,7 +30,7 @@ function addToLocaleStorage(event) {
         poster_path: document.querySelector('.card__img').src,
         release_date: event.target.dataset.release_date,
         original_title: document.querySelector('.card__title').textContent,
-        vote_average: document.querySelector('.js-vote').textContent,
+        vote_average: document.querySelector('.js-watched').textContent,
       });
       localStorage.setItem('watched', JSON.stringify(store));
     }
@@ -38,6 +38,7 @@ function addToLocaleStorage(event) {
 }
 
 document.addEventListener('click', showAllWatched);
+
 function showAllWatched(event) {
   if (event.target.dataset.index === 'watched') {
     refs.galleryRef.textContent = '';
