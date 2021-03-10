@@ -2,10 +2,13 @@
   background-color: $footer-background-color;
   margin-left: auto;
   margin-right: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 
-  @media screen and (min-width: 320px) and (max-width: 1023px) {
-    width: auto;
-  }
+  // @media screen and (min-width: 320px) and (max-width: 1023px) {
+  //   width: auto;
+  // }
   &__text-section {
     align-items: center;
     display: block;
@@ -13,6 +16,7 @@
     padding-top: 30px;
     padding-bottom: 30px;
     color: $footer-text-color;
+    margin: 0px auto;
   }
   &__icon {
     color: $orange-second-color;
