@@ -1,5 +1,5 @@
 import refs from '../js/refs';
-import openQueueListFn from './queueList';
+import renderQueueList from './queueList';
 import inputTemplate from '../templates/header/home.hbs';
 import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
 
@@ -35,7 +35,7 @@ function toLibrary() {
       refs.pageHeader.classList.add('header__watched');
       inputIndexRef.classList.add('is__hidden');
       refs.markupMyLibraty.insertAdjacentHTML('beforeend', inputMyLibrary);
-      openQueueListFn();
+      renderQueueList.openQueueListFn();
     }
     if (buttonId === 'home') {
       refs.pageHeader.classList.remove('header__watched');

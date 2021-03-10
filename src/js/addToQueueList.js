@@ -1,3 +1,5 @@
+import storage from './libraryControll';
+
 function addToQueueList(element) {
   const { poster_path, original_title, genre_ids, release_date } = element;
   const data = { poster_path, original_title, genre_ids, release_date };

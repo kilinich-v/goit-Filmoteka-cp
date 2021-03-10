@@ -7,6 +7,7 @@ import apiFetch from './js/apiService.js';
 import addToQueueList from './js/addToQueueList';
 import './js/open-close-modal';
 import './js/watched';
+import './js/libraryControll';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';

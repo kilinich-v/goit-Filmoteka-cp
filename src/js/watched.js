@@ -1,5 +1,8 @@
 import refs from './refs';
 import rendering from './rendering-of-watched';
+import storage from './libraryControll';
+import renderQueueList from './queueList';
+
 // localStorage.clear();
 const watched = localStorage.getItem('watched');
 const store = watched != null ? JSON.parse(watched) : [];
@@ -26,18 +29,24 @@ function addToLocaleStorage(event) {
     }
 
     function pushToLocalStorage() {
-      store.push({
+      const currentFilm = {
         poster_path: document.querySelector('.card__img').src,
         release_date: event.target.dataset.release_date,
         original_title: document.querySelector('.card__title').textContent,
-        vote_average: document.querySelector('.js-vote').textContent,
-      });
+        vote_average: document.querySelector('.js-watched').textContent,
+      };
+      store.push(currentFilm);
+
+      storage.deleteFilm(currentFilm, localStorage.queue);
+      renderQueueList.createQueueListFn();
+
       localStorage.setItem('watched', JSON.stringify(store));
     }
   }
 }
 
 document.addEventListener('click', showAllWatched);
+
 function showAllWatched(event) {
   if (event.target.dataset.index === 'watched') {
     refs.galleryRef.textContent = '';
