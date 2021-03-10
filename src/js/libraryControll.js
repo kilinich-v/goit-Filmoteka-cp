@@ -1,14 +1,17 @@
-// const storage = {
-//     queue: localStorage.queue,
-//     watched: localStorage.watched,
+const storage = {
+    // queue: JSON.parse(localStorage.queue),
+    // watched: JSON.parse(localStorage.watched),
 
-//     findFilm(film, array) {
-//         array.find(filmInArray => filmInArray === film).splice(filmInArray, 1);
-//     }
-// }
+    findFilm(film, filmsArray) {
+        return filmsArray.filter(filmInArray => filmInArray.original_title === film.original_title).splice(film, 1);
+    },
 
-// console.log(storage.queue);
+    deleteFilm(film, filmsArray) {
+        if (!filmsArray) {
+            return;
+        }
+        JSON.parse(filmsArray).splice(this.findFilm(film, JSON.parse(filmsArray)), 1);
+    }
+}
 
-// storage.findFilm({ "poster_path": "https://image.tmdb.org/t/p/w500//lPsD10PP4rgUGiGR4CCXA6iY0QQ.jpg", "original_title": "Raya and the Last Dragon", "genre_ids": [], "release_date": "2021" }, storage.queue);
-
-// console.log(storage.queue);
+export default storage;

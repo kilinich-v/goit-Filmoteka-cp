@@ -18,4 +18,8 @@ function createQueueListFn() {
   }
   refs.galleryRef.insertAdjacentHTML('beforeend', filmGalleryTemplate(queue));
 }
-export default openQueueListFn;
+
+export default {
+  openQueueListFn,
+  createQueueListFn
+};
