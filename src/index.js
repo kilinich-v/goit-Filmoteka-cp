@@ -1,12 +1,17 @@
 import './styles.scss';
 import './js/myLibrary';
-const _ = require('lodash');
+import _ from 'lodash';
 import refs from './js/refs';
+import paginationJs from './js/pagination';
 import apiFetch from './js/apiService.js';
+import addToQueueList from './js/addToQueueList';
 import './js/open-close-modal';
+import './js/watched';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
-import paginationJs from './js/pagination';
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import './js/modal-team';
+
 
 //============== вставка Dr.Frame======================
 paginationJs();
@@ -14,12 +19,13 @@ paginationJs();
 
 // мои ссылки для корректной работы впихнутого кода
 const inputRef = document.querySelector('.filmSearch__input');
+const formRef = document.querySelector('.filmSearch');
 const galleryRef = refs.galleryRef;
 const modalRef = refs.modalRef;
 const backdropRef = document.querySelector('#js-backdrop');
 
 startPopularFilms();
-inputRef.addEventListener('input', _.debounce(handleSearchQuery, 700));
+formRef.addEventListener('submit', handleSearchQuery);
 galleryRef.addEventListener('click', modalMatchesFounder);
 
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
@@ -48,9 +54,11 @@ export let genreDB = [
 ];
 
 // берут значение после фетча
-let currentPage = 1;
-let totalPages;
-let totalResults;
+const resultData = {
+  currentPage: 1,
+  totalPages: null,
+  totalResults: null,
+};
 
 //заходит сюда отрендеренный масив
 let moviesArr;
@@ -61,15 +69,18 @@ export function startPopularFilms() {
   apiFetch
     .fetchPopularMovieGallery()
     .then(data => {
-      currentPage = data.page;
-      totalPages = data.total_pages;
-      totalResults = data.total_results;
-
+      refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
+      resultData.currentPage = data.page;
+      resultData.totalPages = data.total_pages;
+      resultData.totalResults = data.total_results;
       return data;
     })
     .then(({ results }) => {
+      console.log(apiFetch.page);
       handlePopularFilmMarkup(genreTransform(results, genreDB));
-    });
+    })
+    .catch(error => failureMarkup(refs.galContainerRef))
+    .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
 }
 
 // меняет числа жанров на название и дату релиза
@@ -111,31 +122,35 @@ export function handlePopularFilmMarkup(popularFilms) {
 // =================================================================================================
 
 //функции отвечающие за отрисовку запроса
+
 export function handleSearchQuery(event) {
+  event.preventDefault();
+
   apiFetch.searchQuerry = '';
-  apiFetch.searchQuerry = event.target.value;
-  if (event.target.value) {
+  apiFetch.searchQuerry = inputRef.value;
+  if (inputRef.value) {
     galleryRef.innerHTML = '';
     apiFetch
       .fetchSearchRequestGallery()
       .then(data => {
-        currentPage = data.page;
-        totalPages = data.total_pages;
-        totalResults = data.total_results;
+        refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
+        resultData.currentPage = data.page;
+        resultData.totalPages = data.total_pages;
+        resultData.totalResults = data.total_results;
         return data;
       })
       .then(({ results }) => {
         if (results.length === 0) {
-          failureMarkup(refs.galContainerRef);
+          failureMarkup(refs.galleryRef);
         } else {
           handlePopularFilmMarkup(genreTransform(results, genreDB));
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
   } else {
     return;
   }
-  inputRef.value = '';
 }
 
 // рисует разметку когда нету результатов запроса
@@ -164,8 +179,9 @@ export function modalMatchesFounder(event) {
       return;
     }
   });
-  handleModalMarkup(modalGenreEditor(currentFilmObj, genreDB));
+  handleModalMarkup(currentFilmObj);
   backdropRef.classList.remove('is-hidden');
+  addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
 }
 
 //изменяет жанр при рендере модалки
@@ -187,7 +203,8 @@ export function modalGenreEditor(movie, genreDB) {
 //рендерит разметку модального окна
 export function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
-  modalRef.insertAdjacentHTML('afterbegin', modalMarkup);
+  refs.modalBoxRef.insertAdjacentHTML('afterbegin', modalMarkup);
+  // document.querySelector('body').classList.add('hide-overflow');
 }
 
 // ======================== конец кода  Dr.Frame  =============================================

@@ -1,55 +1,42 @@
-h2,
-h3 {
-  margin: 0;
-}
-p {
-  margin: 0;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-  overflow-y: scroll;
+  background-color: rgba(0, 0, 0, 0.25);
 
+  /* overflow-y: scroll; */
   opacity: 1;
+  visibility: visible;
+  transition: opacity 250ms $transition-function,
+    visibility 250ms $transition-function;
 
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
-.backdrop.is-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
+.card {
+  position: relative;
 
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  background-color: #fff;
+  padding: 48px 20px 41px;
 
-  height: 568px;
-
-  display: flex;
-  padding: 30px 50px 30px 40px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
 
   @include for-size(mobile) {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
     width: 280px;
-
+    min-height: 700px;
     transition: transform 250ms $transition-function;
 
     .backdrop.is-hidden & {
@@ -60,21 +47,53 @@ ul {
   @include for-size(tablet) {
     display: flex;
     width: 618px;
+    min-height: 456px;
     padding: 42px 30px 40px 28px;
   }
 
   @include for-size(desktop) {
     width: 882px;
+    min-height: 568px;
     padding: 50px 30px 40px;
   }
 }
 
-.modal__img-wrap {
+.card-box {
+  @include for-size(tablet) {
+    display: flex;
+  }
+}
+
+.card__btn-close {
+  position: absolute;
+  content: '';
+  top: 10px;
+  right: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+}
+
+.card__icon-close {
+  font-size: 30px;
+}
+
+.card__img-wrap {
   width: 240px;
   height: 357px;
   margin-bottom: 30px;
 
   border-radius: 5px;
+  overflow: hidden;
 
   @include for-size(tablet) {
     width: 264px;
@@ -88,157 +107,134 @@ ul {
   }
 }
 
-.modal__description {
-  max-width: 396px;
+.card__content-wrap {
+  height: auto;
+  @include for-size(tablet) {
+    width: 264px;
+  }
+
+  @include for-size(desktop) {
+    width: 396px;
+  }
 }
 
-.modal__img {
-  margin-right: 30px;
-}
+.card__title {
+  margin-bottom: 20px;
 
-.modal__title {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 35px;
-
-  color: #000000;
+  @include font(20px, 1.15);
   text-transform: uppercase;
 }
 
-.modal__ratings {
+.card__info-wrap {
   display: flex;
-  margin-top: 20px;
-  flex-direction: column;
+  margin-bottom: 20px;
 }
 
-.modal__descr-wrapper {
-  display: flex;
-  align-items: center;
+.card__info-title {
+  width: 110px;
+
+  @include for-size(desktop) {
+    margin-right: 24px;
+  }
+}
+
+.card__info-title__item {
   margin-bottom: 10px;
+
+  color: $modal-name-color;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-.modal__criteria {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  color: #8c8c8c;
+.card__info-content {
+  width: 130px;
 }
 
-.modal__descr-wrapper > h3 {
-  font-family: Roboto;
+.card__info-content__item {
+  margin-bottom: 10px;
 
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
+  &:first-child {
+    display: flex;
+  }
 
-  color: #000000;
-}
+  &:last-child {
+    margin-bottom: 0;
+  }
 
-.modal__descr-wrapper .orange {
-  width: 36px;
-  height: 16px;
-  border-radius: 5px;
-  background: #ff6b01;
-  text-align: center;
-  color: white;
-}
+  &:nth-child(3) {
+    text-transform: uppercase;
+  }
 
-.modal__descr-wrapper .grey {
-  width: 36px;
-  height: 16px;
-  border-radius: 5px;
-  background: #f7f7f7;
-  text-align: center;
-}
+  & > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 16px;
 
-.modal__criteria.a {
-  margin-right: 91px;
-}
-.modal__criteria.b {
-  margin-right: 97px;
-}
-.modal__criteria.c {
-  margin-right: 83px;
-}
-.modal__criteria.d {
-  margin-right: 120px;
-}
+    @include font(12px, 1.17);
 
-.modal__genre-list {
-  display: flex;
-}
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
 
-.modal__genre-list li {
-  font-family: Roboto;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
-
-  color: #000000;
-}
-
-.modal__descr-title {
-  margin-top: 20px;
-  font-family: Roboto;
-
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
-
-  text-transform: uppercase;
-
-  color: #000000;
-}
-
-.modal__descr-information {
-  font-family: Roboto;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 20px;
-
-  color: #000000;
-}
-
-.modal__buttons {
-  margin-top: 20px;
-}
-.modal__btn {
-  width: 136px;
-  height: 44px;
-  border-radius: 5px;
-
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.modal__btn.watched {
-  background: #ff6b01;
-  border: none;
-  color: #ffffff;
-  opacity: 0.9;
-  &:hover {
-    opacity: 1;
+  & > span:first-child {
+    color: $white-color;
+    background-color: $orange-color;
   }
 }
 
-.modal__btn.queue {
-  border: 1px solid #000000;
-  background: #ffffff;
-  color: #000000;
-  font-weight: 700;
+.card__info-content__genre-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card__info-content__genre-item {
+  &:last-child > span {
+    display: none;
+  }
+}
+
+.card__description-title {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.card__description {
+  margin: 0;
+  margin-bottom: 21px;
+
+  @include font(12px, 1.67);
+}
+
+.card__btn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.card__btn {
+  width: 112px;
+  height: 44px;
+
+  transition: 250ms $transition-function;
+
+  &:first-child {
+    margin-right: 15px;
+  }
 
   &:hover {
-    background: #f7f7f7;
+    color: $white-color;
+    background-color: $orange-color;
+    border-color: $orange-color;
+  }
+
+  @include for-size(tablet) {
+    width: 125px;
+  }
+
+  @include for-size(desktop) {
+    width: 136px;
   }
 }

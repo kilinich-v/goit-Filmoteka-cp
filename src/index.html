@@ -63,6 +63,9 @@
       <ul data-index="gallery" class="gallery container"></ul> -->
     <main>
       <section class="movie">
+        <div class="spinner-border" role="status" id="spinner">
+          <span class="sr-only">Loading...</span>
+        </div>
         <div class="container js-container">
           <h2 class="movie__tittle visually-hidden">List of movies</h2>
           <ul class="movie__list list"></ul>
@@ -71,8 +74,12 @@
 
       <!-- Modal -->
       <div id="js-backdrop" class="backdrop is-hidden" data-modal>
-        <div class="container">
-          <div class="modal"></div>
+        <div class="card">
+          <button class="card__btn-close" type="button">
+            <span class="material-icons card__icon-close"> clear </span>
+          </button>
+
+          <div class="card-box"></div>
         </div>
       </div>
 
@@ -88,7 +95,7 @@
               class="material-icons"
               >favorite</i
             >by
-            <a href class="footer__link" data-index="team"
+            <a href class="footer__link" onclick="return false" data-index="team"
               >GoIT Students Team-A</a
             >
           </span>

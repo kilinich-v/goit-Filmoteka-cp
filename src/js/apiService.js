@@ -19,7 +19,7 @@ export default {
         throw new Error(res.status);
       })
       .then(data => {
-        this.page += 1;
+        //this.page += 1;
         return data;
       })
       .catch(error => console.log(error));
@@ -31,7 +31,7 @@ export default {
     return fetch(url)
       .then(res => res.json())
       .then(data => {
-        this.page += 1;
+        //this.page += 1;
         return data;
       })
       .catch(error => console.log(error));

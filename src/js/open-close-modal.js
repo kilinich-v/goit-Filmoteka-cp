@@ -1,9 +1,23 @@
 import refs from './refs';
 
-/* function openModal() {
-  refs.modalBackdropRef.classList.toggle('show');
+function closeModal() {
+  refs.modalBackdropRef.classList.toggle('is-hidden');
+  refs.modalBoxRef.innerHTML = '';
+  // document.querySelector('body').classList.remove('hide-overflow');
 }
 
-function closeModal() {
-  refs.modalBackdropRef.classList.toggle('show');
-} */
+refs.btnCloseModalRef.addEventListener('click', closeModal);
+refs.modalBackdropRef.addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    closeModal();
+  }
+});
+window.addEventListener('keydown', e => {
+  if (
+    e.code === 'Escape' &&
+    !refs.modalBackdropRef.classList.contains('is-hidden')
+  ) {
+    closeModal();
+    console.log('adasd');
+  }
+});

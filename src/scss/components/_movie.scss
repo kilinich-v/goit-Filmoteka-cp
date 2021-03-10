@@ -10,6 +10,7 @@
 
 .movie__list {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   margin-bottom: 40px;
 
@@ -87,17 +88,20 @@
 }
 
 .poster__genre-item {
-  & > span:last-child {
+  /* & > span:last-child {
+    display: none;
+  } */
+
+  /* / & > span {
+    display: none;
+  } */
+  &:nth-last-child(2) > span {
     display: none;
   }
 
-  &:last-child > span:first-child {
-    display: none;
-  }
-
-  &:last-child > span:last-child {
+  /* &:last-child > span:last-child {
     display: inline-block;
-  }
+  } */
 }
 
 .poster__movie-year {
