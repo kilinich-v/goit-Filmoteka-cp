@@ -10,7 +10,7 @@ const students = [
     role: 'Scrum Master',
   },
   {
-    src: 'https:',
+    src: 'https:https://github.com/AleksandrPriadko',
     name: 'Aleksandr Pryadko',
     role: 'Developer',
   },
@@ -48,6 +48,6 @@ const students = [
     src: 'https:',
     name: 'Volodymyr Kostetskyi',
     role: 'Developer',
-  }
+  },
 ];
 export default students;
