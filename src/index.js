@@ -10,6 +10,7 @@ import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/modal-team';
+import pnotify from './js/notification';
 
 //============== вставка Dr.Frame======================
 //=====================================================
@@ -137,13 +138,16 @@ function handleSearchQuery(event) {
       .then(({ results }) => {
         if (results.length === 0) {
           failureMarkup(refs.galleryRef);
+          pnotify.showError();
         } else {
           handlePopularFilmMarkup(genreTransform(results, genreDB));
+          pnotify.showSuccess();
         }
       })
       .catch(error => console.log(error))
       .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
   } else {
+    pnotify.showNotice();
     return;
   }
 }
