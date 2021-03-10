@@ -2,6 +2,7 @@ import './styles.scss';
 import './js/myLibrary';
 import _ from 'lodash';
 import refs from './js/refs';
+import paginationJs from './js/pagination';
 import apiFetch from './js/apiService.js';
 import addToQueueList from './js/addToQueueList';
 import './js/open-close-modal';
@@ -11,7 +12,9 @@ import modalTpl from './templates/modal.hbs';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/modal-team';
 
+
 //============== вставка Dr.Frame======================
+paginationJs();
 //=====================================================
 
 // мои ссылки для корректной работы впихнутого кода
@@ -28,7 +31,7 @@ galleryRef.addEventListener('click', modalMatchesFounder);
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
 
 //массив жанров от АПИ
-let genreDB = [
+export let genreDB = [
   { id: 28, name: 'Action' },
   { id: 12, name: 'Adventure' },
   { id: 16, name: 'Animation' },
@@ -62,7 +65,7 @@ let moviesArr;
 //заходит обьект для рендера модалки
 let currentFilmObj = {};
 
-function startPopularFilms() {
+export function startPopularFilms() {
   apiFetch
     .fetchPopularMovieGallery()
     .then(data => {
@@ -81,7 +84,7 @@ function startPopularFilms() {
 }
 
 // меняет числа жанров на название и дату релиза
-function genreTransform(moviesDB, genreDB) {
+export function genreTransform(moviesDB, genreDB) {
   const transferedGenreArr = moviesDB.map(film => {
     //ставим заглушку если нету фото
     if (film.poster_path === null) {
@@ -106,12 +109,12 @@ function genreTransform(moviesDB, genreDB) {
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
   moviesArr = transferedGenreArr;
-  console.log(moviesArr);
+  //console.log(moviesArr);
   return transferedGenreArr;
 }
 
 //ставит разметку популярных фильмов
-function handlePopularFilmMarkup(popularFilms) {
+export function handlePopularFilmMarkup(popularFilms) {
   const popularMarkup = popularFilmsGalerryTpl(popularFilms);
   galleryRef.insertAdjacentHTML('beforeend', popularMarkup);
 }
@@ -119,8 +122,10 @@ function handlePopularFilmMarkup(popularFilms) {
 // =================================================================================================
 
 //функции отвечающие за отрисовку запроса
-function handleSearchQuery(event) {
+
+export function handleSearchQuery(event) {
   event.preventDefault();
+
   apiFetch.searchQuerry = '';
   apiFetch.searchQuerry = inputRef.value;
   if (inputRef.value) {
@@ -149,7 +154,7 @@ function handleSearchQuery(event) {
 }
 
 // рисует разметку когда нету результатов запроса
-function failureMarkup(placeToInsert) {
+export function failureMarkup(placeToInsert) {
   const failureMarkup = `<div class="error">
   <div class="error-img"><img src="https://i.ibb.co/4WvT00q/caterror.jpg" alt="" width="300"></div>
 
@@ -160,7 +165,7 @@ function failureMarkup(placeToInsert) {
 
 // =================== модалка вывод фильма по клику =======================================
 
-function modalMatchesFounder(event) {
+export function modalMatchesFounder(event) {
   if (event.target.nodeName !== 'IMG') {
     return;
   }
@@ -180,7 +185,7 @@ function modalMatchesFounder(event) {
 }
 
 //изменяет жанр при рендере модалки
-function modalGenreEditor(movie, genreDB) {
+export function modalGenreEditor(movie, genreDB) {
   //изменяем жанр
   let genreArr = [];
   movie.genre_ids.forEach(genreId => {
@@ -196,7 +201,7 @@ function modalGenreEditor(movie, genreDB) {
 }
 
 //рендерит разметку модального окна
-function handleModalMarkup(currentMovie) {
+export function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
   refs.modalBoxRef.insertAdjacentHTML('afterbegin', modalMarkup);
   // document.querySelector('body').classList.add('hide-overflow');
