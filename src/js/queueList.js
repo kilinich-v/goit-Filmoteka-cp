@@ -1,12 +1,13 @@
 import refs from './refs';
 import filmGalleryTemplate from '../templates/filmgallery.hbs';
 
-function openQueueListFn() {
-  const queueBtn = document.querySelector('[data-index="queue"]');
-  queueBtn.addEventListener('click', createQueueListFn);
-}
+// для Влада
+// в myLibrary після рядка з openQueueListFn() додай це:
+//
+// const queueBtn = document.querySelector('[data-index="queue"]');
+// queueBtn.addEventListener('click', openQueueListFn);
 
-function createQueueListFn() {
+function openQueueListFn() {
   refs.galleryRef.innerHTML = '';
   const queue = JSON.parse(localStorage.getItem('queue'));
   if (!queue || queue.length === 0) {
