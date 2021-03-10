@@ -18,6 +18,7 @@ const refs = {
   headerButtons: document.querySelector('[data-index="headerButtons"]'),
   pageHeader: document.querySelector('.header__home'),
   markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
+  watched: document.querySelector('.js-watched'),
 };
 
 export default refs;
