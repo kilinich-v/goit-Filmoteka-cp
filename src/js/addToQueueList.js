@@ -5,28 +5,51 @@ function addToQueueList(element) {
   const storage = localStorage.getItem('queue');
   if (storage) {
     if (storage.includes(element.original_title)) {
-      btnStatus('In queue', true);
+      deleteFilm(storage, element);
       return;
     }
   }
-
   addToQueueBtn.addEventListener('click', () => {
+    btnStatus('In queue', true);
     if (!storage) {
       localStorage.setItem('queue', JSON.stringify([data]));
-      btnStatus('In Queue', true);
+      deleteFilm(storage, element);
       return;
     }
-    const newStorage = JSON.parse(localStorage.getItem('queue'));
+    deleteFilm(storage, element);
+    const newStorage = JSON.parse(storage);
     newStorage.push(data);
     localStorage.setItem('queue', JSON.stringify(newStorage));
-    btnStatus('In Queue', true);
   });
 }
-
-export default addToQueueList;
 
 function btnStatus(text, status) {
   const addToQueueBtn = document.querySelector('.js-queue');
   addToQueueBtn.textContent = text;
   addToQueueBtn.disabled = status;
 }
+
+function deleteFilm(storage, element) {
+  btnStatus('In queue', true);
+  const watchedBtn = document.querySelector('.watched');
+  watchedBtn.addEventListener('click', () => {
+    btnStatus('add to queue', false);
+    if (!storage) {
+      return;
+    }
+    const newStorage = JSON.parse(storage);
+    const filmId = newStorage.find(
+      el => el.original_title === element.original_title,
+    );
+    newStorage.splice(filmId, 1);
+    return localStorage.setItem('queue', JSON.stringify(newStorage));
+  });
+}
+
+// function clearLocalStorage() {
+//   if (localStorage.getItem('queue') === []) {
+//     localStorage.removeItem('queue');
+//   }
+// }
+
+export default addToQueueList;
