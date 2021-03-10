@@ -1,51 +1,51 @@
 const students = [
   {
-    src: 'https://github.com/kilinich-v',
+    link: 'https://github.com/kilinich-v',
     name: 'Vladimir Kilinich',
     role: 'Team Lead',
   },
   {
-    src: 'https://github.com/vladhpn',
+    link: 'https://github.com/vladhpn',
     name: 'Vladyslav Hapon',
     role: 'Scrum Master',
   },
   {
-    src: 'https:',
-    name: 'Aleksandr Pryadko',
+    link: 'https://github.com/AleksandrPriadko',
+    name: 'Aleksandr Priadko',
     role: 'Developer',
   },
   {
-    src: 'https://github.com/olenaLa',
+    link: 'https://github.com/olenaLa',
     name: 'Alena Laptieva',
     role: 'Developer',
   },
   {
-    src: 'https:',
-    name: 'Bogdan Remeniuk',
+    link: 'https://github.com/Bohdan-R',
+    name: 'Bohdan Remeniuk',
     role: 'Developer',
   },
   {
-    src: 'https://github.com/Fil1989',
+    link: 'https://github.com/Fil1989',
     name: 'Filip Koza',
     role: 'Developer',
   },
   {
-    src: 'https://github.com/LiubovShpakova',
+    link: 'https://github.com/LiubovShpakova',
     name: 'Liubov Shpakova',
     role: 'Developer',
   },
   {
-    src: 'https://github.com/Nickmarina',
+    link: 'https://github.com/Nickmarina',
     name: 'Marina Permiakova',
     role: 'Developer',
   },
   {
-    src: 'https:',
+    link: 'https://github.com/Dr-Frame',
     name: 'Vladyslav Remeniuk',
     role: 'Developer',
   },
   {
-    src: 'https:',
+    link: 'https://github.com/Nobergan',
     name: 'Volodymyr Kostetskyi',
     role: 'Developer',
   }
