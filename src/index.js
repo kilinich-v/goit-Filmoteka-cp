@@ -16,13 +16,13 @@ import './js/modal-team';
 
 // мои ссылки для корректной работы впихнутого кода
 const inputRef = document.querySelector('.filmSearch__input');
-const formRef = document.querySelector('filmSearch');
+const formRef = document.querySelector('.filmSearch');
 const galleryRef = refs.galleryRef;
 const modalRef = refs.modalRef;
 const backdropRef = document.querySelector('#js-backdrop');
 
 startPopularFilms();
-inputRef.addEventListener('input', _.debounce(handleSearchQuery, 1000));
+formRef.addEventListener('submit', handleSearchQuery);
 galleryRef.addEventListener('click', modalMatchesFounder);
 
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
@@ -120,11 +120,10 @@ function handlePopularFilmMarkup(popularFilms) {
 
 //функции отвечающие за отрисовку запроса
 function handleSearchQuery(event) {
-  //event.preventDefault();
+  event.preventDefault();
   apiFetch.searchQuerry = '';
   apiFetch.searchQuerry = inputRef.value;
-  console.log(apiFetch.page);
-  if (event.target.value) {
+  if (inputRef.value) {
     galleryRef.innerHTML = '';
     apiFetch
       .fetchSearchRequestGallery()
