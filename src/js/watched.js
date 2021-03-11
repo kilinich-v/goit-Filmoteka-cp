@@ -57,6 +57,12 @@ function addToLocaleStorage(event) {
         vote_average: document.querySelector('.js-vote').textContent,
       };
       const store = JSON.parse(localStorage.getItem('watched'));
+
+      if (!localStorage.getItem('watched') || store.length <= 2) {
+        localStorage.removeItem('watched');
+        return;
+      }
+
       const deleteMovieFromArray = store.filter(
         film => film.poster_path != currentFilm.poster_path,
       );
