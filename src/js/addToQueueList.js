@@ -16,7 +16,14 @@ function addToQueueList(element) {
   }
 
   addToQueueBtn.addEventListener('click', () => {
+    if (!addToQueueBtn.disabled) {
+      addToQueueBtn.addEventListener(
+        'click',
+        deletingFromLocalStorage('watched', element),
+      );
+    }
     addToQueueBtn.disabled = true;
+    btnText(addToQueueBtn);
     if (!localStorage.getItem('queue')) {
       return localStorage.setItem('queue', JSON.stringify([data]));
     }
@@ -28,22 +35,23 @@ function addToQueueList(element) {
   watchedBtn.addEventListener('click', () => {
     addToQueueBtn.disabled = false;
     btnText(addToQueueBtn);
-    const newStorage = JSON.parse(localStorage.getItem('queue'));
-
-    if (!localStorage.getItem('queue') || newStorage.length <= 2) {
-      localStorage.removeItem('queue');
-      return;
-    }
-    const updatedStorage = newStorage.filter(
-      el => el.poster_path !== element.poster_path,
-    );
-    // if (event.target.getAttribute('id') === 'myLibrary') {
-    //   createQueueListFn(
-    //     localStorage.setItem('queue', JSON.stringify(updatedStorage)),
-    //   );
-    // }
-    return localStorage.setItem('queue', JSON.stringify(updatedStorage));
+    deletingFromLocalStorage('queue', element);
   });
+}
+function deletingFromLocalStorage(key, element) {
+  const newStorage = JSON.parse(localStorage.getItem(key));
+
+  if (!localStorage.getItem(key)) {
+    return;
+  }
+  if (newStorage.length < 2) {
+    localStorage.removeItem(key);
+    return;
+  }
+  const updatedStorage = newStorage.filter(
+    el => el.poster_path !== element.poster_path,
+  );
+  return localStorage.setItem(key, JSON.stringify(updatedStorage));
 }
 
 function btnText(btn) {
