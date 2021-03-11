@@ -151,7 +151,7 @@ function handleSearchQuery(event) {
 // рисует разметку когда нету результатов запроса
 function failureMarkup(placeToInsert) {
   const failureMarkup = `<div class="error">
-  <div class="error-img"><img src="https://i.ibb.co/4WvT00q/caterror.jpg" alt="" width="300"></div>
+  <div class="error-img"><img class="js-img-error" src="https://i.ibb.co/4WvT00q/caterror.jpg" alt="" width="300"></div>
 
   <p class="gallery__failure"> Unfortunately, no matches found. <span>Try again!</span> </p>
 </div>`;
@@ -161,7 +161,10 @@ function failureMarkup(placeToInsert) {
 // =================== модалка вывод фильма по клику =======================================
 
 function modalMatchesFounder(event) {
-  if (event.target.nodeName !== 'IMG') {
+  if (
+    event.target.nodeName !== 'IMG' ||
+    event.target.classList.contains('js-img-error')
+  ) {
     return;
   }
   //вызов рендеринга модалки
