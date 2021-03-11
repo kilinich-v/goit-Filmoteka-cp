@@ -1,7 +1,7 @@
 import refs from './refs';
 import rendering from './rendering-of-watched';
 import storage from './libraryControll';
-import renderQueueList from './queueList';
+import createQueueListFn from './queueList';
 
 // localStorage.clear();
 const watched = localStorage.getItem('watched');
@@ -38,7 +38,7 @@ function addToLocaleStorage(event) {
       store.push(currentFilm);
 
       storage.deleteFilm(currentFilm, storage.queue);
-      renderQueueList.createQueueListFn();
+      createQueueListFn();
 
       localStorage.setItem('watched', JSON.stringify(store));
     }

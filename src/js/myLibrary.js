@@ -1,5 +1,5 @@
 import refs from '../js/refs';
-import openQueueListFn from './queueList';
+import createQueueListFn from './queueList';
 import inputTemplate from '../templates/header/home.hbs';
 import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
 
@@ -35,7 +35,9 @@ function toLibrary() {
       refs.pageHeader.classList.add('header__watched');
       inputIndexRef.classList.add('is__hidden');
       refs.markupMyLibraty.insertAdjacentHTML('beforeend', inputMyLibrary);
-      openQueueListFn();
+      createQueueListFn();
+      const queueBtn = document.querySelector('[data-index="queue"]');
+      queueBtn.addEventListener('click', createQueueListFn);
     }
     if (buttonId === 'home') {
       refs.pageHeader.classList.remove('header__watched');
