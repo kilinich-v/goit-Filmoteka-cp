@@ -200,7 +200,7 @@ function modalGenreEditor(movie, genreDB) {
 function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
   refs.modalBoxRef.insertAdjacentHTML('afterbegin', modalMarkup);
-  // document.querySelector('body').classList.add('hide-overflow');
+  refs.body.classList.add('hide-overflow');
 }
 
 // ======================== конец кода  Dr.Frame  =============================================
