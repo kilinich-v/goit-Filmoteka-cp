@@ -1,57 +1,57 @@
 import storage from './libraryControll';
+import createQueueListFn from './queueList';
 
 function addToQueueList(element) {
   const { poster_path, original_title, genre_ids, release_date } = element;
   const data = { poster_path, original_title, genre_ids, release_date };
+
   const addToQueueBtn = document.querySelector('.js-queue');
+  const watchedBtn = document.querySelector('.js-watched');
   const storage = localStorage.getItem('queue');
+
   if (storage) {
-    if (storage.includes(element.original_title)) {
-      deleteFilm(storage, element);
-      return;
+    if (storage.includes(element.poster_path)) {
+      addToQueueBtn.disabled = true;
     }
   }
+
   addToQueueBtn.addEventListener('click', () => {
-    btnStatus('In queue', true);
-    if (!storage) {
-      localStorage.setItem('queue', JSON.stringify([data]));
-      deleteFilm(storage, element);
-      return;
+    addToQueueBtn.disabled = true;
+    if (!localStorage.getItem('queue')) {
+      return localStorage.setItem('queue', JSON.stringify([data]));
     }
-    deleteFilm(storage, element);
-    const newStorage = JSON.parse(storage);
+    const newStorage = JSON.parse(localStorage.getItem('queue'));
     newStorage.push(data);
-    localStorage.setItem('queue', JSON.stringify(newStorage));
-  });
-}
-
-function btnStatus(text, status) {
-  const addToQueueBtn = document.querySelector('.js-queue');
-  addToQueueBtn.textContent = text;
-  addToQueueBtn.disabled = status;
-}
-
-function deleteFilm(storage, element) {
-  btnStatus('In queue', true);
-  const watchedBtn = document.querySelector('.js-watched');
-  watchedBtn.addEventListener('click', () => {
-    btnStatus('add to queue', false);
-    if (!storage) {
-      return;
-    }
-    const newStorage = JSON.parse(storage);
-    const filmId = newStorage.find(
-      el => el.original_title === element.original_title,
-    );
-    newStorage.splice(filmId, 1);
     return localStorage.setItem('queue', JSON.stringify(newStorage));
   });
+
+  watchedBtn.addEventListener('click', () => {
+    addToQueueBtn.disabled = false;
+    btnText(addToQueueBtn);
+    const newStorage = JSON.parse(localStorage.getItem('queue'));
+    if (newStorage.length < 2) {
+      localStorage.removeItem('queue');
+      return;
+    }
+    const updatedStorage = newStorage.filter(
+      el => el.poster_path !== element.poster_path,
+    );
+    // if (event.target.getAttribute('id') === 'myLibrary') {
+    //   createQueueListFn(
+    //     localStorage.setItem('queue', JSON.stringify(updatedStorage)),
+    //   );
+    // }
+    return localStorage.setItem('queue', JSON.stringify(updatedStorage));
+  });
 }
 
-// function clearLocalStorage() {
-//   if (localStorage.getItem('queue') === []) {
-//     localStorage.removeItem('queue');
-//   }
-// }
+function btnText(btn) {
+  if (btn.disabled) {
+    btn.textContent = 'In queue';
+  } else {
+    btn.textContent = 'Add to queue';
+  }
+  return btn.textContent;
+}
 
 export default addToQueueList;
