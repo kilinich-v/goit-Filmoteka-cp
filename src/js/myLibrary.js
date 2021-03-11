@@ -7,15 +7,14 @@ import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
 
 const input = inputTemplate();
 
+refs.myLibraryBtn.addEventListener('click', libraryMarkup);
 refs.header.insertAdjacentHTML('beforeend', input);
 refs.headerButtons.addEventListener('click', toLibrary);
 
 function toLibrary(event) {
   event.preventDefault();
 
-  // const inputFilmsGallery = popularFilmsGalerryTpl();
   const inputIndexRef = document.querySelector('[data-index="form"]');
-  const inputMyLibrary = inputTemplateMyLibrary();
 
   if (event.target.nodeName !== 'BUTTON') {
     return;
@@ -35,7 +34,6 @@ function toLibrary(event) {
     refs.pageHeader.classList.remove('header__home');
     refs.pageHeader.classList.add('header__watched');
     inputIndexRef.classList.add('is__hidden');
-    refs.markupMyLibraty.insertAdjacentHTML('beforeend', inputMyLibrary);
     refs.galleryRef.innerHTML = '';
     openQueueListFn();
   }
@@ -46,4 +44,10 @@ function toLibrary(event) {
     refs.markupMyLibraty.innerHTML = '';
     window.location.reload();
   }
+}
+
+function libraryMarkup() {
+  const inputMyLibrary = inputTemplateMyLibrary();
+  refs.markupMyLibraty.innerHTML = '';
+  refs.markupMyLibraty.insertAdjacentHTML('beforeend', inputMyLibrary);
 }
