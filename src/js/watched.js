@@ -82,6 +82,8 @@ document.addEventListener('click', showAllWatched);
 function showAllWatched(event) {
   if (event.target.dataset.index === 'watched') {
     const queueBtn = document.querySelector('[data-index="queue"]');
+    const watchBtn = document.querySelector('[data-index="watched"]');
+    watchBtn.classList.add('is__active--btn');
     queueBtn.classList.remove('is__active--btn');
 
     refs.galleryRef.textContent = '';

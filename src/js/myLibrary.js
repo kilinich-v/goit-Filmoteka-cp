@@ -2,6 +2,7 @@ import refs from '../js/refs';
 import createQueueListFn from './queueList';
 import inputTemplate from '../templates/header/home.hbs';
 import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
+import { startPopularFilms } from '../index';
 
 const input = inputTemplate();
 
@@ -43,7 +44,8 @@ function toLibrary(event) {
     inputIndexRef.classList.remove('is__hidden');
     refs.markupMyLibraty.innerHTML = '';
     refs.paginationRef.classList.remove('pagination-is-hide');
-    window.location.reload();
+    refs.galleryRef.innerHTML = '';
+    startPopularFilms();
   }
 }
 
