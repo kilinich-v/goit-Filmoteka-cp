@@ -13,7 +13,6 @@ import modalTpl from './templates/modal.hbs';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/modal-team';
 
-
 //============== вставка Dr.Frame======================
 paginationJs();
 //=====================================================
@@ -135,7 +134,6 @@ export function handleSearchQuery(event) {
     apiFetch
       .fetchSearchRequestGallery()
       .then(data => {
-
         resultData.currentPage = data.page;
         resultData.totalPages = data.total_pages;
         resultData.totalResults = data.total_results;

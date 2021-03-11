@@ -29,7 +29,7 @@ function addToQueueList(element) {
     addToQueueBtn.disabled = false;
     btnText(addToQueueBtn);
     const newStorage = JSON.parse(localStorage.getItem('queue'));
-    if (newStorage.length < 2) {
+    if (newStorage.length < 1) {
       localStorage.removeItem('queue');
       return;
     }
