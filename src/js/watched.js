@@ -49,6 +49,9 @@ document.addEventListener('click', showAllWatched);
 
 function showAllWatched(event) {
   if (event.target.dataset.index === 'watched') {
+    const queueBtn = document.querySelector('[data-index="queue"]');
+    queueBtn.classList.remove('is__active--btn');
+
     refs.galleryRef.textContent = '';
     if (localStorage.getItem('watched')) {
       const dataArray = JSON.parse(localStorage.getItem('watched'));
