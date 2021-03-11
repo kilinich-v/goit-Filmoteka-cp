@@ -1,46 +1,78 @@
 import refs from './refs';
 import rendering from './rendering-of-watched';
-import storage from './libraryControll';
-import createQueueListFn from './queueList';
+// import storage from './libraryControll';
+// import createQueueListFn from './queueList';
 
 // localStorage.clear();
-const watched = localStorage.getItem('watched');
-const store = watched != null ? JSON.parse(watched) : [];
+
 document.addEventListener('click', addToLocaleStorage);
 
 function addToLocaleStorage(event) {
   if (event.target.classList.contains('js-watched')) {
     if (localStorage.getItem('watched') === null) {
-      pushToLocalStorage();
-      document.querySelector('.js-watched').textContent = 'already watched';
-      document
-        .querySelector('.js-watched')
-        .setAttribute('style', 'background: #ff6b08; color:#ffffff; border:0;');
+      pushToStorage();
+      changeBtnTxt();
     } else if (
       !localStorage
         .getItem('watched')
         .includes(`${document.querySelector('.card__img').src}`)
     ) {
-      pushToLocalStorage();
-      document.querySelector('.js-watched').textContent = 'already watched';
-      document
-        .querySelector('.js-watched')
-        .setAttribute('style', 'background: #ff6b08; color:#ffffff; border:0;');
+      pushToStorage();
+      changeBtnTxt();
+    } else if (
+      localStorage
+        .getItem('watched')
+        .includes(`${document.querySelector('.card__img').src}`)
+    ) {
+      deleteFromStorage();
+      originalBtnTxt();
     }
-
-    function pushToLocalStorage() {
+    function pushToStorage() {
       const currentFilm = {
         poster_path: document.querySelector('.card__img').src,
         release_date: event.target.dataset.release_date,
         original_title: document.querySelector('.card__title').textContent,
-        vote_average: document.querySelector('.js-watched').textContent,
+        vote_average: document.querySelector('.js-vote').textContent,
       };
+      const store =
+        localStorage.getItem('watched') != null
+          ? JSON.parse(localStorage.getItem('watched'))
+          : [];
       store.push(currentFilm);
 
-      storage.deleteFilm(currentFilm, storage.queue);
-      createQueueListFn();
+      // storage.deleteFilm(currentFilm, storage.queue);
+      // createQueueListFn();
 
       localStorage.setItem('watched', JSON.stringify(store));
+    }
+    function changeBtnTxt() {
+      document.querySelector('.js-watched').textContent = 'already watched';
+      document.querySelector('.js-watched').classList.add('added-to-watched');
+    }
+    function deleteFromStorage() {
+      const currentFilm = {
+        poster_path: document.querySelector('.card__img').src,
+        release_date: event.target.dataset.release_date,
+        original_title: document.querySelector('.card__title').textContent,
+        vote_average: document.querySelector('.js-vote').textContent,
+      };
+      const store = JSON.parse(localStorage.getItem('watched'));
+
+      if (!localStorage.getItem('watched') || store.length <= 2) {
+        localStorage.removeItem('watched');
+        return;
+      }
+
+      const deleteMovieFromArray = store.filter(
+        film => film.poster_path != currentFilm.poster_path,
+      );
+      localStorage.setItem('watched', JSON.stringify(deleteMovieFromArray));
+    }
+    function originalBtnTxt() {
+      document.querySelector('.js-watched').textContent = 'add to watched';
+      document
+        .querySelector('.js-watched')
+        .classList.remove('added-to-watched');
     }
   }
 }
