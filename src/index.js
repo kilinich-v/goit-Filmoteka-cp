@@ -215,7 +215,7 @@ function changeBtnWatchedText(event) {
     localStorage.getItem('watched').includes(`${event.target.src}`)
   ) {
     document.querySelector('.js-watched').textContent = 'already watched';
-    document.querySelector('.js-watched').classList.remove('added-to-watched');
+    document.querySelector('.js-watched').classList.add('added-to-watched');
   }
 }
 

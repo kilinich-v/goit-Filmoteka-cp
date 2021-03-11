@@ -1,7 +1,5 @@
 import refs from './refs';
 import rendering from './rendering-of-watched';
-// import storage from './libraryControll';
-// import createQueueListFn from './queueList';
 
 // localStorage.clear();
 
@@ -26,6 +24,17 @@ function addToLocaleStorage(event) {
     ) {
       deleteFromStorage();
       originalBtnTxt();
+      if (document.querySelector('[data-index="watched"]')) {
+        refs.galleryRef.textContent = '';
+        const dataArray = JSON.parse(localStorage.getItem('watched'));
+        rendering(dataArray);
+        if (!JSON.parse(localStorage.getItem('watched'))) {
+          refs.galleryRef.insertAdjacentHTML(
+            'afterbegin',
+            'No Watched moovies to show',
+          );
+        }
+      }
     }
     function pushToStorage() {
       const currentFilm = {
@@ -39,9 +48,6 @@ function addToLocaleStorage(event) {
           ? JSON.parse(localStorage.getItem('watched'))
           : [];
       store.push(currentFilm);
-
-      // storage.deleteFilm(currentFilm, storage.queue);
-      // createQueueListFn();
 
       localStorage.setItem('watched', JSON.stringify(store));
     }
@@ -85,16 +91,17 @@ function showAllWatched(event) {
     const watchBtn = document.querySelector('[data-index="watched"]');
     watchBtn.classList.add('is__active--btn');
     queueBtn.classList.remove('is__active--btn');
-
-    refs.galleryRef.textContent = '';
-    if (localStorage.getItem('watched')) {
-      const dataArray = JSON.parse(localStorage.getItem('watched'));
-      rendering(dataArray);
-    } else {
-      refs.galleryRef.insertAdjacentHTML(
-        'afterbegin',
-        'No Watched moovies to show',
-      );
+    if (document.querySelector('[data-index="watched"]')) {
+      refs.galleryRef.textContent = '';
+      if (localStorage.getItem('watched')) {
+        const dataArray = JSON.parse(localStorage.getItem('watched'));
+        rendering(dataArray);
+      } else {
+        refs.galleryRef.insertAdjacentHTML(
+          'afterbegin',
+          'No Watched moovies to show',
+        );
+      }
     }
   }
 }
