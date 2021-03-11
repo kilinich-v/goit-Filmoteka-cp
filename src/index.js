@@ -76,7 +76,6 @@ export function startPopularFilms() {
       return data;
     })
     .then(({ results }) => {
-      console.log(apiFetch.page);
       handlePopularFilmMarkup(genreTransform(results, genreDB));
     })
     .catch(error => failureMarkup(refs.galContainerRef))

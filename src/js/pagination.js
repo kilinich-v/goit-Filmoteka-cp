@@ -41,7 +41,6 @@ export default function paginationJs() {
   function totalRes() {
     apiFetch.fetchPopularMovieGallery().then(data => {
       data.total_results;
-      console.log(data.total_results);
     });
   }
   totalRes();
