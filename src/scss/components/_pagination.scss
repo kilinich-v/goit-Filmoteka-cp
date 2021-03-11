@@ -31,7 +31,7 @@ $hover-color: rgb(238, 233, 222);
     }
 
     &.disabled {
-      >a {
+      > a {
         color: black;
         font-weight: 500;
         //opacity: 0.3;
@@ -44,7 +44,6 @@ $hover-color: rgb(238, 233, 222);
   }
 
   li.paginationjs-ellipsis {
-
     width: 11px;
 
     @media screen and (max-width: 450px) {
@@ -65,8 +64,7 @@ $hover-color: rgb(238, 233, 222);
       width: 100%;
       height: 100%;
 
-      font-family: Roboto,
-        sans-serif;
+      font-family: Roboto, sans-serif;
       font-weight: 500;
       color: $black-color;
       background-color: $white-color;
@@ -80,8 +78,7 @@ $hover-color: rgb(238, 233, 222);
       //@include transition(all);
     }
 
-    &.paginationjs-page>a {
-
+    &.paginationjs-page > a {
       &:hover,
       &:focus {
         background-color: $hover-color;
@@ -97,7 +94,7 @@ $hover-color: rgb(238, 233, 222);
     }
   }
 
-  li.active>a {
+  li.active > a {
     background-color: $orange-color;
     color: $white-color;
 
@@ -110,8 +107,8 @@ $hover-color: rgb(238, 233, 222);
   }
 }
 
-li.paginationjs-prev>a,
-li.paginationjs-next>a {
+li.paginationjs-prev > a,
+li.paginationjs-next > a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,12 +123,12 @@ li.paginationjs-next>a {
   }
 }
 
-.paginationjs-prev>a {
+.paginationjs-prev > a {
   background: url('./images/arrow-left.svg') no-repeat;
   background-position: 50% 50%;
 }
 
-.paginationjs-next>a {
+.paginationjs-next > a {
   background: url('./images/arrow-right.svg') no-repeat;
   background-position: 50% 50%;
 }
@@ -201,4 +198,8 @@ li.paginationjs-next>a {
   @media screen and (max-width: 767px) {
     padding-bottom: 40px;
   }
+}
+
+.pagination-is-hide {
+  display: none;
 }

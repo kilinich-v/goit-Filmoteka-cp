@@ -20,6 +20,8 @@ const refs = {
   markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
   watched: document.querySelector('.js-watched'),
   body: document.querySelector('body'),
+  myLibraryBtn: document.querySelector('[data-index="mylibrary"]'),
+  paginationRef: document.getElementById('pagination-container'),
 };
 
 export default refs;
