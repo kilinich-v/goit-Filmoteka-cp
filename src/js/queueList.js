@@ -1,10 +1,13 @@
 import refs from './refs';
 import filmGalleryTemplate from '../templates/filmgallery.hbs';
 
-function openQueueListFn() {
-  const queueBtn = document.querySelector('[data-index="queue"]');
-  queueBtn.addEventListener('click', createQueueListFn);
-}
+// в mylibrary.js зверху заміни назву функціїї (2 рядок) на:
+// import createQueueListFn from './queueList';
+//
+//і  нижче замість рядка openListFn() (рядок 38) напиши:
+// createQueueListFn();
+// const queueBtn = document.querySelector('[data-index="queue"]');
+// queueBtn.addEventListener('click', createQueueListFn;
 
 function createQueueListFn() {
   refs.galleryRef.innerHTML = '';
@@ -12,10 +15,15 @@ function createQueueListFn() {
   if (!queue || queue.length === 0) {
     refs.galleryRef.insertAdjacentHTML(
       'beforeend',
-      '<p> Please add films to your Queue list:) </p>',
+      '<p> This list is empty. Please add something:) </p>',
     );
     return;
   }
-  refs.galleryRef.insertAdjacentHTML('beforeend', filmGalleryTemplate(queue));
+
+  return refs.galleryRef.insertAdjacentHTML(
+    'beforeend',
+    filmGalleryTemplate(queue),
+  );
 }
-export default openQueueListFn;
+
+export default createQueueListFn;

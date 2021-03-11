@@ -4,35 +4,32 @@
 <div class="card__content-wrap">
   <h3 class="card__title">{{original_title}}</h3>
   <div class="card__info-wrap">
-    <div class="card__info-title">
-      <ul class="card__info-title__list list">
-        <li class="card__info-title__item">Vote / Votes</li>
-        <li class="card__info-title__item">Popularity</li>
-        <li class="card__info-title__item">Original Title</li>
-        <li class="card__info-title__item">Genre</li>
-      </ul>
-    </div>
-    <div class="card__info-content">
-      <ul class="card__info-content__list list">
-        <li class="card__info-content__item"><span>{{vote_average}}</span>&nbsp;/&nbsp;<span>{{vote_count}}</span></li>
-        <li class="card__info-content__item">{{popularity}}</li>
-        <li class="card__info-content__item">{{original_title}}</li>
-        <li class="card__info-content__item">
-          <ul class="card__info-content__genre-list list">
-            {{#each genre_ids}}
-            <li class="card__info-content__genre-item">{{this}}<span>,&nbsp;</span></li>
-            {{/each}}
-          </ul>
-        </li>
-      </ul>
-    </div>
+    <ul class="card__info-list list">
+      <li class="card__info-item">
+        <p class="card__info-title">Vote / Votes</p>
+        <p class="card__info-vote js-vote"><span>{{vote_average}}</span>&nbsp;/&nbsp;<span>{{vote_count}}</span></p>
+      </li>
+      <li class="card__info-item">
+        <p class="card__info-title">Popularity</p>
+        <p class="card__info-popularity">{{popularity}}</p>
+      </li>
+      <li class="card__info-item">
+        <p class="card__info-title">Original Title</p>
+        <p class="card__info-movie-name">{{original_title}}</p>
+      </li>
+      <li class="card__info-item">
+        <p class="card__info-title">Genre</p>
+        <ul class="card__info__genre-list list">
+          {{#each genre_ids}}
+          <li class="card__info__genre-item">{{this}}<span>,&nbsp;</span></li>
+          {{/each}}
+      </li>
+    </ul>
   </div>
   <p class="card__description-title">About</p>
   <p class="card__description">{{overview}}</p>
   <div class="card__btn-box">
-    <button type="button" class="button card__btn watched" data-poster="{{poster_path}}"
-      data-release_date="{{release_date}}" data-original_title="{{original_title}}" data-vote="{{vote_average}}">add
-      to Watched</button>
+    <button type="button" class="button card__btn js-watched">add to Watched</button>
     <button type="button" class="button card__btn js-queue">add to queue</button>
   </div>
 </div>

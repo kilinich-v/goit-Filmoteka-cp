@@ -1,25 +1,57 @@
+import storage from './libraryControll';
+import createQueueListFn from './queueList';
+
 function addToQueueList(element) {
-  createQueueLocalStorage();
   const { poster_path, original_title, genre_ids, release_date } = element;
   const data = { poster_path, original_title, genre_ids, release_date };
+
   const addToQueueBtn = document.querySelector('.js-queue');
-  addToQueueBtn.addEventListener('click', () => {
-    const storage = localStorage.getItem('queue');
+  const watchedBtn = document.querySelector('.js-watched');
+  const storage = localStorage.getItem('queue');
+
+  if (storage) {
     if (storage.includes(element.poster_path)) {
-      alert('This film has already been added;)');
-      return;
+      addToQueueBtn.disabled = true;
+    }
+  }
+
+  addToQueueBtn.addEventListener('click', () => {
+    addToQueueBtn.disabled = true;
+    if (!localStorage.getItem('queue')) {
+      return localStorage.setItem('queue', JSON.stringify([data]));
     }
     const newStorage = JSON.parse(localStorage.getItem('queue'));
     newStorage.push(data);
-    localStorage.setItem('queue', JSON.stringify(newStorage));
+    return localStorage.setItem('queue', JSON.stringify(newStorage));
+  });
+
+  watchedBtn.addEventListener('click', () => {
+    addToQueueBtn.disabled = false;
+    btnText(addToQueueBtn);
+    const newStorage = JSON.parse(localStorage.getItem('queue'));
+    if (newStorage.length < 2) {
+      localStorage.removeItem('queue');
+      return;
+    }
+    const updatedStorage = newStorage.filter(
+      el => el.poster_path !== element.poster_path,
+    );
+    // if (event.target.getAttribute('id') === 'myLibrary') {
+    //   createQueueListFn(
+    //     localStorage.setItem('queue', JSON.stringify(updatedStorage)),
+    //   );
+    // }
+    return localStorage.setItem('queue', JSON.stringify(updatedStorage));
   });
 }
 
-function createQueueLocalStorage() {
-  const storage = localStorage.getItem('queue');
-  if (storage === null) {
-    return localStorage.setItem('queue', JSON.stringify([]));
+function btnText(btn) {
+  if (btn.disabled) {
+    btn.textContent = 'In queue';
+  } else {
+    btn.textContent = 'Add to queue';
   }
+  return btn.textContent;
 }
 
 export default addToQueueList;
