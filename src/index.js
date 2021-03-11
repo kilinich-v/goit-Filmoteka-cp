@@ -131,10 +131,11 @@ export function handleSearchQuery(event) {
   apiFetch.searchQuerry = inputRef.value;
   if (inputRef.value) {
     galleryRef.innerHTML = '';
+    refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
     apiFetch
       .fetchSearchRequestGallery()
       .then(data => {
-        refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
+
         resultData.currentPage = data.page;
         resultData.totalPages = data.total_pages;
         resultData.totalResults = data.total_results;
