@@ -250,6 +250,15 @@ p {
     background-color: $orange-color;
     border-color: $orange-color;
   }
+  &.added-to-watched {
+    background: $orange-color;
+    color: $white-color;
+    border: 1px solid $black-color;
+
+    // &:hover {
+    //   color: $black-color;
+    // }
+  }
 
   @include for-size(tablet) {
     width: 125px;
@@ -259,3 +268,6 @@ p {
     width: 136px;
   }
 }
+// 'style',
+// 'background: transparent; color:#33333; border:1px solid #222222;',
+//   .setAttribute('style', 'background: #ff6b08; color:#ffffff; border:0;');

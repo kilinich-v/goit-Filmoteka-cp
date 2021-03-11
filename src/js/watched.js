@@ -47,9 +47,7 @@ function addToLocaleStorage(event) {
     }
     function changeBtnTxt() {
       document.querySelector('.js-watched').textContent = 'already watched';
-      document
-        .querySelector('.js-watched')
-        .setAttribute('style', 'background: #ff6b08; color:#ffffff; border:0;');
+      document.querySelector('.js-watched').classList.add('added-to-watched');
     }
     function deleteFromStorage() {
       const currentFilm = {
@@ -68,10 +66,7 @@ function addToLocaleStorage(event) {
       document.querySelector('.js-watched').textContent = 'add to watched';
       document
         .querySelector('.js-watched')
-        .setAttribute(
-          'style',
-          'background: transparent; color:#33333; border:1px solid #333333;',
-        );
+        .classList.remove('added-to-watched');
     }
   }
 }
