@@ -108,7 +108,7 @@ export function genreTransform(moviesDB, genreDB) {
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
   moviesArr = transferedGenreArr;
-  //console.log(moviesArr);
+
   return transferedGenreArr;
 }
 
@@ -199,7 +199,6 @@ export function modalGenreEditor(movie, genreDB) {
     }
   });
   movie.genre_ids = genreArr;
-  console.log(movie);
   return movie;
 }
 
@@ -215,7 +214,14 @@ function changeBtnWatchedText(event) {
     localStorage.getItem('watched').includes(`${event.target.src}`)
   ) {
     document.querySelector('.js-watched').textContent = 'already watched';
-    document.querySelector('.js-watched').classList.remove('added-to-watched');
+    document.querySelector('.js-watched').classList.add('added-to-watched');
+  }
+  if (
+    localStorage.getItem('queue') != null &&
+    localStorage.getItem('queue').includes(`${event.target.src}`)
+  ) {
+    document.querySelector('.js-queue').textContent = 'In queue';
+    document.querySelector('.js-queue').classList.add('added-to-watched');
   }
 }
 

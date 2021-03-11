@@ -254,10 +254,6 @@ p {
     background: $orange-color;
     color: $white-color;
     border: 1px solid $black-color;
-
-    // &:hover {
-    //   color: $black-color;
-    // }
   }
 
   @include for-size(tablet) {
