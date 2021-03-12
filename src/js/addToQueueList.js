@@ -55,9 +55,9 @@ function addToQueueList(element) {
     newStorage.push(data);
     const dataArray = JSON.parse(localStorage.getItem('watched'));
 
-    if (refs.myLibraryBtn.classList.contains('current')) {
-      rendering(dataArray);
-    }
+    // if (refs.myLibraryBtn.classList.contains('current')) {
+    //   rendering(dataArray);
+    // }
 
     return localStorage.setItem('queue', JSON.stringify(newStorage));
   });
