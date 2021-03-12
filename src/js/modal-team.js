@@ -1,7 +1,6 @@
 import * as basicLightbox from 'basiclightbox';
 import students from './list-devs';
 
-
 const markupStudent = students.reduce(
   (string, {avatar,link, name, role }) =>
     string +
@@ -38,4 +37,9 @@ function openModalStudent(e) {
       window.removeEventListener('keydown', closeModalHandler);
     }
   }
+
+//   const defaultImage = '...location of default image..';
+
+//  ${avatar} = empty($src) ? $src : defaultImage;
+
 }

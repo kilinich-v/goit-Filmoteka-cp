@@ -5,9 +5,13 @@ $hover-color: rgb(238, 233, 222);
   justify-content: center;
   align-items: center;
 
-  margin-top: 46px;
+  padding-bottom: 40px;
 
   background-color: inherit;
+
+  @media screen and (min-width: 450px) {
+    padding-bottom: 60px;
+  }
 }
 
 .paginationjs-pages ul {

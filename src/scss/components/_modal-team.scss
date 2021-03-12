@@ -1,20 +1,19 @@
 .basicLightbox {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .team-wrapper {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
+
+  align-items: center;
   justify-content: center;
-
-  @include for-size(tablet - 1) {
-    margin-top: 210px;
-    justify-content: center;
-  }
-
-  width: 240px;
   background-color: $white-color;
-
+  width: 240px;
+  @include for-size(mobile-only) {
+    top: 220px;
+  }
   @include for-size(tablet) {
     width: 700px;
   }
@@ -26,21 +25,22 @@
 
 .team-card {
   position: relative;
-
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: space-between;
   margin: 15px;
   width: calc((100% - 60px) / 2);
+  align-items: center;
+  justify-items: flex-end;
 
   @include for-size(tablet) {
     width: calc((100% - 260px) / 5);
+    margin: 20px;
   }
 
   @include for-size(desktop) {
-    width: calc((100% - 140px) / 5);
-    margin: 10px;
+    width: calc((100% - 340px) / 5);
+    margin: 30px;
   }
 }
 
@@ -75,10 +75,10 @@
 }
 
 .team-image {
+  display: flex;
   margin-bottom: 10px;
 
   width: 100%;
-
+  height: auto;
   border-radius: 50%;
-  box-shadow: 5px 5px 11px -2px;
 }

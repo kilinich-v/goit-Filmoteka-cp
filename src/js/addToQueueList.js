@@ -13,11 +13,13 @@ function addToQueueList(element) {
 
   if (storage) {
     if (storage.includes(element.poster_path)) {
-      addToQueueBtn.disabled = true;
+      addToQueueBtn.classList.add('added-to-watched');
     }
   }
 
   addToQueueBtn.addEventListener('click', () => {
+    document.querySelector('.js-watched').classList.remove('added-to-watched');
+    document.querySelector('.js-watched').textContent = 'add to watched';
     if (!addToQueueBtn.disabled) {
       addToQueueBtn.addEventListener(
         'click',
@@ -44,18 +46,24 @@ function addToQueueList(element) {
         }
       }
     }
-    addToQueueBtn.disabled = true;
+    addToQueueBtn.classList.add('added-to-watched');
     btnText(addToQueueBtn);
     if (!localStorage.getItem('queue')) {
       return localStorage.setItem('queue', JSON.stringify([data]));
     }
     const newStorage = JSON.parse(localStorage.getItem('queue'));
     newStorage.push(data);
+    const dataArray = JSON.parse(localStorage.getItem('watched'));
+
+    if (refs.myLibraryBtn.classList.contains('current')) {
+      rendering(dataArray);
+    }
+
     return localStorage.setItem('queue', JSON.stringify(newStorage));
   });
 
   watchedBtn.addEventListener('click', () => {
-    addToQueueBtn.disabled = false;
+    addToQueueBtn.classList.remove('added-to-watched');
     btnText(addToQueueBtn);
     deletingFromLocalStorage('queue', element);
     document.querySelector('.js-queue').classList.remove('added-to-storage');
@@ -77,7 +85,6 @@ function addToQueueList(element) {
 }
 function deletingFromLocalStorage(key, element) {
   const newStorage = JSON.parse(localStorage.getItem(key));
-
   if (!localStorage.getItem(key)) {
     return;
   }
@@ -92,7 +99,7 @@ function deletingFromLocalStorage(key, element) {
 }
 
 function btnText(btn) {
-  if (btn.disabled) {
+  if (btn.classList.contains('added-to-watched')) {
     btn.textContent = 'In queue';
   } else {
     btn.textContent = 'Add to queue';

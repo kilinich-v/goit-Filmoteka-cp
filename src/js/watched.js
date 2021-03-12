@@ -1,8 +1,6 @@
 import refs from './refs';
 import rendering from './rendering-of-watched';
 
-// localStorage.clear();
-
 document.addEventListener('click', addToLocaleStorage);
 
 function addToLocaleStorage(event) {
