@@ -1,11 +1,9 @@
 .movie {
   padding-top: 20px;
-  padding-bottom: 40px;
   min-height: calc(100vh - 230px - 78px);
 
   @include for-size(tablet) {
     padding-top: 60px;
-    padding-bottom: 60px;
   }
   @media screen and (min-width: 768px) {
     min-height: calc(100vh - - 230px - 94px);
