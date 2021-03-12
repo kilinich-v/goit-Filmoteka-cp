@@ -2,14 +2,17 @@ import './styles.scss';
 import './js/myLibrary';
 import _ from 'lodash';
 import refs from './js/refs';
+import './js/paginJS';
 import apiFetch from './js/apiService.js';
 import addToQueueList from './js/addToQueueList';
 import './js/open-close-modal';
 import './js/watched';
+import './js/libraryControll';
 import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/modal-team';
+import pnotify from './js/notification';
 
 //============== вставка Dr.Frame======================
 //=====================================================
@@ -28,7 +31,7 @@ galleryRef.addEventListener('click', modalMatchesFounder);
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
 
 //массив жанров от АПИ
-let genreDB = [
+export let genreDB = [
   { id: 28, name: 'Action' },
   { id: 12, name: 'Adventure' },
   { id: 16, name: 'Animation' },
@@ -62,22 +65,91 @@ let moviesArr;
 //заходит обьект для рендера модалки
 let currentFilmObj = {};
 
-function startPopularFilms() {
-  apiFetch
-    .fetchPopularMovieGallery()
-    .then(data => {
-      refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
-      resultData.currentPage = data.page;
-      resultData.totalPages = data.total_pages;
-      resultData.totalResults = data.total_results;
-      return data;
-    })
-    .then(({ results }) => {
-      console.log(apiFetch.page);
-      handlePopularFilmMarkup(genreTransform(results, genreDB));
-    })
-    .catch(error => failureMarkup(refs.galContainerRef))
-    .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
+export function startPopularFilms() {
+  formRef.firstElementChild.value = '';
+  refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
+  refs.galleryRef.classList.remove('movie__list--error');
+  paginationJsPopular();
+  refs.spinner.classList.add('is-hidden'); //прячет спиннер
+}
+
+function paginationJsPopular() {
+  const trendingsUrl = apiFetch.trendingUrl;
+  const trendingUrlApiKey = `${trendingsUrl}${apiFetch.apiKey}`;
+  const galleryRef = refs.galleryRef;
+
+  $('#pagination-container').pagination({
+    dataSource: trendingUrlApiKey,
+    locator: 'results',
+    totalNumberLocator: data => data.total_results,
+    pageSize: 20,
+    alias: {
+      pageNumber: 'page',
+    },
+    prevText: '',
+    nextText: '',
+    callback: function (data, pagination) {
+      galleryRef.innerHTML = '';
+      handlePopularFilmMarkup(genreTransform(data, genreDB));
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+  });
+}
+
+//функции отвечающие за отрисовку запроса
+
+function handleSearchQuery(event) {
+  refs.paginationRef.classList.remove('pagination-is-hide');
+  event.preventDefault();
+  apiFetch.searchQuerry = '';
+  apiFetch.searchQuerry = inputRef.value;
+
+  if (inputRef.value) {
+    galleryRef.innerHTML = '';
+    refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
+    paginationJsSearch();
+    refs.spinner.classList.add('is-hidden'); //прячет спиннер
+  } else {
+    // galleryRef.innerHTML = '';
+    // startPopularFilms();
+    pnotify.showNotice();
+  }
+}
+
+function paginationJsSearch() {
+  const searchUrl = apiFetch.searchUrl;
+  const querry = apiFetch.searchQuerry;
+  const searchUrlApiKey = `${searchUrl}${apiFetch.apiKey}&query=${querry}`;
+  const galleryRef = refs.galleryRef;
+
+  $('#pagination-container').pagination({
+    dataSource: searchUrlApiKey,
+    locator: 'results',
+    totalNumberLocator: data => data.total_results,
+    pageSize: 20,
+    alias: {
+      pageNumber: 'page',
+    },
+    prevText: '',
+    nextText: '',
+    callback: function (data, pagination) {
+      if (data.length === 0) {
+        pnotify.showError();
+        failureMarkup(galleryRef);
+        refs.paginationRef.classList.add('pagination-is-hide');
+      } else {
+        galleryRef.innerHTML = '';
+        handlePopularFilmMarkup(genreTransform(data, genreDB));
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+    },
+  });
 }
 
 // меняет числа жанров на название и дату релиза
@@ -106,7 +178,7 @@ function genreTransform(moviesDB, genreDB) {
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
   moviesArr = transferedGenreArr;
-  console.log(moviesArr);
+
   return transferedGenreArr;
 }
 
@@ -118,40 +190,10 @@ function handlePopularFilmMarkup(popularFilms) {
 
 // =================================================================================================
 
-//функции отвечающие за отрисовку запроса
-function handleSearchQuery(event) {
-  event.preventDefault();
-  apiFetch.searchQuerry = '';
-  apiFetch.searchQuerry = inputRef.value;
-  if (inputRef.value) {
-    galleryRef.innerHTML = '';
-    apiFetch
-      .fetchSearchRequestGallery()
-      .then(data => {
-        refs.spinner.classList.remove('is-hidden'); //добавляет спиннер
-        resultData.currentPage = data.page;
-        resultData.totalPages = data.total_pages;
-        resultData.totalResults = data.total_results;
-        return data;
-      })
-      .then(({ results }) => {
-        if (results.length === 0) {
-          failureMarkup(refs.galleryRef);
-        } else {
-          handlePopularFilmMarkup(genreTransform(results, genreDB));
-        }
-      })
-      .catch(error => console.log(error))
-      .finally(() => refs.spinner.classList.add('is-hidden')); //прячет спиннер
-  } else {
-    return;
-  }
-}
-
 // рисует разметку когда нету результатов запроса
 function failureMarkup(placeToInsert) {
   const failureMarkup = `<div class="error">
-  <div class="error-img"><img src="https://i.ibb.co/4WvT00q/caterror.jpg" alt="" width="300"></div>
+  <div class="error-img"><img class="js-img-error" src="https://i.ibb.co/4WvT00q/caterror.jpg" alt="" width="300"></div>
 
   <p class="gallery__failure"> Unfortunately, no matches found. <span>Try again!</span> </p>
 </div>`;
@@ -161,7 +203,10 @@ function failureMarkup(placeToInsert) {
 // =================== модалка вывод фильма по клику =======================================
 
 function modalMatchesFounder(event) {
-  if (event.target.nodeName !== 'IMG') {
+  if (
+    event.target.nodeName !== 'IMG' ||
+    event.target.classList.contains('js-img-error')
+  ) {
     return;
   }
   //вызов рендеринга модалки
@@ -175,8 +220,9 @@ function modalMatchesFounder(event) {
     }
   });
   handleModalMarkup(currentFilmObj);
+  changeBtnWatchedText(event);
   backdropRef.classList.remove('is-hidden');
-  addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
+  addToQueueList(currentFilmObj);
 }
 
 //изменяет жанр при рендере модалки
@@ -191,7 +237,6 @@ function modalGenreEditor(movie, genreDB) {
     }
   });
   movie.genre_ids = genreArr;
-  console.log(movie);
   return movie;
 }
 
@@ -199,7 +244,23 @@ function modalGenreEditor(movie, genreDB) {
 function handleModalMarkup(currentMovie) {
   const modalMarkup = modalTpl(currentMovie);
   refs.modalBoxRef.insertAdjacentHTML('afterbegin', modalMarkup);
-  // document.querySelector('body').classList.add('hide-overflow');
+  refs.body.classList.add('hide-overflow');
+}
+function changeBtnWatchedText(event) {
+  if (
+    localStorage.getItem('watched') != null &&
+    localStorage.getItem('watched').includes(`${event.target.src}`)
+  ) {
+    document.querySelector('.js-watched').textContent = 'already watched';
+    document.querySelector('.js-watched').classList.add('added-to-storage');
+  }
+  if (
+    localStorage.getItem('queue') != null &&
+    localStorage.getItem('queue').includes(`${event.target.src}`)
+  ) {
+    document.querySelector('.js-queue').textContent = 'in queue';
+    document.querySelector('.js-queue').classList.add('added-to-storage');
+  }
 }
 
 // ======================== конец кода  Dr.Frame  =============================================
