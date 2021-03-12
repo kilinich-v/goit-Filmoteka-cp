@@ -85,8 +85,8 @@ function showAllWatched(event) {
     const watchBtn = document.querySelector('[data-index="watched"]');
     watchBtn.classList.add('is__active--btn');
     queueBtn.classList.remove('is__active--btn');
-    const watchBtn = document.querySelector('[data-index="watched"]');
-    watchBtn.classList.add('is__active--btn');
+    /* const watchBtn = document.querySelector('[data-index="watched"]');
+    watchBtn.classList.add('is__active--btn'); */
 
     refs.galleryRef.textContent = '';
     if (localStorage.getItem('watched')) {
