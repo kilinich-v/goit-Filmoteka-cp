@@ -251,14 +251,14 @@ function changeBtnWatchedText(event) {
     localStorage.getItem('watched').includes(`${event.target.src}`)
   ) {
     document.querySelector('.js-watched').textContent = 'already watched';
-    document.querySelector('.js-watched').classList.add('added-to-watched');
+    document.querySelector('.js-watched').classList.add('added-to-storage');
   }
   if (
     localStorage.getItem('queue') != null &&
     localStorage.getItem('queue').includes(`${event.target.src}`)
   ) {
-    document.querySelector('.js-queue').textContent = 'In queue';
-    document.querySelector('.js-queue').classList.add('added-to-watched');
+    document.querySelector('.js-queue').textContent = 'in queue';
+    document.querySelector('.js-queue').classList.add('added-to-storage');
   }
 }
 

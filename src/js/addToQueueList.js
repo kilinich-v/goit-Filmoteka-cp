@@ -1,7 +1,7 @@
-import storage from './libraryControll';
+// import storage from './libraryControll';
+// import createQueueListFn from './queueList';
 import refs from './refs';
-import createQueueListFn from './queueList';
-import rendering from './rendering-of-watched';
+import filmGalleryTemplate from '../templates/filmgallery.hbs';
 
 function addToQueueList(element) {
   const { poster_path, original_title, genre_ids, release_date } = element;
@@ -21,7 +21,30 @@ function addToQueueList(element) {
     document.querySelector('.js-watched').classList.remove('added-to-watched');
     document.querySelector('.js-watched').textContent = 'add to watched';
     if (!addToQueueBtn.disabled) {
-      deletingFromLocalStorage('watched', element);
+      addToQueueBtn.addEventListener(
+        'click',
+        deletingFromLocalStorage('watched', element),
+      );
+      document.querySelector('.js-watched').textContent = 'add to watched';
+
+      document
+        .querySelector('.js-watched')
+        .classList.remove('added-to-storage');
+      document.querySelector('.js-queue').classList.add('added-to-storage');
+      if (document.querySelector('[data-index="watched"]')) {
+        refs.galleryRef.textContent = '';
+        refs.galleryRef.insertAdjacentHTML(
+          'beforeend',
+          filmGalleryTemplate(JSON.parse(localStorage.getItem('watched'))),
+        );
+
+        if (!JSON.parse(localStorage.getItem('watched'))) {
+          refs.galleryRef.insertAdjacentHTML(
+            'afterbegin',
+            'No Watched moovies to show',
+          );
+        }
+      }
     }
     addToQueueBtn.classList.add('added-to-watched');
     btnText(addToQueueBtn);
@@ -43,9 +66,20 @@ function addToQueueList(element) {
     addToQueueBtn.classList.remove('added-to-watched');
     btnText(addToQueueBtn);
     deletingFromLocalStorage('queue', element);
+    document.querySelector('.js-queue').classList.remove('added-to-storage');
 
-    if (refs.myLibraryBtn.classList.contains('current')) {
-      createQueueListFn();
+    if (document.querySelector('[data-index="watched"]')) {
+      refs.galleryRef.textContent = '';
+      refs.galleryRef.insertAdjacentHTML(
+        'beforeend',
+        filmGalleryTemplate(JSON.parse(localStorage.getItem('queue'))),
+      );
+      if (!JSON.parse(localStorage.getItem('queue'))) {
+        refs.galleryRef.insertAdjacentHTML(
+          'afterbegin',
+          'No moovies in Queue to show',
+        );
+      }
     }
   });
 }
