@@ -250,10 +250,10 @@ p {
     background-color: $orange-color;
     border-color: $orange-color;
   }
-  &.added-to-watched {
+  &.added-to-storage {
     background: $orange-color;
     color: $white-color;
-    border: 1px solid $black-color;
+    border: 1px solid $orange-color;
 
     // &:hover {
     //   color: $black-color;

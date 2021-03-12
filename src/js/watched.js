@@ -53,7 +53,7 @@ function addToLocaleStorage(event) {
     }
     function changeBtnTxt() {
       document.querySelector('.js-watched').textContent = 'already watched';
-      document.querySelector('.js-watched').classList.add('added-to-watched');
+      document.querySelector('.js-watched').classList.add('added-to-storage');
     }
     function deleteFromStorage() {
       const currentFilm = {
@@ -78,7 +78,7 @@ function addToLocaleStorage(event) {
       document.querySelector('.js-watched').textContent = 'add to watched';
       document
         .querySelector('.js-watched')
-        .classList.remove('added-to-watched');
+        .classList.remove('added-to-storage');
     }
   }
 }

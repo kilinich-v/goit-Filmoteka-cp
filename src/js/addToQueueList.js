@@ -1,5 +1,5 @@
-import storage from './libraryControll';
-import createQueueListFn from './queueList';
+// import storage from './libraryControll';
+// import createQueueListFn from './queueList';
 import refs from './refs';
 import filmGalleryTemplate from '../templates/filmgallery.hbs';
 
@@ -23,12 +23,19 @@ function addToQueueList(element) {
         'click',
         deletingFromLocalStorage('watched', element),
       );
+      document.querySelector('.js-watched').textContent = 'add to watched';
+
+      document
+        .querySelector('.js-watched')
+        .classList.remove('added-to-storage');
+      document.querySelector('.js-queue').classList.add('added-to-storage');
       if (document.querySelector('[data-index="watched"]')) {
         refs.galleryRef.textContent = '';
         refs.galleryRef.insertAdjacentHTML(
           'beforeend',
           filmGalleryTemplate(JSON.parse(localStorage.getItem('watched'))),
         );
+
         if (!JSON.parse(localStorage.getItem('watched'))) {
           refs.galleryRef.insertAdjacentHTML(
             'afterbegin',
@@ -51,6 +58,8 @@ function addToQueueList(element) {
     addToQueueBtn.disabled = false;
     btnText(addToQueueBtn);
     deletingFromLocalStorage('queue', element);
+    document.querySelector('.js-queue').classList.remove('added-to-storage');
+
     if (document.querySelector('[data-index="watched"]')) {
       refs.galleryRef.textContent = '';
       refs.galleryRef.insertAdjacentHTML(
