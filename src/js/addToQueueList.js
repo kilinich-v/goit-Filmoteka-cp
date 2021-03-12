@@ -34,16 +34,7 @@ function addToQueueList(element) {
 
     if (refs.myLibraryBtn.classList.contains('current')) {
       rendering(dataArray);
-
-      if (!dataArray) {
-        refs.galleryRef.insertAdjacentHTML(
-          'afterbegin',
-          'No Watched moovies to show',
-        );
-      }
     }
-
-
 
     return localStorage.setItem('queue', JSON.stringify(newStorage));
   });
