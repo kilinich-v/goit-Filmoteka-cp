@@ -43,7 +43,7 @@ p {
   }
 
   @media screen and (max-width: 767px) {
-        margin: 0 auto;
+    margin: 0 auto;
   }
 
   @include for-size(tablet) {
@@ -119,6 +119,13 @@ p {
     width: 396px;
     height: 478px;
   }
+}
+
+.card__img {
+  height: auto;
+  transform: translate(-50%, -50%);
+  margin-left: 50%;
+  margin-top: 64%;
 }
 
 .card__content-wrap {
