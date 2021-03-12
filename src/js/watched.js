@@ -64,7 +64,7 @@ function addToLocaleStorage(event) {
       };
       const store = JSON.parse(localStorage.getItem('watched'));
 
-      if (!localStorage.getItem('watched') || store.length <= 2) {
+      if (!localStorage.getItem('watched') || store.length < 2) {
         localStorage.removeItem('watched');
         return;
       }

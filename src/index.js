@@ -182,7 +182,7 @@ function modalMatchesFounder(event) {
     }
   });
   handleModalMarkup(currentFilmObj);
-  changeBtnWatchedText(event);
+  // changeBtnWatchedText(event);
   backdropRef.classList.remove('is-hidden');
   addToQueueList(modalGenreEditor(currentFilmObj, genreDB));
 }
@@ -216,6 +216,13 @@ function changeBtnWatchedText(event) {
   ) {
     document.querySelector('.js-watched').textContent = 'already watched';
     document.querySelector('.js-watched').classList.add('added-to-watched');
+  }
+  if (
+    localStorage.getItem('queue') != null &&
+    localStorage.getItem('queue').includes(`${event.target.src}`)
+  ) {
+    document.querySelector('.js-queue').textContent = 'in queue';
+    document.querySelector('.js-queue').classList.add('added-to-watched');
   }
 }
 

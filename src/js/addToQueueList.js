@@ -51,18 +51,18 @@ function addToQueueList(element) {
     addToQueueBtn.disabled = false;
     btnText(addToQueueBtn);
     deletingFromLocalStorage('queue', element);
-      if (document.querySelector('[data-index="watched"]')) {
-    refs.galleryRef.textContent = '';
-    refs.galleryRef.insertAdjacentHTML(
-      'beforeend',
-      filmGalleryTemplate(JSON.parse(localStorage.getItem('queue'))),
-    );
-    if (!JSON.parse(localStorage.getItem('queue'))) {
+    if (document.querySelector('[data-index="watched"]')) {
+      refs.galleryRef.textContent = '';
       refs.galleryRef.insertAdjacentHTML(
-        'afterbegin',
-        'No moovies in Queue to show',
+        'beforeend',
+        filmGalleryTemplate(JSON.parse(localStorage.getItem('queue'))),
       );
-    }
+      if (!JSON.parse(localStorage.getItem('queue'))) {
+        refs.galleryRef.insertAdjacentHTML(
+          'afterbegin',
+          'No moovies in Queue to show',
+        );
+      }
     }
   });
 }
