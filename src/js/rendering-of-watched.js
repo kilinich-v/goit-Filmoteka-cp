@@ -11,5 +11,5 @@ export default function (data) {
     );
     return;
   }
-  refs.galleryRef.insertAdjacentHTML('afterbegin', markup);
+  return refs.galleryRef.insertAdjacentHTML('afterbegin', markup);
 }
