@@ -31,14 +31,19 @@ function addToQueueList(element) {
     const newStorage = JSON.parse(localStorage.getItem('queue'));
     newStorage.push(data);
     const dataArray = JSON.parse(localStorage.getItem('watched'));
-    rendering(dataArray);
 
-    if (!dataArray) {
-      refs.galleryRef.insertAdjacentHTML(
-        'afterbegin',
-        'No Watched moovies to show',
-      );
+    if (refs.myLibraryBtn.classList.contains('current')) {
+      rendering(dataArray);
+
+      if (!dataArray) {
+        refs.galleryRef.insertAdjacentHTML(
+          'afterbegin',
+          'No Watched moovies to show',
+        );
+      }
     }
+
+
 
     return localStorage.setItem('queue', JSON.stringify(newStorage));
   });
@@ -47,7 +52,10 @@ function addToQueueList(element) {
     addToQueueBtn.classList.remove('added-to-watched');
     btnText(addToQueueBtn);
     deletingFromLocalStorage('queue', element);
-    createQueueListFn();
+
+    if (refs.myLibraryBtn.classList.contains('current')) {
+      createQueueListFn();
+    }
   });
 }
 function deletingFromLocalStorage(key, element) {
