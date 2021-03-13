@@ -12,16 +12,15 @@ function addToQueueList(element) {
 
   if (storage) {
     if (storage.includes(element.poster_path)) {
-      // addToQueueBtn.classList.add('added-to-watched');
+      addToQueueBtn.classList.add('added-to-watched');
     }
   }
 
   addToQueueBtn.addEventListener('click', () => {
-    btnStyles();
     deleteWatched(element);
     document.querySelector('.js-watched').classList.remove('added-to-watched');
     document.querySelector('.js-watched').textContent = 'add to watched';
-    // addToQueueBtn.classList.add('added-to-watched');
+    addToQueueBtn.classList.add('added-to-watched');
     btnText(addToQueueBtn);
     if (!localStorage.getItem('queue')) {
       localStorage.setItem('queue', JSON.stringify([data]));
@@ -87,12 +86,5 @@ function renderingFn() {
     return rendering('queue');
   }
 }
-function btnStyles() {
-  const addToQueueBtn = document.querySelector('.js-queue');
-  if (addToQueueBtn.classList.contains('added-to-watched')) {
-    return addToQueueBtn.classList.remove('added-to-watched');
-  } else if (!addToQueueBtn.classList.contains('added-to-watched')) {
-    return addToQueueBtn.classList.add('added-to-watched');
-  }
-}
+
 export default addToQueueList;
