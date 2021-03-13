@@ -1,15 +1,10 @@
 import refs from './refs';
 import rendering from './rendering';
-import deletingFromLocalStorage from './deletingFromLocaleStorage';
+import deletingFromLocaleStorage from './deletingFromLocaleStorage';
 
 function addToQueueList(element) {
   const { poster_path, original_title, genre_ids, release_date } = element;
-  const data = {
-    poster_path,
-    original_title,
-    genre_ids,
-    release_date,
-  };
+  const data = { poster_path, original_title, genre_ids, release_date };
 
   const addToQueueBtn = document.querySelector('.js-queue');
   const watchedBtn = document.querySelector('.js-watched');
@@ -17,31 +12,35 @@ function addToQueueList(element) {
 
   if (storage) {
     if (storage.includes(element.poster_path)) {
-      addToQueueBtn.classList.add('added-to-watched');
+      // addToQueueBtn.classList.add('added-to-watched');
     }
   }
 
   addToQueueBtn.addEventListener('click', () => {
+    btnStyles();
     deleteWatched(element);
     document.querySelector('.js-watched').classList.remove('added-to-watched');
     document.querySelector('.js-watched').textContent = 'add to watched';
-    addToQueueBtn.classList.add('added-to-watched');
+    // addToQueueBtn.classList.add('added-to-watched');
     btnText(addToQueueBtn);
     if (!localStorage.getItem('queue')) {
-      return localStorage.setItem('queue', JSON.stringify([data]));
+      localStorage.setItem('queue', JSON.stringify([data]));
+      return renderingFn();
     }
 
     if (localStorage.getItem('queue').includes(element.poster_path)) {
       addToQueueBtn.classList.remove('added-to-watched');
       btnText(addToQueueBtn);
-      deletingFromLocalStorage('queue', element);
-      renderingQueue();
+      deletingFromLocaleStorage('queue', element);
+      renderingFn();
       return;
     }
     const newStorage = JSON.parse(localStorage.getItem('queue'));
     newStorage.push(data);
-    renderingQueue();
-    return localStorage.setItem('queue', JSON.stringify(newStorage));
+    localStorage.setItem('queue', JSON.stringify(newStorage));
+    deleteWatched(element);
+    renderingFn();
+    // return;
   });
 
   watchedBtn.addEventListener('click', () => {
@@ -51,10 +50,9 @@ function addToQueueList(element) {
     }
     if (localStorage.getItem('queue').includes(element.poster_path)) {
       btnText(addToQueueBtn);
-      deletingFromLocalStorage('queue', element);
+      deletingFromLocaleStorage('queue', element);
+      renderingFn();
     }
-
-    renderingQueue();
   });
 }
 
@@ -72,14 +70,29 @@ function deleteWatched(element) {
     return;
   }
   if (localStorage.getItem('watched').includes(element.poster_path)) {
-    deletingFromLocalStorage('watched', element);
+    deletingFromLocaleStorage('watched', element);
+    renderingFn();
   }
 }
 
-function renderingQueue() {
+function renderingFn() {
   if (refs.myLibraryBtn.classList.contains('current')) {
-    rendering('queue');
+    if (
+      document
+        .querySelector('[data-index="watched"]')
+        .classList.contains('is__active--btn')
+    ) {
+      return rendering('watched');
+    }
+    return rendering('queue');
   }
 }
-
+function btnStyles() {
+  const addToQueueBtn = document.querySelector('.js-queue');
+  if (addToQueueBtn.classList.contains('added-to-watched')) {
+    return addToQueueBtn.classList.remove('added-to-watched');
+  } else if (!addToQueueBtn.classList.contains('added-to-watched')) {
+    return addToQueueBtn.classList.add('added-to-watched');
+  }
+}
 export default addToQueueList;

@@ -1,4 +1,4 @@
-function deletingFromLocalStorage(key, element) {
+function deletingFromLocaleStorage(key, element) {
   const newStorage = JSON.parse(localStorage.getItem(key));
   if (!localStorage.getItem(key)) {
     return;
@@ -13,4 +13,4 @@ function deletingFromLocalStorage(key, element) {
   return localStorage.setItem(key, JSON.stringify(updatedStorage));
 }
 
-export default deletingFromLocalStorage;
+export default deletingFromLocaleStorage;

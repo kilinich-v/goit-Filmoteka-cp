@@ -1,5 +1,5 @@
-import refs from './refs';
-import rendering from './rendering-of-watched';
+import rendering from './rendering';
+import deletingFromLocaleStorage from './deletingFromLocaleStorage';
 
 document.addEventListener('click', addToLocaleStorage);
 
@@ -23,15 +23,7 @@ function addToLocaleStorage(event) {
       deleteFromStorage();
       originalBtnTxt();
       if (document.querySelector('[data-index="watched"]')) {
-        refs.galleryRef.textContent = '';
-        const dataArray = JSON.parse(localStorage.getItem('watched'));
-        rendering(dataArray);
-        if (!JSON.parse(localStorage.getItem('watched'))) {
-          refs.galleryRef.insertAdjacentHTML(
-            'afterbegin',
-            'No Watched moovies to show',
-          );
-        }
+        rendering('watched');
       }
     }
     function pushToStorage() {
@@ -60,17 +52,7 @@ function addToLocaleStorage(event) {
         original_title: document.querySelector('.card__title').textContent,
         vote_average: document.querySelector('.js-vote').textContent,
       };
-      const store = JSON.parse(localStorage.getItem('watched'));
-
-      if (!localStorage.getItem('watched') || store.length < 2) {
-        localStorage.removeItem('watched');
-        return;
-      }
-
-      const deleteMovieFromArray = store.filter(
-        film => film.poster_path != currentFilm.poster_path,
-      );
-      localStorage.setItem('watched', JSON.stringify(deleteMovieFromArray));
+      deletingFromLocaleStorage('watched', currentFilm);
     }
     function originalBtnTxt() {
       document.querySelector('.js-watched').textContent = 'add to watched';
@@ -90,16 +72,7 @@ function showAllWatched(event) {
     watchBtn.classList.add('is__active--btn');
     queueBtn.classList.remove('is__active--btn');
     if (document.querySelector('[data-index="watched"]')) {
-      refs.galleryRef.textContent = '';
-      if (localStorage.getItem('watched')) {
-        const dataArray = JSON.parse(localStorage.getItem('watched'));
-        rendering(dataArray);
-      } else {
-        refs.galleryRef.insertAdjacentHTML(
-          'afterbegin',
-          'No Watched moovies to show',
-        );
-      }
+      rendering('watched');
     }
   }
 }
