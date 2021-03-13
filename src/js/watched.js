@@ -15,14 +15,7 @@ function addToLocaleStorage(event) {
     ) {
       pushToStorage();
       changeBtnTxt();
-    } else if (
-      localStorage
-        .getItem('watched')
-        .includes(`${document.querySelector('.card__img').src}`)
-    ) {
-      deleteFromStorage();
-      originalBtnTxt();
-      if (document.querySelector('[data-index="watched"]')) {
+      if (document.querySelector('[data-index="watched"].is__active--btn')) {
         refs.galleryRef.textContent = '';
         const dataArray = JSON.parse(localStorage.getItem('watched'));
         rendering(dataArray);
@@ -30,6 +23,35 @@ function addToLocaleStorage(event) {
           refs.galleryRef.insertAdjacentHTML(
             'afterbegin',
             'No Watched moovies to show',
+          );
+        }
+      }
+    } else if (
+      localStorage
+        .getItem('watched')
+        .includes(`${document.querySelector('.card__img').src}`)
+    ) {
+      deleteFromStorage();
+      originalBtnTxt();
+      if (document.querySelector('[data-index="watched"].is__active--btn')) {
+        refs.galleryRef.textContent = '';
+        const dataArray = JSON.parse(localStorage.getItem('watched'));
+        rendering(dataArray);
+        if (!JSON.parse(localStorage.getItem('watched'))) {
+          refs.galleryRef.insertAdjacentHTML(
+            'afterbegin',
+            'No Watched moovies to show',
+          );
+        }
+      }
+      if (document.querySelector('[data-index="queue"].is__active--btn')) {
+        refs.galleryRef.textContent = '';
+        const dataArray = JSON.parse(localStorage.getItem('queue'));
+        rendering(dataArray);
+        if (!JSON.parse(localStorage.getItem('queue'))) {
+          refs.galleryRef.insertAdjacentHTML(
+            'afterbegin',
+            'No moovies in Queue to show',
           );
         }
       }
@@ -62,13 +84,13 @@ function addToLocaleStorage(event) {
       };
       const store = JSON.parse(localStorage.getItem('watched'));
 
-      if (!localStorage.getItem('watched') || store.length < 2) {
+      if (store.length < 2) {
         localStorage.removeItem('watched');
         return;
       }
 
       const deleteMovieFromArray = store.filter(
-        film => film.poster_path != currentFilm.poster_path,
+        film => film.poster_path !== currentFilm.poster_path,
       );
       localStorage.setItem('watched', JSON.stringify(deleteMovieFromArray));
     }
