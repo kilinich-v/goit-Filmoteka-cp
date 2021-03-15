@@ -11,3 +11,5 @@
   [https://getbootstrap.com/docs/4.4/components/spinners/](https://getbootstrap.com/docs/4.4/components/spinners/)
 - Пагинация
   [https://github.com/superRaytin/paginationjs](https://github.com/superRaytin/paginationjs)
+- Movies API
+  [https://developers.themoviedb.org/3/getting-started/search-and-query-for-details](https://developers.themoviedb.org/3/getting-started/search-and-query-for-details)

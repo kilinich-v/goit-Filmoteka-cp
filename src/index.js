@@ -1,7 +1,7 @@
 import './styles.scss';
 import './js/myLibrary';
 import _ from 'lodash';
-import './js/auth';
+import './js/userControl';
 import refs from './js/refs';
 import apiFetch from './js/apiService.js';
 import addToQueueList from './js/addToQueueList';
@@ -70,7 +70,6 @@ function startPopularFilms() {
       return data;
     })
     .then(({ results }) => {
-      console.log(apiFetch.page);
       handlePopularFilmMarkup(genreTransform(results, genreDB));
     })
     .catch(error => failureMarkup(refs.galContainerRef))
@@ -103,7 +102,6 @@ function genreTransform(moviesDB, genreDB) {
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
   moviesArr = transferedGenreArr;
-  console.log(moviesArr);
   return transferedGenreArr;
 }
 
@@ -120,7 +118,6 @@ function handleSearchQuery(event) {
   //event.preventDefault();
   apiFetch.searchQuerry = '';
   apiFetch.searchQuerry = inputRef.value;
-  console.log(apiFetch.page);
   if (event.target.value) {
     galleryRef.innerHTML = '';
     apiFetch
@@ -189,7 +186,6 @@ function modalGenreEditor(movie, genreDB) {
     }
   });
   movie.genre_ids = genreArr;
-  console.log(movie);
   return movie;
 }
 
