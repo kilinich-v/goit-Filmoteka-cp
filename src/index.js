@@ -1,7 +1,7 @@
 import './styles.scss';
 import './js/myLibrary';
 import _ from 'lodash';
-import './js/userControl';
+import './js/usersControl';
 import refs from './js/refs';
 import apiFetch from './js/apiService.js';
 import addToQueueList from './js/addToQueueList';
