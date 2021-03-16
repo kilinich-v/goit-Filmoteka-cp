@@ -1,16 +1,19 @@
+p {
+  margin: 0;
+}
 .backdrop {
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
+  z-index: 200;
 
   background-color: rgba(0, 0, 0, 0.25);
 
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   opacity: 1;
   visibility: visible;
   transition: opacity 250ms $transition-function,
@@ -23,32 +26,41 @@
 }
 
 .card {
-  position: relative;
-
   padding: 48px 20px 41px;
 
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
 
-  @include for-size(mobile) {
+  transform: scale(1);
+  width: 280px;
+  min-height: 700px;
+
+  transition: transform 250ms $transition-function;
+
+  .backdrop.is-hidden & {
+    transform: scale(1.2);
+  }
+
+  @media screen and (max-width: 767px) {
+    margin: 0 auto;
+  }
+
+  @include for-size(tablet) {
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
-    width: 280px;
-    min-height: 700px;
+    display: flex;
+    width: 618px;
+    min-height: 456px;
+    padding: 42px 30px 40px 28px;
+
     transition: transform 250ms $transition-function;
 
     .backdrop.is-hidden & {
       transform: translate(-50%, -50%) scale(1.2);
     }
-  }
-
-  @include for-size(tablet) {
-    display: flex;
-    width: 618px;
-    min-height: 456px;
-    padding: 42px 30px 40px 28px;
   }
 
   @include for-size(desktop) {
@@ -85,6 +97,7 @@
 
 .card__icon-close {
   font-size: 30px;
+  color: #000000;
 }
 
 .card__img-wrap {
@@ -93,6 +106,7 @@
   margin-bottom: 30px;
 
   border-radius: 5px;
+
   overflow: hidden;
 
   @include for-size(tablet) {
@@ -107,8 +121,16 @@
   }
 }
 
+.card__img {
+  height: auto;
+  transform: translate(-50%, -50%);
+  margin-left: 50%;
+  margin-top: 64%;
+}
+
 .card__content-wrap {
   height: auto;
+
   @include for-size(tablet) {
     width: 264px;
   }
@@ -126,46 +148,38 @@
 }
 
 .card__info-wrap {
-  display: flex;
   margin-bottom: 20px;
 }
 
-.card__info-title {
-  width: 110px;
+.card__info-item {
+  display: flex;
+  margin-bottom: 10px;
 
-  @include for-size(desktop) {
-    margin-right: 24px;
+  & p:last-child {
+    max-width: 132px;
+
+    @include for-size(tablet) {
+      max-width: 156px;
+    }
+
+    @include for-size(desktop) {
+      max-width: 244px;
+    }
   }
 }
 
-.card__info-title__item {
-  margin-bottom: 10px;
+.card__info-title {
+  width: 108px;
 
   color: $modal-name-color;
 
-  &:last-child {
-    margin-bottom: 0;
+  @include for-size(desktop) {
+    width: 152px;
   }
 }
 
-.card__info-content {
-  width: 130px;
-}
-
-.card__info-content__item {
-  margin-bottom: 10px;
-
-  &:first-child {
-    display: flex;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  &:nth-child(3) {
-    text-transform: uppercase;
-  }
+.card__info-vote {
+  display: flex;
 
   & > span {
     display: flex;
@@ -178,6 +192,7 @@
 
     border-radius: 5px;
     background-color: #f7f7f7;
+    margin-top: -1px;
   }
 
   & > span:first-child {
@@ -186,12 +201,26 @@
   }
 }
 
-.card__info-content__genre-list {
-  display: flex;
-  flex-wrap: wrap;
+.card__info-movie-name {
+  display: inline-block;
+  text-transform: uppercase;
 }
 
-.card__info-content__genre-item {
+.card__info__genre-list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 132px;
+
+  @include for-size(tablet) {
+    max-width: 156px;
+  }
+
+  @include for-size(desktop) {
+    max-width: 244px;
+  }
+}
+
+.card__info__genre-item {
   &:last-child > span {
     display: none;
   }
@@ -218,6 +247,7 @@
   width: 112px;
   height: 44px;
 
+  cursor: pointer;
   transition: 250ms $transition-function;
 
   &:first-child {
@@ -229,6 +259,11 @@
     background-color: $orange-color;
     border-color: $orange-color;
   }
+  &.added-to-storage {
+    background: $orange-color;
+    color: $white-color;
+    border: 1px solid $orange-color;
+  }
 
   @include for-size(tablet) {
     width: 125px;
@@ -238,3 +273,6 @@
     width: 136px;
   }
 }
+// 'style',
+// 'background: transparent; color:#33333; border:1px solid #222222;',
+//   .setAttribute('style', 'background: #ff6b08; color:#ffffff; border:0;');

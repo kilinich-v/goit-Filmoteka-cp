@@ -1,6 +1,5 @@
 const refs = {
   homeBtn: document.querySelector('[data-index="home"]'),
-  myLibraryBtn: document.querySelector('[data-index="mylibrary"]'),
   header: document.querySelector('[data-index="header"]'),
   inputQuery: document.querySelector('.filmSearch'),
   gallery: document.querySelector('.movie'),
@@ -19,6 +18,10 @@ const refs = {
   headerButtons: document.querySelector('[data-index="headerButtons"]'),
   pageHeader: document.querySelector('.header__home'),
   markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
+  watched: document.querySelector('.js-watched'),
+  body: document.querySelector('body'),
+  myLibraryBtn: document.querySelector('[data-index="mylibrary"]'),
+  paginationRef: document.getElementById('pagination-container'),
 };
 
 export default refs;

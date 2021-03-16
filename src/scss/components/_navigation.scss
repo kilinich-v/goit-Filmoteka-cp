@@ -3,6 +3,7 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 12px;
 
   &__logo {
     display: block;
@@ -15,10 +16,6 @@
     color: $white-color;
     text-decoration: none !important;
   }
-  //   &__logo-icon {
-  //     width: 24px;
-  //     height: 24px;
-  //   }
   &__logo-text {
     opacity: 0;
     pointer-events: none;

@@ -21,12 +21,15 @@
       border-bottom: 1px solid $orange-color;
     }
   }
+
+  & button {
+    margin-left: -20px;
+  }
+
   &__input-error {
     font-size: 14px;
     line-height: 1.14;
     color: $red-color;
-    // position: absolute;
-    // top: 225%;
   }
 }
 .white {
@@ -65,4 +68,8 @@
 
 .is__hidden {
   display: none;
+}
+
+.is__active--btn {
+  background-color: $orange-color;
 }

@@ -3,6 +3,7 @@ import refs from './refs';
 function closeModal() {
   refs.modalBackdropRef.classList.toggle('is-hidden');
   refs.modalBoxRef.innerHTML = '';
+  refs.body.classList.remove('hide-overflow');
 }
 
 refs.btnCloseModalRef.addEventListener('click', closeModal);
@@ -17,6 +18,5 @@ window.addEventListener('keydown', e => {
     !refs.modalBackdropRef.classList.contains('is-hidden')
   ) {
     closeModal();
-    console.log('adasd');
   }
 });

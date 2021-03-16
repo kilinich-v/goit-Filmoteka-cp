@@ -30,8 +30,8 @@
   </head>
 
   <body>
-    <header class="header header__home container" data-index="header">
-      <nav class="nav" data-index="navigation">
+    <header class="header header__home" data-index="header">
+      <nav class="nav container" data-index="navigation">
         <a href="./index.html" class="nav__logo logo-style">
           <svg class="nav__logo-icon" width="24" height="24">
             <use href="./images/sprite.svg#icon-film"></use>
@@ -54,8 +54,6 @@
       <div data-index="headerСhanging"></div>
     </header>
 
-    <!-- <main class="main-section container">
-      <ul data-index="gallery" class="gallery container"></ul> -->
     <main>
       <section class="movie">
         <div class="spinner-border" role="status" id="spinner">
@@ -79,22 +77,28 @@
       </div>
 
       <!-- Pagination -->
-      <div id="data-container"></div>
       <div id="pagination-container"></div>
     </main>
 
-    <footer class="footer container">
-      <div class="footer__text">
+    <footer class="footer">
+      <div class="footer__text container">
         <span class="footer__text-section">
           <span
             >© 2021 | All Rights Reserved | Developed with<i
               class="material-icons"
               >favorite</i
             >by
-            <a class="footer__link" data-index="team">GoIT Students Team-A</a>
+            <a
+              href
+              class="footer__link"
+              onclick="return false"
+              data-index="team"
+              >GoIT Students Team-A</a
+            >
           </span>
         </span>
       </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </body>
 </html>
