@@ -14,14 +14,14 @@ import authService from './authService';
 
 authService.auth.onAuthStateChanged(user => {
     if (user) {
-        // const userNavMarkup = userNav();
+        const userNavMarkup = userNav({ user });
 
-        // refs.headerButtons.children[1].innerHTML = '';
-        // refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
+        refs.headerButtons.children[1].innerHTML = '';
+        refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
 
         authService.logOut(refs.logoutBtn());
 
-        dbService.toRenderQueue(user.uid, galleryRender);
+        // dbService.toRenderQueue(user.uid, galleryRender);
     }
 
     if (!user) {

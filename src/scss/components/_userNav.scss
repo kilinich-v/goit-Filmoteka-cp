@@ -4,6 +4,7 @@
   &__list {
     position: absolute;
     list-style: none;
+    min-width: 100px;
     top: 100%;
     left: 0;
     padding-inline-start: 0;
