@@ -14,10 +14,10 @@ import authService from './authService';
 
 authService.auth.onAuthStateChanged(user => {
     if (user) {
-        const userNavMarkup = userNav();
+        // const userNavMarkup = userNav();
 
-        refs.headerButtons.children[1].innerHTML = '';
-        refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
+        // refs.headerButtons.children[1].innerHTML = '';
+        // refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
 
         authService.logOut(refs.logoutBtn());
 
