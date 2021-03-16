@@ -2,9 +2,10 @@ const refs = {
   homeBtn: document.querySelector('[data-index="home"]'),
   header: document.querySelector('[data-index="header"]'),
   inputQuery: document.querySelector('.filmSearch'),
-  gallery: document.querySelector('[data-index="gallery"]'),
+  gallery: document.querySelector('.movie'),
   galleryItems: () => document.querySelectorAll('#gallery-item'),
   spinner: document.querySelector('#spinner'),
+  logoutBtn: () => document.querySelector('#logout'),
   //adder by Dr.Frame
   inputRef: document.querySelector('.filmSearch__input'),
   galleryRef: document.querySelector('.movie__list'),

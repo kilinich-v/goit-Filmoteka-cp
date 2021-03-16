@@ -1,6 +1,7 @@
 import './styles.scss';
 import './js/myLibrary';
 import _ from 'lodash';
+import './js/usersControl';
 import refs from './js/refs';
 import './js/paginJS';
 import apiFetch from './js/apiService.js';

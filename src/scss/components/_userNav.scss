@@ -1,0 +1,25 @@
+.user {
+  position: relative;
+
+  &__list {
+    position: absolute;
+    list-style: none;
+    top: 100%;
+    left: 0;
+    padding-inline-start: 0;
+    opacity: 0;
+  }
+
+  &:hover &__list {
+    opacity: 1;
+  }
+
+  &__item {
+    padding: 0;
+  }
+
+  &__btn {
+    color: #fff;
+    text-align: left;
+  }
+}

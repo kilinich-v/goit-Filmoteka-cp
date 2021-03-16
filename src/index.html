@@ -19,6 +19,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css"
+    />
     <title>Filmoteka</title>
 
     <!-- Don't forget to delete this style tag. -->
@@ -33,14 +38,18 @@
           </svg>
           <span class="nav__logo-text">Filmoteka</span>
         </a>
-        <div class="nav__btn-section" data-index="headerButtons">
-          <button class="nav__btn current" id="home" data-index="home">
-            HOME
-          </button>
-          <button class="nav__btn" id="myLibrary" data-index="mylibrary">
-            MY LIBRARY
-          </button>
-        </div>
+        <ul class="nav__btn-section" data-index="headerButtons">
+          <li class="nav__item">
+            <button class="nav__btn current" id="home" data-index="home">
+              HOME
+            </button>
+          </li>
+          <li class="nav__item user">
+            <button class="nav__btn" id="myLibrary" data-index="mylibrary">
+              MY LIBRARY
+            </button>
+          </li>
+        </ul>
       </nav>
       <div data-index="headerСhanging"></div>
     </header>
