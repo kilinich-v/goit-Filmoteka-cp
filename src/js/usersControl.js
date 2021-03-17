@@ -9,6 +9,7 @@ import singupForm from '../templates/header/singupForm.hbs';
 import dbService from './databaseService';
 import filmGallery from '../templates/filmgallery.hbs';
 import authService from './authService';
+import { toLibrary, libraryMarkup } from './myLibrary';
 
 // Listen user status
 
@@ -19,13 +20,17 @@ authService.auth.onAuthStateChanged(user => {
         refs.headerButtons.children[1].innerHTML = '';
         refs.headerButtons.children[1].insertAdjacentHTML('beforeend', userNavMarkup);
 
+        const myLibrary = document.querySelector('#myLibrary');
+
+        myLibrary.addEventListener('click', libraryMarkup);
+
         authService.logOut(refs.logoutBtn());
 
         // dbService.toRenderQueue(user.uid, galleryRender);
     }
 
     if (!user) {
-        authService.signIn('kylynych.v@gmail.com', 'E@2ncbkY@vU!KMc', singupRef);
+        // authService.signIn('kylynych.v@gmail.com', 'E@2ncbkY@vU!KMc', singupRef);
 
         const singupMarkup = singupForm();
 

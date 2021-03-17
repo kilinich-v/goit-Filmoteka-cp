@@ -10,7 +10,7 @@ refs.header.insertAdjacentHTML('beforeend', input);
 refs.headerButtons.addEventListener('click', toLibrary);
 refs.myLibraryBtn.addEventListener('click', libraryMarkup);
 
-function toLibrary(event) {
+export function toLibrary(event) {
   event.preventDefault();
 
   const inputIndexRef = document.querySelector('[data-index="form"]');
@@ -49,7 +49,7 @@ function toLibrary(event) {
   }
 }
 
-function libraryMarkup() {
+export function libraryMarkup() {
   const inputMyLibrary = inputTemplateMyLibrary();
   refs.markupMyLibraty.innerHTML = '';
   refs.markupMyLibraty.insertAdjacentHTML('beforeend', inputMyLibrary);

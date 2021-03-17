@@ -7,6 +7,7 @@ export default {
     movieID: 0,
     searchQuerry: '',
     page: 1,
+    
 
     fetchSearchRequestGallery() {
         const url = `${this.searchUrl}${this.apiKey}&language=en-US&query=${this.searchQuerry}&page=${this.page}`;
