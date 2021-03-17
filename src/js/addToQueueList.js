@@ -12,24 +12,25 @@ function addToQueueList(element) {
 
   if (storage) {
     if (storage.includes(element.poster_path)) {
-      addToQueueBtn.classList.add('added-to-watched');
+      addToQueueBtn.classList.add('added-to-storage');
     }
   }
 
   addToQueueBtn.addEventListener('click', () => {
     deleteWatched(element);
-    document.querySelector('.js-watched').classList.remove('added-to-watched');
-    document.querySelector('.js-watched').textContent = 'add to watched';
-    addToQueueBtn.classList.add('added-to-watched');
-    btnText(addToQueueBtn);
+    addToQueueBtn.classList.add('added-to-storage');
+    btnText(addToQueueBtn, 'queue');
+    watchedBtn.classList.remove('added-to-storage');
+    btnText(watchedBtn, 'watched');
+
     if (!localStorage.getItem('queue')) {
       localStorage.setItem('queue', JSON.stringify([data]));
       return renderingFn();
     }
 
     if (localStorage.getItem('queue').includes(element.poster_path)) {
-      addToQueueBtn.classList.remove('added-to-watched');
-      btnText(addToQueueBtn);
+      addToQueueBtn.classList.remove('added-to-storage');
+      btnText(addToQueueBtn, 'queue');
       deletingFromLocalStorage('queue', element);
       renderingFn();
       return;
@@ -37,31 +38,28 @@ function addToQueueList(element) {
     const newStorage = JSON.parse(localStorage.getItem('queue'));
     newStorage.push(data);
     localStorage.setItem('queue', JSON.stringify(newStorage));
-    deleteWatched(element);
     renderingFn();
-    // return;
   });
 
   watchedBtn.addEventListener('click', () => {
-    addToQueueBtn.classList.remove('added-to-watched');
     if (!localStorage.getItem('queue')) {
       return;
     }
     if (localStorage.getItem('queue').includes(element.poster_path)) {
-      btnText(addToQueueBtn);
+      addToQueueBtn.classList.remove('added-to-storage');
+      btnText(addToQueueBtn, 'queue');
       deletingFromLocalStorage('queue', element);
       renderingFn();
     }
   });
 }
 
-function btnText(btn) {
-  if (btn.classList.contains('added-to-watched')) {
-    btn.textContent = 'in queue';
+function btnText(btn, text) {
+  if (btn.classList.contains('added-to-storage')) {
+    btn.textContent = `in ${text}`;
   } else {
-    btn.textContent = 'add to queue';
+    btn.textContent = `add to ${text}`;
   }
-  return btn.textContent;
 }
 
 function deleteWatched(element) {
