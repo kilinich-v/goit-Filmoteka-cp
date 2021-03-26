@@ -43,7 +43,7 @@ authService.auth.onAuthStateChanged(user => {
 
 
 
-// cb to render queue or watched
+// callback to render queue or watched
 
 function galleryRender(targetGallery) {
     const markup = filmGallery(targetGallery);
