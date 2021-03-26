@@ -8,6 +8,7 @@ function addToLocaleStorage(event) {
     if (localStorage.getItem('watched') === null) {
       pushToStorage();
       changeBtnTxt();
+      renderWatched();
     } else if (
       !localStorage
         .getItem('watched')
@@ -15,6 +16,7 @@ function addToLocaleStorage(event) {
     ) {
       pushToStorage();
       changeBtnTxt();
+      renderWatched();
     } else if (
       localStorage
         .getItem('watched')
@@ -22,9 +24,7 @@ function addToLocaleStorage(event) {
     ) {
       deleteFromStorage();
       originalBtnTxt();
-      if (document.querySelector('[data-index="watched"]')) {
-        rendering('watched');
-      }
+      renderWatched();
     }
     function pushToStorage() {
       const currentFilm = {
@@ -74,5 +74,18 @@ function showAllWatched(event) {
     if (document.querySelector('[data-index="watched"]')) {
       rendering('watched');
     }
+  }
+}
+
+function renderWatched() {
+  if (!document.querySelector('[data-index="watched"]')) {
+    return;
+  }
+  if (
+    document
+      .querySelector('[data-index="watched"]')
+      .classList.contains('is__active--btn')
+  ) {
+    return rendering('watched');
   }
 }
