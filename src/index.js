@@ -60,8 +60,10 @@ const resultData = {
   totalResults: null,
 };
 
+//тест муви
+let allMovies = [];
 //заходит сюда отрендеренный масив
-let moviesArr;
+//let moviesArr;
 //заходит обьект для рендера модалки
 let currentFilmObj = {};
 
@@ -177,7 +179,8 @@ function genreTransform(moviesDB, genreDB) {
     });
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
-  moviesArr = transferedGenreArr;
+
+  allMovies.push(...transferedGenreArr);
 
   return transferedGenreArr;
 }
@@ -212,7 +215,7 @@ function modalMatchesFounder(event) {
   //вызов рендеринга модалки
   const toMatch = event.target.dataset.compare;
 
-  moviesArr.forEach(item => {
+  allMovies.forEach(item => {
     if (item.poster_path === toMatch) {
       currentFilmObj = { ...item };
     } else {
