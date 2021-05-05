@@ -12,6 +12,7 @@ import popularFilmsGalerryTpl from './templates/filmgallery.hbs';
 import modalTpl from './templates/modal.hbs';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/modal-team';
+import { saveAllMoviesArr, getAllMoviesArr } from './js/modal-local-storage';
 import pnotify from './js/notification';
 
 //============== вставка Dr.Frame======================
@@ -25,10 +26,19 @@ const modalRef = refs.modalRef;
 const backdropRef = document.querySelector('#js-backdrop');
 
 startPopularFilms();
+
 formRef.addEventListener('submit', handleSearchQuery);
 galleryRef.addEventListener('click', modalMatchesFounder);
 
 // ============= функции отвечает за стартовую загрузку популярных фильмов =============================
+
+//тест муви
+let allMovies = [];
+/* if (allMovies.length === 0) {
+  allMovies = getAllMoviesArr();
+} */
+//заходит обьект для рендера модалки
+let currentFilmObj = {};
 
 //массив жанров от АПИ
 export let genreDB = [
@@ -59,11 +69,6 @@ const resultData = {
   totalPages: null,
   totalResults: null,
 };
-
-//заходит сюда отрендеренный масив
-let moviesArr;
-//заходит обьект для рендера модалки
-let currentFilmObj = {};
 
 export function startPopularFilms() {
   formRef.firstElementChild.value = '';
@@ -154,6 +159,9 @@ function paginationJsSearch() {
 
 // меняет числа жанров на название и дату релиза
 function genreTransform(moviesDB, genreDB) {
+  if (allMovies.length === 0) {
+    allMovies.push(...getAllMoviesArr());
+  }
   const transferedGenreArr = moviesDB.map(film => {
     //ставим заглушку если нету фото
     if (film.poster_path === null) {
@@ -177,7 +185,11 @@ function genreTransform(moviesDB, genreDB) {
     });
     return { ...film, genre_ids: genreArr, release_date: newDate };
   });
-  moviesArr = transferedGenreArr;
+
+  allMovies.push(...transferedGenreArr);
+  saveAllMoviesArr(allMovies);
+  //TODO:
+  console.log(allMovies);
 
   return transferedGenreArr;
 }
@@ -212,7 +224,7 @@ function modalMatchesFounder(event) {
   //вызов рендеринга модалки
   const toMatch = event.target.dataset.compare;
 
-  moviesArr.forEach(item => {
+  allMovies.forEach(item => {
     if (item.poster_path === toMatch) {
       currentFilmObj = { ...item };
     } else {
@@ -223,6 +235,11 @@ function modalMatchesFounder(event) {
   changeBtnWatchedText(event);
   backdropRef.classList.remove('is-hidden');
   addToQueueList(currentFilmObj);
+
+  //TODO:
+  console.log(currentFilmObj);
+  console.log(toMatch);
+  console.log(allMovies);
 }
 
 //изменяет жанр при рендере модалки
