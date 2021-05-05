@@ -2,7 +2,7 @@ import refs from '../js/refs';
 import createQueueListFn from './queueList';
 import inputTemplate from '../templates/header/home.hbs';
 import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
-import { startPopularFilms } from '../index';
+// import { startPopularFilms } from './renderGallery';
 
 const input = inputTemplate();
 

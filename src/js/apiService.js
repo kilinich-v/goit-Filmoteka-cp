@@ -4,7 +4,7 @@ export default {
   movieDetailsUrl: 'https://api.themoviedb.org/3/movie/',
   movieGenreList: 'https://api.themoviedb.org/3/genre/movie/list?api_key=',
   apiKey: '3550330ecc32a34c7342dbd44dd96d6e',
-  movieID: 0,
+  movieID: null,
   searchQuerry: '',
   page: 1,
 
@@ -19,7 +19,6 @@ export default {
         throw new Error(res.status);
       })
       .then(data => {
-        //this.page += 1;
         return data;
       })
       .catch(error => console.log(error));
@@ -31,7 +30,6 @@ export default {
     return fetch(url)
       .then(res => res.json())
       .then(data => {
-        //this.page += 1;
         return data;
       })
       .catch(error => console.log(error));

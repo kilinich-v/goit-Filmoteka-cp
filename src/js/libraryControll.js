@@ -24,7 +24,6 @@ const storage = {
       this.findFilm(film, JSON.parse(filmsArray)),
       1,
     );
-    // filmsArray = JSON.stringify(a);
   },
 };
 
