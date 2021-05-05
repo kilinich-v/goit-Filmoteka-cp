@@ -44,13 +44,14 @@ export function getPopularFilms() {
 export function getSearchingFilms(event) {
   event.preventDefault();
 
-  spinner.add();
-  const query = event.target;
-  console.dir(query);
+  const query = event.target.elements.query.value;
+
   apiFetch.searchQuerry = query;
 
+  spinner.add();
+
   apiFetch
-    .getSearchingFilms()
+    .fetchSearchRequestGallery()
     .then(data => renderGallery(data.results))
     .catch(err => console.log(err))
     .finally(spinner.remove());

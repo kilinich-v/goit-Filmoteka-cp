@@ -15,5 +15,5 @@ import {
 
 getPopularFilms();
 
-refs.inputQuery().addEventListener('submit', getSearchingFilms);
+refs.inputSubmit().addEventListener('submit', getSearchingFilms);
 // refs.galleryRef.addEventListener('click', modalMatchesFounder);

@@ -2,7 +2,7 @@ const refs = {
   body: document.querySelector('body'),
   homeBtn: document.querySelector('[data-index="home"]'),
   header: document.querySelector('[data-index="header"]'),
-  inputQuery: () => document.querySelector('.filmSearch'),
+  inputSubmit: () => document.querySelector('.filmSearch'),
   gallery: document.querySelector('[data-index="gallery"]'),
   galleryItems: () => document.querySelectorAll('#gallery-item'),
   spinner: document.querySelector('#spinner-container'),
