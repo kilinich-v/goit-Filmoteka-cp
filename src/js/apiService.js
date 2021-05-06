@@ -4,8 +4,9 @@ export default {
   movieDetailsUrl: 'https://api.themoviedb.org/3/movie/',
   movieGenreList: 'https://api.themoviedb.org/3/genre/movie/list?api_key=',
   apiKey: '3550330ecc32a34c7342dbd44dd96d6e',
-  movieID: null,
+  _movieID: null,
   searchQuerry: '',
+  totalResults: null,
   page: 1,
 
   fetchSearchRequestGallery() {
@@ -19,6 +20,7 @@ export default {
         throw new Error(res.status);
       })
       .then(data => {
+        this.totalResults = data.total_results;
         return data;
       })
       .catch(error => console.log(error));
@@ -30,16 +32,16 @@ export default {
     return fetch(url)
       .then(res => res.json())
       .then(data => {
+        this.totalResults = data.total_results;
         return data;
       })
       .catch(error => console.log(error));
   },
 
   fetchMovieInfo() {
-    const url = `${this.movieDetailsUrl}${this.movieID}?api_key=${this.apiKey}&language=en-US`;
+    const url = `${this.movieDetailsUrl}${this.movieID}?api_key=${this.apiKey}`;
     return fetch(url)
       .then(res => res.json())
-      .then(({ results }) => results)
       .catch(error => console.log(error));
   },
 
@@ -64,9 +66,9 @@ export default {
   },
 
   get movieID() {
-    return this.movieID;
+    return this._movieID;
   },
   set movieID(value) {
-    this.movieID = value;
+    this._movieID = value;
   },
 };

@@ -7,10 +7,15 @@
     <h3 class="poster__movie-name">{{original_title}}</h3>
     <div class="poster__movie-info-wrap">
       <ul class="poster__genre-list list">
-        {{#each genre_ids}}
-        <li class="poster__genre-item">
-          {{this}}<span>,&nbsp;</span></li>
-        {{/each}}
+        {{#if genre_ids}}
+          {{#each genre_ids}}
+          <li class="poster__genre-item">
+            {{this}}<span>,&nbsp;</span></li>
+          {{/each}}
+          {{else}}
+          <li class="poster__genre-item">
+            --<span>,&nbsp;</span></li>
+        {{/if}}
         <p class="poster__genre-item">&nbsp| {{release_date}}</p>
       </ul>
     </div>

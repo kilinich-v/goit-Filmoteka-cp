@@ -1,12 +1,8 @@
-import apiFetch from './apiService';
+import apiService from './apiService';
 import refs from './refs';
-import { saveAllMoviesArr, getAllMoviesArr } from './modal-local-storage';
-import modalTpl from '../templates/modal.hbs';
-import addToQueueList from './addToQueueList';
 import spinner from './spinner';
-import pnotify from './notification';
 import filmsGalleryTemplate from '../templates/filmgallery.hbs';
-import galleryErrorTemplate from '../templates/gallery-error.hbs';
+import pagination from './pagination';
 
 const genreDB = {
   28: 'Action',
@@ -33,11 +29,19 @@ const genreDB = {
 const posterBaseURL = 'https://image.tmdb.org/t/p/w500/';
 
 export function getPopularFilms() {
+  clearGallery();
+
   spinner.add();
-  apiFetch
+
+  apiService.page = 1;
+  apiService
     .fetchPopularMovieGallery()
-    .then(data => renderGallery(data.results))
-    .catch(err => console.log(err))
+    .then(data => {
+      pagination(data.total_results, apiService.page);
+
+      return renderGallery(data.results);
+    })
+    // .catch(err => console.log(err))
     .finally(spinner.remove());
 }
 
@@ -46,41 +50,82 @@ export function getSearchingFilms(event) {
 
   const query = event.target.elements.query.value;
 
-  apiFetch.searchQuerry = query;
+  if (apiService.searchQuerry === query) {
+    return;
+  }
 
+  apiService.page = 1;
+  apiService.searchQuerry = query;
+
+  clearGallery();
   spinner.add();
 
-  apiFetch
+  apiService
     .fetchSearchRequestGallery()
-    .then(data => renderGallery(data.results))
-    .catch(err => console.log(err))
+    .then(data => {
+      pagination(data.total_results, apiService.page);
+
+      return renderGallery(data.results);
+    })
+    // .catch(err => console.log(err))
     .finally(spinner.remove());
 }
 
+export function getCurrentPageFilms(event) {
+  clearGallery();
+  spinner.add();
+
+  const currentPage = event.page;
+  apiService.page = currentPage;
+
+  if (!apiService.searchQuerry) {
+    apiService
+      .fetchPopularMovieGallery()
+      .then(data => renderGallery(data.results))
+      //   .catch(err => console.log(err))
+      .finally(spinner.remove());
+    return;
+  }
+
+  apiService
+    .fetchSearchRequestGallery()
+    .then(data => renderGallery(data.results))
+    // .catch(err => console.log(err))
+    .finally(spinner.remove());
+}
+
+function clearGallery() {
+  refs.gallery.innerHTML = '';
+}
+
 function renderGallery(films) {
-  normalizeFilmsGenre(films);
-  normalizeFilmsPoster(films);
+  normalizeFilmsData(films);
 
   const galleryMarkup = filmsGalleryTemplate(films);
   refs.gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 }
 
-function normalizeFilmsGenre(films) {
+function normalizeFilmsData(films) {
   return films.map(film => {
     const filmGenre = [...film.genre_ids];
-    const normalizeGenre = filmGenre.map(genre => (genre = genreDB[genre]));
-    delete film.genre_ids;
-    film.genre_ids = normalizeGenre;
-  });
-}
-
-function normalizeFilmsPoster(films) {
-  return films.map(film => {
     const filmPoster = [...film.poster_path];
+    const filmDate = [...film.release_date];
+
+    const normalizeGenre = filmGenre.map(genre => (genre = genreDB[genre]));
     const normalizePoster = filmPoster.map(
       poster => (poster = `${posterBaseURL}${filmPoster}`),
     );
-    delete film.poster_path;
+    const normalizeDate = filmDate.map(date => {
+      if (!date) {
+        return (date = 'no date');
+      }
+      return (date = date.slice(0, 4));
+    });
+
+    delete film.genre_ids, film.poster_path, film.release_date;
+
+    film.genre_ids = normalizeGenre;
     film.poster_path = normalizePoster;
+    film.release_date = normalizeDate;
   });
 }

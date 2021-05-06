@@ -7,11 +7,8 @@ import './js/watched';
 import './js/libraryControll';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/modal-team';
-import {
-  getPopularFilms,
-  getSearchingFilms,
-  modalMatchesFounder,
-} from './js/renderGallery';
+import { getPopularFilms, getSearchingFilms } from './js/renderGallery';
+import './js/renderFilm';
 
 getPopularFilms();
 
