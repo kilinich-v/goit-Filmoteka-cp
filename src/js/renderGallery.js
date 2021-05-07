@@ -100,9 +100,8 @@ function clearGallery() {
 }
 
 function renderGallery(films) {
-  normalizeFilmsData(films);
+  const galleryMarkup = filmsGalleryTemplate(normalizeFilmsData(films));
 
-  const galleryMarkup = filmsGalleryTemplate(films);
   refs.gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 }
 
@@ -123,5 +122,7 @@ function normalizeFilmsData(films) {
     film.genre_ids = normalizeGenre;
     film.poster_path = normalizePoster;
     film.release_date = normalizeDate;
+
+    return { ...film };
   });
 }

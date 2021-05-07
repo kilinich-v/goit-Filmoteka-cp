@@ -1,7 +1,8 @@
 {{#each this}}
-<li class="poster">
+<li class="poster" data-movieID="{{id}}">
+  <div class="poster__id" data-movieID="{{id}}"></div>
   <div class="poster__img-wrap">
-    <img src="{{poster_path}}" data-compare="{{poster_path}}" alt="movie-poster" class="poster__img" width="274">
+    <img src="{{poster_path}}" alt="movie-poster" class="poster__img" width="274">
   </div>
   <div class="poster__content-wrap">
     <h3 class="poster__movie-name">{{original_title}}</h3>
@@ -20,5 +21,6 @@
       </ul>
     </div>
   </div>
+  
 </li>
 {{/each}}
