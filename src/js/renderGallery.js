@@ -3,6 +3,7 @@ import refs from './refs';
 import spinner from './spinner';
 import filmsGalleryTemplate from '../templates/filmgallery.hbs';
 import pagination from './pagination';
+import imgPlaceholder from '../images/img/noimage.jpg';
 
 const genreDB = {
   28: 'Action',
@@ -41,7 +42,7 @@ export function getPopularFilms() {
 
       return renderGallery(data.results);
     })
-    // .catch(err => console.log(err))
+    .catch(err => console.log(err))
     .finally(spinner.remove());
 }
 
@@ -67,7 +68,7 @@ export function getSearchingFilms(event) {
 
       return renderGallery(data.results);
     })
-    // .catch(err => console.log(err))
+    .catch(err => console.log(err))
     .finally(spinner.remove());
 }
 
@@ -82,7 +83,7 @@ export function getCurrentPageFilms(event) {
     apiService
       .fetchPopularMovieGallery()
       .then(data => renderGallery(data.results))
-      //   .catch(err => console.log(err))
+      .catch(err => console.log(err))
       .finally(spinner.remove());
     return;
   }
@@ -90,7 +91,7 @@ export function getCurrentPageFilms(event) {
   apiService
     .fetchSearchRequestGallery()
     .then(data => renderGallery(data.results))
-    // .catch(err => console.log(err))
+    .catch(err => console.log(err))
     .finally(spinner.remove());
 }
 
@@ -108,19 +109,14 @@ function renderGallery(films) {
 function normalizeFilmsData(films) {
   return films.map(film => {
     const filmGenre = [...film.genre_ids];
-    const filmPoster = [...film.poster_path];
-    const filmDate = [...film.release_date];
+    const filmPoster = film.poster_path;
+    const filmDate = film.release_date;
 
     const normalizeGenre = filmGenre.map(genre => (genre = genreDB[genre]));
-    const normalizePoster = filmPoster.map(
-      poster => (poster = `${posterBaseURL}${filmPoster}`),
-    );
-    const normalizeDate = filmDate.map(date => {
-      if (!date) {
-        return (date = 'no date');
-      }
-      return (date = date.slice(0, 4));
-    });
+    const normalizePoster = filmPoster
+      ? `${posterBaseURL}${filmPoster}`
+      : imgPlaceholder;
+    const normalizeDate = filmDate ? filmDate.slice(0, 4) : 'no date';
 
     delete film.genre_ids, film.poster_path, film.release_date;
 

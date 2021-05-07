@@ -45,7 +45,6 @@ function toLibrary(event) {
     refs.markupMyLibraty.innerHTML = '';
     refs.paginationRef.classList.remove('pagination-is-hide');
     refs.galleryRef.innerHTML = '';
-    startPopularFilms();
   }
 }
 
