@@ -1,8 +1,7 @@
 import refs from '../js/refs';
-import createQueueListFn from './queueList';
+
 import inputTemplate from '../templates/header/home.hbs';
 import inputTemplateMyLibrary from '../templates/header/myLibrary.hbs';
-// import { startPopularFilms } from './renderGallery';
 
 const input = inputTemplate();
 
@@ -33,9 +32,9 @@ function toLibrary(event) {
     refs.pageHeader.classList.remove('header__home');
     refs.pageHeader.classList.add('header__watched');
     inputIndexRef.classList.add('is__hidden');
-    createQueueListFn();
+    // createQueueListFn();
     const queueBtn = document.querySelector('[data-index="queue"]');
-    queueBtn.addEventListener('click', createQueueListFn);
+    // queueBtn.addEventListener('click', createQueueListFn);
     queueBtn.classList.add('is__active--btn');
   }
   if (buttonId === 'home') {

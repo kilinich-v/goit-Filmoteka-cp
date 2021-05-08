@@ -1,4 +1,4 @@
-import rendering from './rendering';
+// import rendering from './rendering';
 import deletingFromLocalStorage from './deletingFromLocalStorage';
 
 document.addEventListener('click', addToLocaleStorage);
@@ -72,7 +72,7 @@ function showAllWatched(event) {
     watchBtn.classList.add('is__active--btn');
     queueBtn.classList.remove('is__active--btn');
     if (document.querySelector('[data-index="watched"]')) {
-      rendering('watched');
+      // rendering('watched');
     }
   }
 }
@@ -86,6 +86,6 @@ function renderWatched() {
       .querySelector('[data-index="watched"]')
       .classList.contains('is__active--btn')
   ) {
-    return rendering('watched');
+    // return rendering('watched');
   }
 }

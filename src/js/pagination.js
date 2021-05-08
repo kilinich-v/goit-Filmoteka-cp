@@ -1,5 +1,5 @@
 import Pagination from 'tui-pagination';
-import { getCurrentPageFilms } from './renderGallery';
+import { getCurrentPageFilms } from './gallery';
 
 const paginationContainer = document.getElementById('pagination');
 
@@ -8,7 +8,7 @@ const paginationOptions = {
   visiblePages: 5,
 };
 
-function pagination(totalResults, page) {
+function pagination(totalResults, currentPage) {
   if (totalResults < 20) {
     paginationContainer.innerHTML = '';
     return;
@@ -17,7 +17,7 @@ function pagination(totalResults, page) {
   const pagination = new Pagination(paginationContainer, paginationOptions);
 
   pagination.setTotalItems(totalResults);
-  pagination.movePageTo(page);
+  pagination.movePageTo(currentPage);
 
   pagination.on('afterMove', getCurrentPageFilms);
 }
