@@ -1,6 +1,23 @@
-<form class="filmSearch" id="query" action="" data-index="form">
-    <input name="query" class="filmSearch__input" data-index="serch" type="text" placeholder="Search films" autocomplete="off" />
-    <button type="submit" class="material-icons white search-icon">search</button>
-    <p type="submit" class="filmSearch__input-error hidden" data-index="fetchStatus">
-    </p>
-</form>
+<nav class="nav container" data-index="navigation">
+    <a href="" class="nav__logo logo-style" data-index="logo">
+        {{svg "{{logoSprite}}"}}
+        {{!-- <svg class="nav__logo-icon" width="24" height="24">
+        <use href="{{logoSprite}}"></use>
+        </svg> --}}
+        <span class="nav__logo-text">Filmoteka</span>
+    </a>
+    <form class="filmSearch" id="query" data-index="form">
+        <input name="query" class="filmSearch__input" data-index="serch" type="text" placeholder="Search films" autocomplete="off" />
+        <button type="submit" class="material-icons white search-icon">search</button>
+        <p type="submit" class="filmSearch__input-error hidden" data-index="fetchStatus">
+        </p>
+    </form>
+    <div class="nav__btn-section" data-index="headerButtons">
+        <button class="nav__btn current" id="home" data-index="home">
+        HOME
+        </button>
+        <button class="nav__btn" id="myLibrary" data-index="mylibrary">
+        MY LIBRARY
+        </button>
+    </div>
+</nav>

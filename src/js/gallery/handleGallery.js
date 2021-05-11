@@ -1,4 +1,5 @@
 import apiService from '../apiService';
+import { apiStorage } from '../localStorage';
 import spinner from '../spinner';
 import pagination from '../pagination';
 import { renderGallery, clearGallery } from './renderGallery';
@@ -70,6 +71,7 @@ export function getCurrentPageFilms(event) {
 }
 
 export function getFilmsFromQueue(event) {
+  console.log(apiStorage.getQueue());
   clearGallery();
 }
 

@@ -1,6 +1,12 @@
 import refs from '../refs';
 import apiService from '../apiService';
-import { renderModal, closeModal, currentFilm } from './renderFilmModal';
+import {
+  renderModal,
+  closeModal,
+  currentFilm,
+  renderModalBtnText,
+} from './renderFilmModal';
+import { apiStorage, storageControle } from '../localStorage';
 
 export function handleCreateModal(event) {
   event.preventDefault();
@@ -12,6 +18,8 @@ export function handleCreateModal(event) {
   apiService.movieID = event.target.dataset.movieid;
   apiService.fetchMovieInfo().then(data => {
     renderModal(data);
+    storageControle.checkFilmBeforeModalRender(currentFilm);
+    renderModalBtnText();
   });
 }
 
@@ -26,12 +34,28 @@ export function handleModalClick(event) {
     closeModal();
   }
 
-  if (target.dataset.index === 'queue') {
-    console.log(currentFilm);
+  if (target.dataset.queue === 'addToList') {
+    apiStorage.addToQueue(currentFilm);
+    renderModalBtnText();
+    return;
   }
 
-  if (target.dataset.index === 'watched') {
-    console.log(currentFilm);
+  if (target.dataset.watched === 'addToList') {
+    apiStorage.addToWatched(currentFilm);
+    renderModalBtnText();
+    return;
+  }
+
+  if (target.dataset.queue === 'isList') {
+    apiStorage.removeToQueue(currentFilm.id);
+    renderModalBtnText();
+    return;
+  }
+
+  if (target.dataset.watched === 'isList') {
+    apiStorage.removeToWatched(currentFilm.id);
+    renderModalBtnText();
+    return;
   }
 }
 

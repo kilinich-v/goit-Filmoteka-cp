@@ -3,4 +3,4 @@ export {
   handleModalClick,
   handleModalKeypress,
 } from './handleFilmModal';
-export { renderModal, closeModal } from './renderFilmModal';
+export { renderModal, closeModal, currentFilm } from './renderFilmModal';
