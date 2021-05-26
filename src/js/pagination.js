@@ -9,7 +9,7 @@ const paginationOptions = {
 };
 
 function pagination(totalResults, currentPage) {
-  if (totalResults < 20) {
+  if (!totalResults || totalResults < 20) {
     paginationContainer.innerHTML = '';
     return;
   }

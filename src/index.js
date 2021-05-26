@@ -4,12 +4,10 @@ import refs from './js/refs';
 import './js/modal-team';
 import { getPopularFilms, getSearchingFilms } from './js/gallery';
 import { handleCreateModal, handleModalClick } from './js/modal';
-import { handlePagesClick, renderHomeHeader } from './js/renderPages';
+import './js/routing';
 
-renderHomeHeader();
-getPopularFilms();
+// getPopularFilms();
 
-refs.headerButtons.addEventListener('click', handlePagesClick);
-refs.inputSubmit().addEventListener('submit', getSearchingFilms);
-refs.gallery.addEventListener('click', handleCreateModal);
-refs.backdrop.addEventListener('click', handleModalClick);
+// refs.inputSubmit().addEventListener('submit', getSearchingFilms);
+// refs.gallery.addEventListener('click', handleCreateModal);
+// refs.backdrop.addEventListener('click', handleModalClick);

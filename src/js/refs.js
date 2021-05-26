@@ -11,7 +11,7 @@ const refs = {
   queue: () => document.querySelector('#queueBtn'),
   btnCloseModalRef: document.querySelector('.card__btn-close'),
   galContainerRef: document.querySelector('.js-container'),
-  headerButtons: document.querySelector('[data-index="headerButtons"]'),
+  headerButtons: () => document.querySelector('[data-index="headerButtons"]'),
   pageHeader: document.querySelector('.header__home'),
   markupMyLibraty: document.querySelector('[data-index="headerСhanging"]'),
   myLibraryBtn: document.querySelector('[data-index="mylibrary"]'),

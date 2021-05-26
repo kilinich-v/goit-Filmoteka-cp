@@ -2,8 +2,11 @@ import refs from '../refs';
 import storageControle from './localStorageControle';
 
 export default {
+  page: 1,
+
   getQueue() {
     const parsedFilms = JSON.parse(localStorage.getItem('queue'));
+    if (!parsedFilms) return;
 
     const total_results = parsedFilms.length;
 

@@ -1,5 +1,6 @@
 import refs from '../refs';
 import filmsGalleryTemplate from '../../templates/filmgallery.hbs';
+import voidGalleryTemplate from '../../templates/voidGallery.hbs';
 import imgPlaceholder from '../../images/img/noimage.jpg';
 
 const genreDB = {
@@ -31,6 +32,13 @@ export function clearGallery() {
 }
 
 export function renderGallery(films) {
+  if (!films) {
+    const voidGalleryMarckup = voidGalleryTemplate();
+
+    refs.gallery.insertAdjacentHTML('beforeend', voidGalleryMarckup);
+    return;
+  }
+
   const galleryMarkup = filmsGalleryTemplate(normalizeFilmsData(films));
 
   refs.gallery.insertAdjacentHTML('beforeend', galleryMarkup);

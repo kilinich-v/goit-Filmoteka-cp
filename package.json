@@ -54,6 +54,7 @@
     "basiclightbox": "^5.0.4",
     "core-js": "^3.6.5",
     "handlebars": "^4.7.6",
+    "routerjs": "^2.4.5",
     "tui-pagination": "^3.4.0"
   }
 }

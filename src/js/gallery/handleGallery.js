@@ -70,11 +70,24 @@ export function getCurrentPageFilms(event) {
     .finally(spinner.remove());
 }
 
-export function getFilmsFromQueue(event) {
-  console.log(apiStorage.getQueue());
+export function getFilmsFromQueue() {
   clearGallery();
+
+  apiStorage.page = 1;
+
+  const queue = apiStorage.getQueue();
+
+  renderGallery(queue?.results);
+  pagination(queue?.total_results, apiStorage.page);
 }
 
-export function getFilmsFromWatched(event) {
+export function getFilmsFromWatched() {
   clearGallery();
+
+  apiStorage.page = 1;
+
+  const queue = apiStorage.getWatched();
+
+  renderGallery(queue?.results);
+  pagination(queue?.total_results, apiStorage.page);
 }
