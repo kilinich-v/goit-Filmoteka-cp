@@ -15,32 +15,33 @@ export default {
 
   getWatched() {
     const parsedFilms = JSON.parse(localStorage.getItem('watched'));
+    if (!parsedFilms) return;
 
     const total_results = parsedFilms.length;
 
-    return [...parsedFilms, total_results];
+    return { results: [...parsedFilms], total_results: total_results };
   },
 
   addToQueue(filmData) {
     this.addToLocalStorage('queue', filmData);
     storageControle.checkFilmFromQueue(filmData);
-    refs.queue().dataset.queue = 'isList';
+    refs.queueModalBtn().dataset.queue = 'isList';
   },
 
   removeToQueue(filmID) {
     this.removeToLocalStorage('queue', filmID);
-    refs.queue().dataset.queue = 'addToList';
+    refs.queueModalBtn().dataset.queue = 'addToList';
   },
 
   addToWatched(filmData) {
     this.addToLocalStorage('watched', filmData);
     storageControle.checkFilmFromWatched(filmData);
-    refs.watched().dataset.watched = 'isList';
+    refs.watchedModalBtn().dataset.watched = 'isList';
   },
 
   removeToWatched(filmID) {
     this.removeToLocalStorage('watched', filmID);
-    refs.watched().dataset.watched = 'addToList';
+    refs.watchedModalBtn().dataset.watched = 'addToList';
   },
 
   addToLocalStorage(storageItemName, filmData) {

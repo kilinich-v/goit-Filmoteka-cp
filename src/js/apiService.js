@@ -5,12 +5,12 @@ export default {
   movieGenreList: 'https://api.themoviedb.org/3/genre/movie/list?api_key=',
   apiKey: '3550330ecc32a34c7342dbd44dd96d6e',
   _movieID: null,
-  searchQuerry: '',
+  searchQuery: null,
   totalResults: null,
   page: 1,
 
   fetchSearchRequestGallery() {
-    const url = `${this.searchUrl}${this.apiKey}&language=en-US&query=${this.searchQuerry}&page=${this.page}`;
+    const url = `${this.searchUrl}${this.apiKey}&language=en-US&query=${this.searchQuery}&page=${this.page}`;
 
     return fetch(url)
       .then(res => {
@@ -58,11 +58,11 @@ export default {
   },
 
   get query() {
-    return this.searchQuerry;
+    return this.searchQuery;
   },
 
   set query(value) {
-    this.searchQuerry = value;
+    this.searchQuery = value;
   },
 
   get movieID() {

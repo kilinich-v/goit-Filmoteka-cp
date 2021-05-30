@@ -1,8 +1,10 @@
+import queryString from 'query-string';
 import apiService from '../apiService';
 import { apiStorage } from '../localStorage';
 import spinner from '../spinner';
 import pagination from '../pagination';
 import { renderGallery, clearGallery } from './renderGallery';
+import notification from '../notification';
 
 export function getPopularFilms() {
   clearGallery();
@@ -23,15 +25,20 @@ export function getPopularFilms() {
 
 export function getSearchingFilms(event) {
   event.preventDefault();
+  const currentQuery = event.target.elements.query.value;
 
-  const query = event.target.elements.query.value;
+  if (apiService.query === currentQuery) {
+    notification.repeatedQuery();
+    return;
+  }
 
-  if (apiService.searchQuerry === query) {
+  if (currentQuery === '') {
+    notification.voidQuery();
     return;
   }
 
   apiService.page = 1;
-  apiService.searchQuerry = query;
+  apiService.query = currentQuery;
 
   clearGallery();
   spinner.add();
@@ -39,6 +46,10 @@ export function getSearchingFilms(event) {
   apiService
     .fetchSearchRequestGallery()
     .then(data => {
+      if (!data.total_results) {
+        notification.notFound();
+      }
+
       pagination(data.total_results, apiService.page);
 
       return renderGallery(data.results);
@@ -54,7 +65,7 @@ export function getCurrentPageFilms(event) {
   const currentPage = event.page;
   apiService.page = currentPage;
 
-  if (!apiService.searchQuerry) {
+  if (!apiService.searchQuery) {
     apiService
       .fetchPopularMovieGallery()
       .then(data => renderGallery(data.results))
@@ -86,8 +97,8 @@ export function getFilmsFromWatched() {
 
   apiStorage.page = 1;
 
-  const queue = apiStorage.getWatched();
+  const watched = apiStorage.getWatched();
 
-  renderGallery(queue?.results);
-  pagination(queue?.total_results, apiStorage.page);
+  renderGallery(watched?.results);
+  pagination(watched?.total_results, apiStorage.page);
 }

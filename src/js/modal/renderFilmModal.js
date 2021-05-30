@@ -31,16 +31,16 @@ export function openModal() {
 }
 
 export function renderModalBtnText() {
-  if (refs.queue().dataset.queue === 'isList') {
-    refs.queue().textContent = 'In Queue';
+  if (refs.queueModalBtn().dataset.queue === 'isList') {
+    refs.queueModalBtn().textContent = 'In Queue';
   } else {
-    refs.queue().textContent = 'Add to Queue';
+    refs.queueModalBtn().textContent = 'Add to Queue';
   }
 
-  if (refs.watched().dataset.watched === 'isList') {
-    refs.watched().textContent = 'In Watched';
+  if (refs.watchedModalBtn().dataset.watched === 'isList') {
+    refs.watchedModalBtn().textContent = 'In Watched';
   } else {
-    refs.watched().textContent = 'Add to Watched';
+    refs.watchedModalBtn().textContent = 'Add to Watched';
   }
 }
 

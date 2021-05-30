@@ -1,13 +1,34 @@
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './styles.scss';
-import refs from './js/refs';
 import './js/modal-team';
-import { getPopularFilms, getSearchingFilms } from './js/gallery';
+import refs from './js/refs';
+import { route, routeApp } from './js/routing';
 import { handleCreateModal, handleModalClick } from './js/modal';
-import './js/routing';
+import { getSearchingFilms } from './js/gallery';
 
-// getPopularFilms();
+window.addEventListener('click', event => {
+  const { target } = event;
 
-// refs.inputSubmit().addEventListener('submit', getSearchingFilms);
-// refs.gallery.addEventListener('click', handleCreateModal);
-// refs.backdrop.addEventListener('click', handleModalClick);
+  if (target.dataset.index === 'home') {
+    routeApp.navigate(route.home);
+  }
+
+  if (target.dataset.index === 'mylibrary') {
+    routeApp.navigate(route.queue);
+  }
+
+  if (target.dataset.index === 'watched') {
+    routeApp.navigate(route.watched);
+  }
+
+  if (target.dataset.index === 'queue') {
+    routeApp.navigate(route.queue);
+  }
+
+  if (target.dataset.index === 'search') {
+    refs.inputSubmit().addEventListener('submit', getSearchingFilms);
+  }
+});
+
+refs.gallery.addEventListener('click', handleCreateModal);
+refs.backdrop.addEventListener('click', handleModalClick);

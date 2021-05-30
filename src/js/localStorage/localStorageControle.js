@@ -9,7 +9,7 @@ function checkFilmFromQueue(filmData) {
     parseWatchedList.find(({ id }) => filmData.id === id)
   ) {
     apiStorage.removeToWatched(filmData.id);
-    refs.watched().dataset.watched = 'addToList';
+    refs.watchedModalBtn().dataset.watched = 'addToList';
   }
 }
 
@@ -18,10 +18,10 @@ function checkFilmFromWatched(filmData) {
 
   if (parseQueueList && parseQueueList.find(({ id }) => filmData.id === id)) {
     apiStorage.removeToQueue(filmData.id);
-    refs.queue().dataset.queue = 'addToList';
+    refs.queueModalBtn().dataset.queue = 'addToList';
   }
 
-  refs.watched().dataset.watched = 'isList';
+  refs.watchedModalBtn().dataset.watched = 'isList';
 }
 
 function checkFilmBeforeModalRender(filmData) {
@@ -29,14 +29,14 @@ function checkFilmBeforeModalRender(filmData) {
   const parseWatchedList = JSON.parse(localStorage.getItem('watched'));
 
   if (parseQueueList && parseQueueList.find(({ id }) => filmData.id === id)) {
-    refs.queue().dataset.queue = 'isList';
+    refs.queueModalBtn().dataset.queue = 'isList';
   }
 
   if (
     parseWatchedList &&
     parseWatchedList.find(({ id }) => filmData.id === id)
   ) {
-    refs.watched().dataset.watched = 'isList';
+    refs.watchedModalBtn().dataset.watched = 'isList';
   }
 }
 
