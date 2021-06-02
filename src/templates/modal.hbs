@@ -1,5 +1,5 @@
 <div class="film__img-wrap">
-  <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" alt="modal__img" class="film__img">
+  <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" alt="{{title}} film poster" class="film__img">
 </div>
 <div class="film__content-wrap">
   <h3 class="film__title">{{original_title}}</h3>
@@ -21,8 +21,8 @@
       <li class="film__info-item">
         <p class="film__info-title">Genre</p>
         <ul class="film__info__genre-list list">
-          {{#each genre_ids}}
-          <li class="film__info__genre-item">{{this}}<span>,&nbsp;</span></li>
+          {{#each genres}}
+          <li class="film__info__genre-item">{{this.name}}<span>,&nbsp;</span></li>
           {{/each}}
       </li>
     </ul>

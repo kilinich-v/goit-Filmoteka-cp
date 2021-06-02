@@ -1,4 +1,5 @@
 import apiService from '../apiService';
+import refs from '../refs';
 import {
   renderModal,
   closeModal,
@@ -36,36 +37,50 @@ export function handleModalClick(event) {
   }
 
   if (target.dataset.queue === 'addToList') {
+    refs.queueModalBtn().classList.add('current-mylibrary');
+    refs.watchedModalBtn().classList.remove('current-mylibrary');
+
     apiStorage.addToQueue(currentFilm);
     renderModalBtnText();
 
     if (location.pathname === route.queue) getFilmsFromQueue();
+    if (location.pathname === route.watched) getFilmsFromWatched();
 
     return;
   }
 
   if (target.dataset.watched === 'addToList') {
+    refs.watchedModalBtn().classList.add('current-mylibrary');
+    refs.queueModalBtn().classList.remove('current-mylibrary');
+
     apiStorage.addToWatched(currentFilm);
     renderModalBtnText();
 
+    if (location.pathname === route.queue) getFilmsFromQueue();
     if (location.pathname === route.watched) getFilmsFromWatched();
 
     return;
   }
 
   if (target.dataset.queue === 'isList') {
+    refs.queueModalBtn().classList.remove('current-mylibrary');
+
     apiStorage.removeToQueue(currentFilm.id);
     renderModalBtnText();
 
     if (location.pathname === route.queue) getFilmsFromQueue();
+    if (location.pathname === route.watched) getFilmsFromWatched();
 
     return;
   }
 
   if (target.dataset.watched === 'isList') {
+    refs.watchedModalBtn().classList.remove('current-mylibrary');
+
     apiStorage.removeToWatched(currentFilm.id);
     renderModalBtnText();
 
+    if (location.pathname === route.queue) getFilmsFromQueue();
     if (location.pathname === route.watched) getFilmsFromWatched();
 
     return;

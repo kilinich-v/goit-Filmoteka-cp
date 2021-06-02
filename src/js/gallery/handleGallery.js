@@ -16,7 +16,7 @@ export function getPopularFilms() {
     .fetchPopularMovieGallery()
     .then(data => {
       pagination(data.total_results, apiService.page);
-
+      console.log('1');
       return renderGallery(data.results);
     })
     .catch(err => console.log(err))
@@ -84,16 +84,22 @@ export function getCurrentPageFilms(event) {
 export function getFilmsFromQueue() {
   clearGallery();
 
+  spinner.add();
+
   apiStorage.page = 1;
 
   const queue = apiStorage.getQueue();
 
   renderGallery(queue?.results);
   pagination(queue?.total_results, apiStorage.page);
+
+  spinner.remove();
 }
 
 export function getFilmsFromWatched() {
   clearGallery();
+
+  spinner.add();
 
   apiStorage.page = 1;
 
@@ -101,4 +107,6 @@ export function getFilmsFromWatched() {
 
   renderGallery(watched?.results);
   pagination(watched?.total_results, apiStorage.page);
+
+  spinner.remove();
 }

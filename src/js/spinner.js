@@ -10,7 +10,9 @@ const add = () => {
 };
 
 const remove = () => {
-  refs.spinner.textContent = '';
+  setTimeout(() => {
+    refs.spinner.textContent = '';
+  }, 50);
 };
 
 export default {

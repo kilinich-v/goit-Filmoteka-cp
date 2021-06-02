@@ -1,6 +1,5 @@
 .filmSearch {
-  display: block;
-  text-align: center;
+  display: flex;
 
   &__input {
     width: 280px;
@@ -22,8 +21,10 @@
     }
   }
 
-  & button {
+  &__btn {
     margin-left: -20px;
+    color: $white-color;
+    font-size: 20px;
   }
 
   &__input-error {
@@ -32,9 +33,7 @@
     color: $red-color;
   }
 }
-.white {
-  color: $white-color !important;
-}
+
 .mylibrary {
   display: flex;
   justify-content: center;
@@ -64,10 +63,7 @@
 .current-mylibrary {
   background-color: $orange-color;
   border: 1px solid transparent;
-}
-
-.is__hidden {
-  display: none;
+  color: #fff;
 }
 
 .is__active--btn {

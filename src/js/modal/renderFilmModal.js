@@ -6,6 +6,7 @@ export let currentFilm = {};
 
 export function renderModal(filmData) {
   currentFilm = { ...filmData };
+
   const modalMarkup = modalTemplate(currentFilm);
 
   clearModal();
@@ -26,19 +27,21 @@ export function closeModal() {
 export function openModal() {
   window.addEventListener('keydown', handleModalKeypress);
 
-  refs.backdrop.classList.remove('is-hidden');
   refs.body.classList.add('modal-open');
+  refs.backdrop.classList.remove('is-hidden');
 }
 
 export function renderModalBtnText() {
   if (refs.queueModalBtn().dataset.queue === 'isList') {
     refs.queueModalBtn().textContent = 'In Queue';
+    refs.queueModalBtn().classList.add('current-mylibrary');
   } else {
     refs.queueModalBtn().textContent = 'Add to Queue';
   }
 
   if (refs.watchedModalBtn().dataset.watched === 'isList') {
     refs.watchedModalBtn().textContent = 'In Watched';
+    refs.watchedModalBtn().classList.add('current-mylibrary');
   } else {
     refs.watchedModalBtn().textContent = 'Add to Watched';
   }

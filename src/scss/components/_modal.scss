@@ -2,23 +2,18 @@
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100%;
   padding: 20px;
   z-index: 200;
 
   background-color: rgba(0, 0, 0, 0.25);
-
   overflow-y: scroll;
   opacity: 1;
-  visibility: visible;
-  transition: opacity 250ms $transition-function,
-    visibility 250ms $transition-function;
+  transition: opacity 250ms $transition-function;
 
   &.is-hidden {
     opacity: 0;
-    visibility: hidden;
   }
 }
 
@@ -26,34 +21,35 @@
   display: flex;
   width: 280px;
   min-height: 700px;
-  padding: 48px 20px 41px;
+  padding: 48px 20px;
   margin-right: auto;
   margin-left: auto;
-
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   transform: scale(1);
   transition: transform 250ms $transition-function;
 
-  @media screen and (max-width: 767px) {
+  .is-hidden & {
+    transform: scale(0.9);
+  }
+
+  @include for-size(tablet-only) {
+    display: block;
     margin: 0 auto;
   }
 
   @include for-size(tablet) {
     position: relative;
-    display: flex;
     width: 618px;
     min-height: 456px;
-    padding: 42px 30px 40px 28px;
-
-    transition: transform 250ms $transition-function;
+    padding: 42px 30px;
   }
 
   @include for-size(desktop) {
     width: 882px;
     min-height: 568px;
-    padding: 50px 30px 40px;
+    padding: 50px 30px;
   }
 }
 
