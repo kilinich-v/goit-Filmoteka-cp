@@ -2,13 +2,7 @@
   background-color: $footer-background-color;
   margin-left: auto;
   margin-right: auto;
-  // position: fixed;
-  // bottom: 0;
-  // width: 100%;
 
-  // @media screen and (min-width: 320px) and (max-width: 1023px) {
-  //   width: auto;
-  // }
   &__text-section {
     align-items: center;
     display: block;
@@ -19,6 +13,8 @@
     margin: 0px auto;
   }
   &__icon {
+    vertical-align: middle;
+    align-items: center;
     color: $orange-second-color;
     font-size: 18px;
     margin-left: 10px;
@@ -32,12 +28,4 @@
     text-decoration: none !important;
     color: $footer-text-color !important;
   }
-}
-.material-icons {
-  color: $orange-second-color;
-  vertical-align: middle;
-  align-items: center;
-  font-size: 18px;
-  margin-left: 10px;
-  margin-right: 10px;
 }

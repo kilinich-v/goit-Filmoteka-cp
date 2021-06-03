@@ -1,6 +1,9 @@
-.header {
+.header-container {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,21 +13,21 @@
   height: 230px;
   margin-left: auto;
   margin-right: auto;
-  @media screen and (min-width: 320px) and (max-width: 1023px) {
-    width: auto;
-  }
-  &__home {
+
+  &--home {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/images/header_home_mobile.jpg);
     background-color: $black-color;
   }
-  &__watched {
+
+  &--library {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/images/header_queue_watched_mobile.jpg);
     background-color: $black-color;
   }
-  @media screen and (min-width: 768px) {
-    &__home {
+
+  @include for-size(tablet) {
+    &--home {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
@@ -33,7 +36,7 @@
       background-color: $black-color;
     }
 
-    &__watched {
+    &--library {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
@@ -42,8 +45,8 @@
       background-color: $black-color;
     }
   }
-  @media screen and (min-width: 1024px) {
-    &__home {
+  @include for-size(desktop) {
+    &--home {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
@@ -52,7 +55,7 @@
       background-color: $black-color;
     }
 
-    &__watched {
+    &--library {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)

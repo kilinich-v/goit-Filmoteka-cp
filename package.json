@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --env.mode development --config ./webpack/config.js",
     "build": "webpack --env.mode production --config ./webpack/config.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "netlify deploy -p"
   },
   "repository": {
     "type": "git",
@@ -54,7 +54,8 @@
     "basiclightbox": "^5.0.4",
     "core-js": "^3.6.5",
     "handlebars": "^4.7.6",
-    "paginationjs": "^2.1.5",
+    "query-string": "^7.0.0",
+    "routerjs": "^2.4.5",
     "tui-pagination": "^3.4.0"
   }
 }
